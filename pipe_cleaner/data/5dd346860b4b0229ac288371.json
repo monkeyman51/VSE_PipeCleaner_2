@@ -1,0 +1,1977 @@
+{
+    "bmc": {
+        "mc": {
+            "aux_firmwares": [
+                "0x00",
+                "0x00",
+                "0x00",
+                "0x00"
+            ],
+            "firmware": "4.55"
+        },
+        "lan": {
+            "ip": "172.17.0.13",
+            "ip_source": "DHCP",
+            "mac": "70:e2:84:81:73:37",
+            "netmask": "255.255.255.252",
+            "gateway_ip": "172.17.0.14",
+            "gateway_mac": "6c:ec:5a:05:18:16"
+        },
+        "lan_8": [
+
+        ],
+        "sol": {
+            "volatile_bit_rate": "115.2",
+            "non_volatile_bit_rate": "115.2"
+        },
+        "users": [
+            {
+                "id": "1",
+                "name": "",
+                "channel_priv_limit": "ADMINISTRATOR",
+                "callin": "false",
+                "link_auth": "false",
+                "ipmi_msg": "true"
+            },
+            {
+                "id": "2",
+                "name": "admin",
+                "channel_priv_limit": "ADMINISTRATOR",
+                "callin": "true",
+                "link_auth": "true",
+                "ipmi_msg": "true"
+            }
+        ],
+        "sdrs": [
+            {
+                "id": "1",
+                "sensor_type_name": "Fan",
+                "sensor_number": "01",
+                "name": "PWM_1",
+                "status": "OK",
+                "reading": "22.00 ?"
+            },
+            {
+                "id": "2",
+                "sensor_type_name": "Battery",
+                "sensor_number": "02",
+                "name": "Energy_Storage",
+                "status": "OK",
+                "reading": "98.00 ?"
+            },
+            {
+                "id": "3",
+                "sensor_type_name": "OEM(d0)",
+                "sensor_number": "03",
+                "name": "NVDIMM",
+                "status": "_"
+            },
+            {
+                "id": "5",
+                "sensor_type_name": "OEM(d1)",
+                "sensor_number": "04",
+                "name": "SM_ALERT",
+                "status": "_"
+            },
+            {
+                "id": "6",
+                "sensor_type_name": "System Event",
+                "sensor_number": "07",
+                "name": "System Reconfig",
+                "status": "OK"
+            },
+            {
+                "id": "7",
+                "sensor_type_name": "FRU Sensor",
+                "sensor_number": "0e",
+                "name": "HSC0 Input Power",
+                "status": "OK",
+                "reading": "225.00 W"
+            },
+            {
+                "id": "8",
+                "sensor_type_name": "Voltage",
+                "sensor_number": "0f",
+                "name": "HSC0 Input Volt",
+                "status": "OK",
+                "reading": "12.30 V"
+            },
+            {
+                "id": "9",
+                "sensor_type_name": "Current",
+                "sensor_number": "10",
+                "name": "HSC0 Output Curr",
+                "status": "OK",
+                "reading": "18.50 A"
+            },
+            {
+                "id": "c",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "14",
+                "name": "HSC0 Temp",
+                "status": "OK",
+                "reading": "33.00 C"
+            },
+            {
+                "id": "13",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "21",
+                "name": "FPGA_S4_HSC_TMP",
+                "status": "OK",
+                "reading": "26.00 C"
+            },
+            {
+                "id": "14",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "32",
+                "name": "FPGA_S4_DIE_TMP",
+                "status": "OK",
+                "reading": "51.00 C"
+            },
+            {
+                "id": "15",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "33",
+                "name": "FPGA_S4_AMB_TMP",
+                "status": "OK",
+                "reading": "32.00 C"
+            },
+            {
+                "id": "16",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "34",
+                "name": "FPGA_S4_NIC_TMP",
+                "status": "OK",
+                "reading": "69.00 C"
+            },
+            {
+                "id": "17",
+                "sensor_type_name": "Power Supply",
+                "sensor_number": "35",
+                "name": "FPGA_S4_POWER",
+                "status": "OK",
+                "reading": "34.00 W"
+            },
+            {
+                "id": "1f",
+                "sensor_type_name": "Processor",
+                "sensor_number": "38",
+                "name": "CPU_ERROR",
+                "status": "OK"
+            },
+            {
+                "id": "21",
+                "sensor_type_name": "Voltage",
+                "sensor_number": "70",
+                "name": "P0VPP_ABC",
+                "status": "OK",
+                "reading": "2.56 V"
+            },
+            {
+                "id": "22",
+                "sensor_type_name": "Voltage",
+                "sensor_number": "71",
+                "name": "P0VPP_DEF",
+                "status": "OK",
+                "reading": "2.56 V"
+            },
+            {
+                "id": "23",
+                "sensor_type_name": "Voltage",
+                "sensor_number": "72",
+                "name": "P1VPP_GHJ",
+                "status": "OK",
+                "reading": "2.56 V"
+            },
+            {
+                "id": "24",
+                "sensor_type_name": "Voltage",
+                "sensor_number": "73",
+                "name": "P1VPP_KLM",
+                "status": "OK",
+                "reading": "2.57 V"
+            },
+            {
+                "id": "25",
+                "sensor_type_name": "Voltage",
+                "sensor_number": "80",
+                "name": "CPU0_VccIO",
+                "status": "OK",
+                "reading": "0.99 V"
+            },
+            {
+                "id": "26",
+                "sensor_type_name": "Voltage",
+                "sensor_number": "81",
+                "name": "CPU1_VccIO",
+                "status": "OK",
+                "reading": "0.99 V"
+            },
+            {
+                "id": "27",
+                "sensor_type_name": "Battery",
+                "sensor_number": "86",
+                "name": "BAT_Status_Event",
+                "status": "OK"
+            },
+            {
+                "id": "29",
+                "sensor_type_name": "Event Log",
+                "sensor_number": "8a",
+                "name": "SEL",
+                "status": "OK"
+            },
+            {
+                "id": "2a",
+                "sensor_type_name": "Watchdog_2",
+                "sensor_number": "93",
+                "name": "Host Watchdog",
+                "status": "OK"
+            },
+            {
+                "id": "30",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "a8",
+                "name": "CPU0_PROC_HOT",
+                "status": "OK"
+            },
+            {
+                "id": "31",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "a9",
+                "name": "CPU1_PROC_HOT",
+                "status": "OK"
+            },
+            {
+                "id": "32",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "aa",
+                "name": "PVCCP_CPU0_VRHOT",
+                "status": "OK"
+            },
+            {
+                "id": "33",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "ab",
+                "name": "PVCCP_CPU1_VRHOT",
+                "status": "OK"
+            },
+            {
+                "id": "34",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "ac",
+                "name": "DIMM_ABC_VRHOT",
+                "status": "OK"
+            },
+            {
+                "id": "35",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "ad",
+                "name": "Temp_CPU0",
+                "status": "OK",
+                "reading": "38.00 C"
+            },
+            {
+                "id": "36",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "af",
+                "name": "Temp_PCH",
+                "status": "OK",
+                "reading": "38.00 C"
+            },
+            {
+                "id": "37",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "b0",
+                "name": "Temp_Inlet",
+                "status": "OK",
+                "reading": "19.00 C"
+            },
+            {
+                "id": "38",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "b1",
+                "name": "Temp_Outlet",
+                "status": "OK",
+                "reading": "30.00 C"
+            },
+            {
+                "id": "39",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "b3",
+                "name": "Temp_CPU1",
+                "status": "OK",
+                "reading": "39.00 C"
+            },
+            {
+                "id": "3a",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "b4",
+                "name": "Temp_DIMM_A",
+                "status": "OK",
+                "reading": "32.00 C"
+            },
+            {
+                "id": "3b",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "b5",
+                "name": "Temp_DIMM_B",
+                "status": "OK",
+                "reading": "33.00 C"
+            },
+            {
+                "id": "3c",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "b6",
+                "name": "Temp_DIMM_C",
+                "status": "OK",
+                "reading": "34.00 C"
+            },
+            {
+                "id": "3d",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "b7",
+                "name": "Temp_DIMM_D",
+                "status": "OK",
+                "reading": "30.00 C"
+            },
+            {
+                "id": "3e",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "b8",
+                "name": "Temp_DIMM_E",
+                "status": "OK",
+                "reading": "30.00 C"
+            },
+            {
+                "id": "3f",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "b9",
+                "name": "Temp_DIMM_F",
+                "status": "OK",
+                "reading": "31.00 C"
+            },
+            {
+                "id": "40",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "ba",
+                "name": "Temp_DIMM_G",
+                "status": "OK",
+                "reading": "33.00 C"
+            },
+            {
+                "id": "41",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "bb",
+                "name": "Temp_DIMM_H",
+                "status": "OK",
+                "reading": "33.00 C"
+            },
+            {
+                "id": "42",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "bc",
+                "name": "Temp_DIMM_J",
+                "status": "OK",
+                "reading": "31.00 C"
+            },
+            {
+                "id": "43",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "bd",
+                "name": "Temp_DIMM_K",
+                "status": "OK",
+                "reading": "36.00 C"
+            },
+            {
+                "id": "44",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "be",
+                "name": "Temp_DIMM_L",
+                "status": "OK",
+                "reading": "36.00 C"
+            },
+            {
+                "id": "45",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "bf",
+                "name": "Temp_DIMM_M",
+                "status": "OK",
+                "reading": "35.00 C"
+            },
+            {
+                "id": "46",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "c8",
+                "name": "Temp_DIMM_MAX",
+                "status": "OK",
+                "reading": "36.00 C"
+            },
+            {
+                "id": "47",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "c0",
+                "name": "DIMM_DEF_VRHOT",
+                "status": "OK"
+            },
+            {
+                "id": "48",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "c1",
+                "name": "CPU0_MEM_ABC_HOT",
+                "status": "OK"
+            },
+            {
+                "id": "49",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "c2",
+                "name": "CPU1_MEM_GHJ_HOT",
+                "status": "OK"
+            },
+            {
+                "id": "4a",
+                "sensor_type_name": "Chip Set",
+                "sensor_number": "c3",
+                "name": "SSB ThermalTrip",
+                "status": "_"
+            },
+            {
+                "id": "4b",
+                "sensor_type_name": "Voltage",
+                "sensor_number": "c4",
+                "name": "P3V3",
+                "status": "OK",
+                "reading": "3.37 V"
+            },
+            {
+                "id": "4c",
+                "sensor_type_name": "Voltage",
+                "sensor_number": "c5",
+                "name": "P5V",
+                "status": "OK",
+                "reading": "5.10 V"
+            },
+            {
+                "id": "4d",
+                "sensor_type_name": "Voltage",
+                "sensor_number": "c6",
+                "name": "P0VDDQ_ABC",
+                "status": "OK",
+                "reading": "1.24 V"
+            },
+            {
+                "id": "4e",
+                "sensor_type_name": "Voltage",
+                "sensor_number": "c7",
+                "name": "P0VDDQ_DEF",
+                "status": "OK",
+                "reading": "1.23 V"
+            },
+            {
+                "id": "4f",
+                "sensor_type_name": "Voltage",
+                "sensor_number": "cb",
+                "name": "P0_VccIN",
+                "status": "OK",
+                "reading": "1.81 V"
+            },
+            {
+                "id": "50",
+                "sensor_type_name": "Voltage",
+                "sensor_number": "cc",
+                "name": "P1_VccIN",
+                "status": "OK",
+                "reading": "1.81 V"
+            },
+            {
+                "id": "51",
+                "sensor_type_name": "Voltage",
+                "sensor_number": "cd",
+                "name": "P12V_AUX",
+                "status": "OK",
+                "reading": "12.61 V"
+            },
+            {
+                "id": "52",
+                "sensor_type_name": "Voltage",
+                "sensor_number": "ce",
+                "name": "P1VDDQ_GHJ",
+                "status": "OK",
+                "reading": "1.23 V"
+            },
+            {
+                "id": "53",
+                "sensor_type_name": "Voltage",
+                "sensor_number": "d0",
+                "name": "P1VDDQ_KLM",
+                "status": "OK",
+                "reading": "1.23 V"
+            },
+            {
+                "id": "54",
+                "sensor_type_name": "Processor",
+                "sensor_number": "d3",
+                "name": "CPU0_ERR",
+                "status": "OK"
+            },
+            {
+                "id": "55",
+                "sensor_type_name": "Processor",
+                "sensor_number": "d4",
+                "name": "CPU1_ERR",
+                "status": "OK"
+            },
+            {
+                "id": "56",
+                "sensor_type_name": "Voltage",
+                "sensor_number": "d6",
+                "name": "P5V_STBY",
+                "status": "OK",
+                "reading": "5.10 V"
+            },
+            {
+                "id": "57",
+                "sensor_type_name": "Voltage",
+                "sensor_number": "d7",
+                "name": "P1V05_STBY_PCH",
+                "status": "OK",
+                "reading": "1.07 V"
+            },
+            {
+                "id": "58",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "da",
+                "name": "CPU0_MEM_DEF_HOT",
+                "status": "OK"
+            },
+            {
+                "id": "59",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "db",
+                "name": "CPU1_MEM_KLM_HOT",
+                "status": "OK"
+            },
+            {
+                "id": "5a",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "dc",
+                "name": "DIMM_GHJ_VRHOT",
+                "status": "OK"
+            },
+            {
+                "id": "5b",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "dd",
+                "name": "DIMM_KLM_VRHOT",
+                "status": "OK"
+            },
+            {
+                "id": "5c",
+                "sensor_type_name": "Voltage",
+                "sensor_number": "de",
+                "name": "PVNN_STBY_PCH",
+                "status": "OK",
+                "reading": "0.86 V"
+            },
+            {
+                "id": "5d",
+                "sensor_type_name": "Voltage",
+                "sensor_number": "df",
+                "name": "P3V3_STBY",
+                "status": "OK",
+                "reading": "3.39 V"
+            },
+            {
+                "id": "5e",
+                "sensor_type_name": "Voltage",
+                "sensor_number": "e0",
+                "name": "VRDPCHVNN",
+                "status": "OK",
+                "reading": "0.85 V"
+            },
+            {
+                "id": "5f",
+                "sensor_type_name": "Current",
+                "sensor_number": "e1",
+                "name": "PVDDQ_ABC Curr",
+                "status": "OK",
+                "reading": "2.40 A"
+            },
+            {
+                "id": "60",
+                "sensor_type_name": "Current",
+                "sensor_number": "e2",
+                "name": "PVDDQ_DEF Curr",
+                "status": "OK",
+                "reading": "2.40 A"
+            },
+            {
+                "id": "61",
+                "sensor_type_name": "Current",
+                "sensor_number": "e3",
+                "name": "PVDDQ_GHJ Curr",
+                "status": "OK",
+                "reading": "2.80 A"
+            },
+            {
+                "id": "62",
+                "sensor_type_name": "Current",
+                "sensor_number": "e4",
+                "name": "PVDDQ_KLM Curr",
+                "status": "OK",
+                "reading": "2.80 A"
+            },
+            {
+                "id": "63",
+                "sensor_type_name": "Voltage",
+                "sensor_number": "eb",
+                "name": "P3V_VBAT",
+                "status": "OK",
+                "reading": "3.04 V"
+            },
+            {
+                "id": "64",
+                "sensor_type_name": "Voltage",
+                "sensor_number": "ec",
+                "name": "P0_VSA",
+                "status": "OK",
+                "reading": "0.85 V"
+            },
+            {
+                "id": "65",
+                "sensor_type_name": "Voltage",
+                "sensor_number": "ed",
+                "name": "P1_VSA",
+                "status": "OK",
+                "reading": "0.84 V"
+            },
+            {
+                "id": "66",
+                "sensor_type_name": "Management Subs",
+                "sensor_number": "ee",
+                "name": "Subsystem_Health",
+                "status": "OK"
+            },
+            {
+                "id": "67",
+                "sensor_type_name": "OEM(e0)",
+                "sensor_number": "ef",
+                "name": "BMC Health",
+                "status": "_"
+            },
+            {
+                "id": "68",
+                "sensor_type_name": "Fan",
+                "sensor_number": "f0",
+                "name": "Fan_0",
+                "status": "OK",
+                "reading": "5800.00 RPM"
+            },
+            {
+                "id": "69",
+                "sensor_type_name": "Fan",
+                "sensor_number": "f1",
+                "name": "Fan_1",
+                "status": "OK",
+                "reading": "5900.00 RPM"
+            },
+            {
+                "id": "6a",
+                "sensor_type_name": "Fan",
+                "sensor_number": "f2",
+                "name": "Fan_2",
+                "status": "OK",
+                "reading": "5900.00 RPM"
+            },
+            {
+                "id": "6b",
+                "sensor_type_name": "Fan",
+                "sensor_number": "f3",
+                "name": "Fan_3",
+                "status": "OK",
+                "reading": "5900.00 RPM"
+            },
+            {
+                "id": "6c",
+                "sensor_type_name": "Fan",
+                "sensor_number": "f4",
+                "name": "Fan_4",
+                "status": "OK",
+                "reading": "5800.00 RPM"
+            },
+            {
+                "id": "6d",
+                "sensor_type_name": "Fan",
+                "sensor_number": "f5",
+                "name": "Fan_5",
+                "status": "OK",
+                "reading": "5800.00 RPM"
+            },
+            {
+                "id": "7a",
+                "sensor_type_name": "Voltage",
+                "sensor_number": "a2",
+                "name": "CPU0_VccInPIN",
+                "status": "OK",
+                "reading": "28.00 W"
+            },
+            {
+                "id": "7b",
+                "sensor_type_name": "Voltage",
+                "sensor_number": "a3",
+                "name": "CPU1_VccInPIN",
+                "status": "OK",
+                "reading": "25.00 W"
+            },
+            {
+                "id": "7c",
+                "sensor_type_name": "Voltage",
+                "sensor_number": "a4",
+                "name": "CPU0_VccInPOUT",
+                "status": "OK",
+                "reading": "26.00 W"
+            },
+            {
+                "id": "7d",
+                "sensor_type_name": "Voltage",
+                "sensor_number": "a5",
+                "name": "CPU1_VccInPOUT",
+                "status": "OK",
+                "reading": "25.00 W"
+            },
+            {
+                "id": "7e",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "52",
+                "name": "M.2_Temp_High",
+                "status": "OK",
+                "reading": "36.00 C"
+            },
+            {
+                "id": "87",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "8c",
+                "name": "Temp_PSU_BBU",
+                "status": "OK",
+                "reading": "34.00 C"
+            },
+            {
+                "id": "88",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "8d",
+                "name": "Temp_PSU_Hotspot",
+                "status": "OK",
+                "reading": "33.00 C"
+            },
+            {
+                "id": "89",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "8e",
+                "name": "Temp_PSU_Inlet",
+                "status": "OK",
+                "reading": "26.00 C"
+            },
+            {
+                "id": "8a",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "90",
+                "name": "FPGA_DIE_MAX_TMP",
+                "status": "OK",
+                "reading": "51.00 C"
+            },
+            {
+                "id": "8b",
+                "sensor_type_name": "Temperature",
+                "sensor_number": "91",
+                "name": "NIC_MAX_TMP",
+                "status": "Init",
+                "reading": "0.00 C"
+            },
+            {
+                "id": "8c",
+                "sensor_type_name": "System Event",
+                "sensor_number": "83",
+                "name": "System Event",
+                "status": "OK"
+            }
+        ],
+        "sel": {
+            "info": [
+
+            ],
+            "list": [
+                {
+                    "id": "1",
+                    "date": "12\/03\/20",
+                    "time": "23:36:52",
+                    "severety": "INF",
+                    "source": "BMC",
+                    "event_type": "Event Log",
+                    "sensor_name": "SEL",
+                    "description": "Log Cleared",
+                    "raw": "01000214e7c95f200004108a6f02ffff",
+                    "elist_line": "0001 | 12\/03\/20 23:36:52 | INF | BMC  | Event Log | SEL  | Log Cleared \r"
+                },
+                {
+                    "id": "2",
+                    "date": "12\/03\/20",
+                    "time": "23:46:21",
+                    "severety": "INF",
+                    "source": "BMC",
+                    "event_type": "OEM(e0)",
+                    "sensor_name": "BMC Health",
+                    "description": "-",
+                    "raw": "0200024de9c95f200004e0ef70a20100",
+                    "elist_line": "0002 | 12\/03\/20 23:46:21 | INF | BMC  | OEM(e0) | BMC Health  | - \r"
+                },
+                {
+                    "id": "3",
+                    "date": "12\/03\/20",
+                    "time": "23:46:21",
+                    "severety": "INF",
+                    "source": "BMC",
+                    "event_type": "Power Supply",
+                    "sensor_name": "PSU_Status_Event",
+                    "description": "Inserted",
+                    "raw": "0300024de9c95f20000408846f00ffff",
+                    "elist_line": "0003 | 12\/03\/20 23:46:21 | INF | BMC  | Power Supply | PSU_Status_Event  | Inserted \r"
+                },
+                {
+                    "id": "4",
+                    "date": "12\/03\/20",
+                    "time": "23:46:21",
+                    "severety": "INF",
+                    "source": "BMC",
+                    "event_type": "Battery",
+                    "sensor_name": "BAT_Status_Event",
+                    "description": "Present",
+                    "raw": "0400024de9c95f20000429866f02ffff",
+                    "elist_line": "0004 | 12\/03\/20 23:46:21 | INF | BMC  | Battery | BAT_Status_Event  | Present \r"
+                },
+                {
+                    "id": "5",
+                    "date": "12\/03\/20",
+                    "time": "23:46:50",
+                    "severety": "INF",
+                    "source": "BMC",
+                    "event_type": "ACPI Power State",
+                    "sensor_name": "ACPI State",
+                    "description": "S0\/G0 Working",
+                    "raw": "0500026ae9c95f20000422396f00ffff",
+                    "elist_line": "0005 | 12\/03\/20 23:46:50 | INF | BMC  | ACPI Power State | ACPI State  | S0\/G0 Working \r"
+                },
+                {
+                    "id": "6",
+                    "date": "12\/03\/20",
+                    "time": "23:46:58",
+                    "severety": "INF",
+                    "source": "c8",
+                    "event_type": "009c9c",
+                    "sensor_name": "",
+                    "description": "OEM Event 00 02 00 00 00 00",
+                    "raw": "0600c872e9c95f9c9c00000200000000",
+                    "elist_line": "0006 | 12\/03\/20 23:46:58 | INF | c8 | 009c9c |  | OEM Event 00 02 00 00 00 00 \r"
+                },
+                {
+                    "id": "7",
+                    "date": "12\/03\/20",
+                    "time": "23:49:11",
+                    "severety": "INF",
+                    "source": "0100",
+                    "event_type": "OEM(d2)",
+                    "sensor_name": "",
+                    "description": "-",
+                    "raw": "070002f7e9c95f000104d2056fab0081",
+                    "elist_line": "0007 | 12\/03\/20 23:49:11 | INF | 0100 | OEM(d2) |  | - \r"
+                },
+                {
+                    "id": "8",
+                    "date": "12\/03\/20",
+                    "time": "23:51:03",
+                    "severety": "INF",
+                    "source": "Sms",
+                    "event_type": "OS Boot",
+                    "sensor_name": "",
+                    "description": "C: boot completed",
+                    "raw": "08000267eac95f4100041f006f01ffff",
+                    "elist_line": "0008 | 12\/03\/20 23:51:03 | INF | Sms  | OS Boot |  | C: boot completed \r"
+                },
+                {
+                    "id": "9",
+                    "date": "12\/03\/20",
+                    "time": "23:51:03",
+                    "severety": "INF",
+                    "source": "dc",
+                    "event_type": "000137",
+                    "sensor_name": "Microsoft",
+                    "description": "OEM Event 00 46 ea c9 5f 00",
+                    "raw": "0900dc67eac95f3701000046eac95f00",
+                    "elist_line": "0009 | 12\/03\/20 23:51:03 | INF | dc | 000137 | Microsoft | OEM Event 00 46 ea c9 5f 00 \r"
+                }
+            ]
+        },
+        "fru": {
+            "chassis": {
+                "part": "M1067746-002",
+                "serial": "P774692920052012",
+                "extra": "3.0"
+            },
+            "board": {
+                "manufacturer": "Microsoft",
+                "product": "C2012",
+                "serial": "B957092040313010",
+                "part": "M1039570-002"
+            },
+            "product": {
+                "name": "C2012",
+                "manufacturer": "Microsoft",
+                "part": "B91.00T01.0098",
+                "version": "4.0",
+                "serial": "T0100989290001AK",
+                "asset": "N\/A"
+            }
+        },
+        "exec_time": 14.786645889282,
+        "time": 14.790648698807
+    },
+    "server_id": "28:16:a8:fd:dd:84",
+    "kernel": {
+        "short": "10.0.17763",
+        "long": "Microsoft Windows Version 10.0.17763 64-bit Multiprocessor Free",
+        "exec_time": 0.3391101360321,
+        "time": 0.34010791778564
+    },
+    "mem": {
+        "total": "267006764 kB",
+        "swap_total": "0 kB",
+        "free": "261767760 kB",
+        "swap_free": "37748736 kB",
+        "available": "299697452 kB",
+        "exec_time": 0.59648108482361,
+        "time": 0.59847569465637
+    },
+    "dmi": {
+        "dimms": [
+            {
+                "speed": "2666",
+                "rank": "2",
+                "locator": "NODE 1",
+                "part": "36ASF4G72PZ-2G6J1",
+                "asset": "DIMM_A1_AssetTag",
+                "serial": "251E9172",
+                "size": "32.0 GB",
+                "type": "Unknown",
+                "manufacturer": "Microsoft"
+            },
+            {
+                "speed": "2666",
+                "rank": "2",
+                "locator": "NODE 1",
+                "part": "36ASF4G72PZ-2G6J1",
+                "asset": "DIMM_B1_AssetTag",
+                "serial": "251E8C3E",
+                "size": "32.0 GB",
+                "type": "Unknown",
+                "manufacturer": "Microsoft"
+            },
+            {
+                "speed": "2666",
+                "rank": "2",
+                "locator": "NODE 1",
+                "part": "36ASF4G72PZ-2G6J1",
+                "asset": "DIMM_C1_AssetTag",
+                "serial": "251E8C2B",
+                "size": "32.0 GB",
+                "type": "Unknown",
+                "manufacturer": "Micron"
+            },
+            {
+                "speed": "2666",
+                "rank": "2",
+                "locator": "NODE 2",
+                "part": "36ASF4G72PZ-2G6J1",
+                "asset": "DIMM_D1_AssetTag",
+                "serial": "2524C48F",
+                "size": "32.0 GB",
+                "type": "Unknown",
+                "manufacturer": "Micron"
+            },
+            {
+                "speed": "2666",
+                "rank": "2",
+                "locator": "NODE 2",
+                "part": "36ASF4G72PZ-2G6J1",
+                "asset": "DIMM_E1_AssetTag",
+                "serial": "251E8C61",
+                "size": "32.0 GB",
+                "type": "Unknown",
+                "manufacturer": "Micron"
+            },
+            {
+                "speed": "2666",
+                "rank": "2",
+                "locator": "NODE 2",
+                "part": "36ASF4G72PZ-2G6J1",
+                "asset": "DIMM_F1_AssetTag",
+                "serial": "251E9270",
+                "size": "32.0 GB",
+                "type": "Unknown",
+                "manufacturer": "Micron"
+            },
+            {
+                "speed": "2666",
+                "rank": "2",
+                "locator": "NODE 3",
+                "part": "36ASF4G72PZ-2G6J1",
+                "asset": "DIMM_G1_AssetTag",
+                "serial": "251E904D",
+                "size": "32.0 GB",
+                "type": "Unknown",
+                "manufacturer": "Microsoft"
+            },
+            {
+                "speed": "2666",
+                "rank": "2",
+                "locator": "NODE 3",
+                "part": "36ASF4G72PZ-2G6J1",
+                "asset": "DIMM_H1_AssetTag",
+                "serial": "251E9471",
+                "size": "32.0 GB",
+                "type": "Unknown",
+                "manufacturer": "Microsoft"
+            },
+            {
+                "speed": "2666",
+                "rank": "2",
+                "locator": "NODE 3",
+                "part": "36ASF4G72PZ-2G6J1",
+                "asset": "DIMM_J1_AssetTag",
+                "serial": "251E9598",
+                "size": "32.0 GB",
+                "type": "Unknown",
+                "manufacturer": "Micron"
+            },
+            {
+                "speed": "2666",
+                "rank": "2",
+                "locator": "NODE 4",
+                "part": "36ASF4G72PZ-2G6J1",
+                "asset": "DIMM_K1_AssetTag",
+                "serial": "251E92FC",
+                "size": "32.0 GB",
+                "type": "Unknown",
+                "manufacturer": "Micron"
+            },
+            {
+                "speed": "2666",
+                "rank": "2",
+                "locator": "NODE 4",
+                "part": "36ASF4G72PZ-2G6J1",
+                "asset": "DIMM_L1_AssetTag",
+                "serial": "251E9A67",
+                "size": "32.0 GB",
+                "type": "Unknown",
+                "manufacturer": "Micron"
+            },
+            {
+                "speed": "2666",
+                "rank": "2",
+                "locator": "NODE 4",
+                "part": "36ASF4G72PZ-2G6J1",
+                "asset": "DIMM_M1_AssetTag",
+                "serial": "251E8D3F",
+                "size": "32.0 GB",
+                "type": "Unknown",
+                "manufacturer": "Micron"
+            }
+        ],
+        "procs": [
+            {
+                "cores": "26",
+                "threads": "26",
+                "version": "Intel(R) Xeon(R) Platinum 8171M CPU @ 2.60GHz"
+            },
+            {
+                "cores": "26",
+                "threads": "26",
+                "version": "Intel(R) Xeon(R) Platinum 8171M CPU @ 2.60GHz"
+            }
+        ],
+        "bios": {
+            "version": "C2010.BS.3F42.AD3"
+        },
+        "chassis": {
+            "manufacturer": "Microsoft",
+            "asset": "N\/A",
+            "serial": "P774692920052012"
+        },
+        "baseboard": {
+            "product": "C2012",
+            "version": "M1039570-002",
+            "asset": "N\/A",
+            "serial": "B957092040313010",
+            "manufacturer": "Microsoft"
+        },
+        "system": {
+            "sku": "B91.00T01.0098",
+            "product": "C2012",
+            "serial": "T0100989290001AK",
+            "manufacturer": "Microsoft"
+        },
+        "unique_dimms": [
+            {
+                "count": "12",
+                "speed": "2666",
+                "rank": "2",
+                "part": "36ASF4G72PZ-2G6J1",
+                "size": "32.0 GB",
+                "type": "Unknown",
+                "manufacturer": "Microsoft"
+            }
+        ],
+        "unique_procs": [
+            {
+                "count": "2",
+                "cores": "26",
+                "version": "Intel(R) Xeon(R) Platinum 8171M CPU @ 2.60GHz",
+                "threads": "26"
+            }
+        ],
+        "exec_time": 2.8237144947052,
+        "time": 2.8318154811859
+    },
+    "nvme": {
+        "nvmes": [
+            {
+                "dev": "\/dev\/sdb",
+                "model": "SAMSUNG MZ1LB960HAJQ-000MV",
+                "serial": "S3WGNE0MC30946",
+                "firmware": "EDA79M5Q",
+                "unique_string": "SAMSUNG MZ1LB960HAJQ-000MV-EDA79M5Q"
+            },
+            {
+                "dev": "\/dev\/sdc",
+                "model": "SAMSUNG MZ1LB3T8HMLA-000MV",
+                "serial": "S46SNY0N307812",
+                "firmware": "EDB78M5Q",
+                "unique_string": "SAMSUNG MZ1LB3T8HMLA-000MV-EDB78M5Q"
+            },
+            {
+                "dev": "\/dev\/sdd",
+                "model": "SAMSUNG MZ1LB3T8HMLA-000MV",
+                "serial": "S46SNY0N307444",
+                "firmware": "EDB78M5Q",
+                "unique_string": "SAMSUNG MZ1LB3T8HMLA-000MV-EDB78M5Q"
+            },
+            {
+                "dev": "\/dev\/sde",
+                "model": "SAMSUNG MZ1LB3T8HMLA-000MV",
+                "serial": "S46SNY0N307585",
+                "firmware": "EDB78M5Q",
+                "unique_string": "SAMSUNG MZ1LB3T8HMLA-000MV-EDB78M5Q"
+            },
+            {
+                "dev": "\/dev\/sdf",
+                "model": "SAMSUNG MZ1LB3T8HMLA-000MV",
+                "serial": "S46SNY0N307817",
+                "firmware": "EDB78M5Q",
+                "unique_string": "SAMSUNG MZ1LB3T8HMLA-000MV-EDB78M5Q"
+            },
+            {
+                "dev": "\/dev\/sdg",
+                "model": "SAMSUNG MZ1LB3T8HMLA-000MV",
+                "serial": "S46SNY0N307437",
+                "firmware": "EDB78M5Q",
+                "unique_string": "SAMSUNG MZ1LB3T8HMLA-000MV-EDB78M5Q"
+            },
+            {
+                "dev": "\/dev\/sdh",
+                "model": "SAMSUNG MZ1LB3T8HMLA-000MV",
+                "serial": "S46SNY0N307849",
+                "firmware": "EDB78M5Q",
+                "unique_string": "SAMSUNG MZ1LB3T8HMLA-000MV-EDB78M5Q"
+            },
+            {
+                "dev": "\/dev\/sdi",
+                "model": "SAMSUNG MZ1LB3T8HMLA-000MV",
+                "serial": "S46SNY0N307848",
+                "firmware": "EDB78M5Q",
+                "unique_string": "SAMSUNG MZ1LB3T8HMLA-000MV-EDB78M5Q"
+            },
+            {
+                "dev": "\/dev\/sdj",
+                "model": "SAMSUNG MZ1LB3T8HMLA-000MV",
+                "serial": "S46SNY0N307877",
+                "firmware": "EDB78M5Q",
+                "unique_string": "SAMSUNG MZ1LB3T8HMLA-000MV-EDB78M5Q"
+            },
+            {
+                "dev": "\/dev\/sdk",
+                "model": "SAMSUNG MZ1LB3T8HMLA-000MV",
+                "serial": "S46SNY0N307921",
+                "firmware": "EDB78M5Q",
+                "unique_string": "SAMSUNG MZ1LB3T8HMLA-000MV-EDB78M5Q"
+            },
+            {
+                "dev": "\/dev\/sdl",
+                "model": "SAMSUNG MZ1LB3T8HMLA-000MV",
+                "serial": "S46SNY0N307596",
+                "firmware": "EDB78M5Q",
+                "unique_string": "SAMSUNG MZ1LB3T8HMLA-000MV-EDB78M5Q"
+            },
+            {
+                "dev": "\/dev\/sdm",
+                "model": "SAMSUNG MZ1LB3T8HMLA-000MV",
+                "serial": "S46SNY0N307583",
+                "firmware": "EDB78M5Q",
+                "unique_string": "SAMSUNG MZ1LB3T8HMLA-000MV-EDB78M5Q"
+            },
+            {
+                "dev": "\/dev\/sdn",
+                "model": "SAMSUNG MZ1LB3T8HMLA-000MV",
+                "serial": "S46SNY0N307330",
+                "firmware": "EDB78M5Q",
+                "unique_string": "SAMSUNG MZ1LB3T8HMLA-000MV-EDB78M5Q"
+            },
+            {
+                "dev": "\/dev\/sdo",
+                "model": "SAMSUNG MZ1LB3T8HMLA-000MV",
+                "serial": "S46SNY0N307308",
+                "firmware": "EDB78M5Q",
+                "unique_string": "SAMSUNG MZ1LB3T8HMLA-000MV-EDB78M5Q"
+            },
+            {
+                "dev": "\/dev\/sdp",
+                "model": "SAMSUNG MZ1LB3T8HMLA-000MV",
+                "serial": "S46SNY0N307843",
+                "firmware": "EDB78M5Q",
+                "unique_string": "SAMSUNG MZ1LB3T8HMLA-000MV-EDB78M5Q"
+            },
+            {
+                "dev": "\/dev\/sdq",
+                "model": "SAMSUNG MZ1LB3T8HMLA-000MV",
+                "serial": "S46SNY0N307844",
+                "firmware": "EDB78M5Q",
+                "unique_string": "SAMSUNG MZ1LB3T8HMLA-000MV-EDB78M5Q"
+            }
+        ],
+        "unique_nvmes": [
+            {
+                "count": "1",
+                "model": "SAMSUNG MZ1LB960HAJQ-000MV",
+                "firmware": "EDA79M5Q",
+                "unique_string": "SAMSUNG MZ1LB960HAJQ-000MV-EDA79M5Q"
+            },
+            {
+                "count": "15",
+                "model": "SAMSUNG MZ1LB3T8HMLA-000MV",
+                "firmware": "EDB78M5Q",
+                "unique_string": "SAMSUNG MZ1LB3T8HMLA-000MV-EDB78M5Q"
+            }
+        ],
+        "exec_time": 8.1810765266418,
+        "time": 8.1871070861816
+    },
+    "hba": {
+        "hbas": [
+
+        ],
+        "exec_time": 0.16556549072266,
+        "time": 0.16656303405762
+    },
+    "annapurna": {
+        "devices": [
+
+        ],
+        "exec_time": 0.035905838012695,
+        "time": 0.036903142929077
+    },
+    "pci": {
+        "devices": [
+            {
+                "output": "00:11.0 Unassigned class [ff00]: Intel Corporation C620 Series Chipset Family MROM 0 (rev 04)\r",
+                "address": "00:11.0",
+                "type": "Unassigned class [ff00]",
+                "description": " Intel Corporation C620 Series Chipset Family MROM 0 (rev 04)",
+                "verbose_output": "00:11.0 Unassigned class [ff00]: Intel Corporation C620 Series Chipset Family MROM 0 (rev 04)\r\n\tSubsystem: Intel Corporation Device 7270\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr- Stepping- SERR- FastB2B- DisINTx-\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin ? routed to IRQ 255\r\n\tCapabilities: [80] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\r\n\r\nSummary of buses:\r\n\r\n00: Primary host bus\r\n",
+                "irq": "255"
+            },
+            {
+                "output": "00:11.1 Unassigned class [ff00]: Intel Corporation C620 Series Chipset Family MROM 1 (rev 04)\r",
+                "address": "00:11.1",
+                "type": "Unassigned class [ff00]",
+                "description": " Intel Corporation C620 Series Chipset Family MROM 1 (rev 04)",
+                "verbose_output": "\r\nSummary of buses:\r\n\r\n"
+            },
+            {
+                "output": "00:11.5 SATA controller: Intel Corporation C620 Series Chipset Family SSATA Controller [AHCI mode] (rev 04)\r",
+                "address": "00:11.5",
+                "type": "SATA controller",
+                "description": " Intel Corporation C620 Series Chipset Family SSATA Controller [AHCI mode] (rev 04)",
+                "verbose_output": "\r\nSummary of buses:\r\n\r\n"
+            },
+            {
+                "output": "00:11.5 SATA controller: Intel Corporation C620 Series Chipset Family SSATA Controller [AHCI mode] (rev 04)\r",
+                "address": "00:11.5",
+                "type": "SATA controller",
+                "description": " Intel Corporation C620 Series Chipset Family SSATA Controller [AHCI mode] (rev 04)",
+                "verbose_output": "\r\nSummary of buses:\r\n\r\n"
+            },
+            {
+                "output": "00:17.0 SATA controller: Intel Corporation C620 Series Chipset Family SATA Controller [AHCI mode] (rev 04)\r",
+                "address": "00:17.0",
+                "type": "SATA controller",
+                "description": " Intel Corporation C620 Series Chipset Family SATA Controller [AHCI mode] (rev 04)",
+                "verbose_output": "00:17.0 SATA controller: Intel Corporation C620 Series Chipset Family SATA Controller [AHCI mode] (rev 04) (prog-if 01 [AHCI 1.0])\r\n\tSubsystem: Intel Corporation Device 7270\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr- Stepping- SERR- FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz+ UDF- FastB2B+ ParErr- DEVSEL=medium >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tRegion 0: Memory at 90704000 (32-bit, non-prefetchable)\r\n\tRegion 1: Memory at 90708000 (32-bit, non-prefetchable)\r\n\tRegion 2: [virtual] I\/O ports at <unassigned>\r\n\tRegion 3: [virtual] I\/O ports at <unassigned>\r\n\tRegion 4: [virtual] I\/O ports at <unassigned>\r\n\tRegion 5: Memory at 90600000 (32-bit, non-prefetchable)\r\n\tCapabilities: [80] MSI: Enable+ Count=1\/1 Maskable- 64bit-\r\n\t\tAddress: fee0f00c  Data: 4990\r\n\tCapabilities: [70] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot+,D3cold-)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\tCapabilities: [a8] SATA HBA v1.0 BAR4 Offset=00000004\r\n\r\n\r\nSummary of buses:\r\n\r\n00: Primary host bus\r\n",
+                "irq": "0"
+            },
+            {
+                "output": "00:17.0 SATA controller: Intel Corporation C620 Series Chipset Family SATA Controller [AHCI mode] (rev 04)\r",
+                "address": "00:17.0",
+                "type": "SATA controller",
+                "description": " Intel Corporation C620 Series Chipset Family SATA Controller [AHCI mode] (rev 04)",
+                "verbose_output": "00:17.0 SATA controller: Intel Corporation C620 Series Chipset Family SATA Controller [AHCI mode] (rev 04) (prog-if 01 [AHCI 1.0])\r\n\tSubsystem: Intel Corporation Device 7270\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr- Stepping- SERR- FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz+ UDF- FastB2B+ ParErr- DEVSEL=medium >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tRegion 0: Memory at 90704000 (32-bit, non-prefetchable)\r\n\tRegion 1: Memory at 90708000 (32-bit, non-prefetchable)\r\n\tRegion 2: [virtual] I\/O ports at <unassigned>\r\n\tRegion 3: [virtual] I\/O ports at <unassigned>\r\n\tRegion 4: [virtual] I\/O ports at <unassigned>\r\n\tRegion 5: Memory at 90600000 (32-bit, non-prefetchable)\r\n\tCapabilities: [80] MSI: Enable+ Count=1\/1 Maskable- 64bit-\r\n\t\tAddress: fee0f00c  Data: 4990\r\n\tCapabilities: [70] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot+,D3cold-)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\tCapabilities: [a8] SATA HBA v1.0 BAR4 Offset=00000004\r\n\r\n\r\nSummary of buses:\r\n\r\n00: Primary host bus\r\n",
+                "irq": "0"
+            },
+            {
+                "output": "00:1c.0 PCI bridge: Intel Corporation C620 Series Chipset Family PCI Express Root Port #1 (rev f4)\r",
+                "address": "00:1c.0",
+                "type": "PCI bridge",
+                "description": " Intel Corporation C620 Series Chipset Family PCI Express Root Port #1 (rev f4)",
+                "verbose_output": "00:1c.0 PCI bridge: Intel Corporation C620 Series Chipset Family PCI Express Root Port #1 (rev f4) (prog-if 00 [Normal decode])\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tBus: primary=00, secondary=01, subordinate=01, sec-latency=0\r\n\tI\/O behind bridge: 0000f000-00000fff [empty]\r\n\tMemory behind bridge: 90500000-905fffff [size=1M]\r\n\tPrefetchable memory behind bridge: 00000000fff00000-00000000000fffff [empty]\r\n\tSecondary status: 66MHz- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort+ <SERR- <PERR-\r\n\tBridgeCtl: Parity+ SERR+ NoISA- VGA- VGA16- MAbort- >Reset- FastB2B-\r\n\t\tPriDiscTmr- SecDiscTmr- DiscTmrStat- DiscTmrSERREn-\r\n\tCapabilities: [40] Express (v2) Root Port (Slot+), MSI 00\r\n\t\tDevCap:\tMaxPayload 128 bytes, PhantFunc 0\r\n\t\t\tExtTag- RBE+\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd- ExtTag- PhantFunc- AuxPwr- NoSnoop-\r\n\t\t\tMaxPayload 128 bytes, MaxReadReq 128 bytes\r\n\t\tDevSta:\tCorrErr- NonFatalErr- FatalErr- UnsupReq- AuxPwr+ TransPend-\r\n\t\tLnkCap:\tPort #1, Speed 8GT\/s, Width x4, ASPM not supported\r\n\t\t\tClockPM- Surprise- LLActRep+ BwNot+ ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive+ BWMgmt+ ABWMgmt-\r\n\t\tSltCap:\tAttnBtn- PwrCtrl- MRL- AttnInd- PwrInd- HotPlug- Surprise-\r\n\t\t\tSlot #1, PowerLimit 25.000W; Interlock- NoCompl+\r\n\t\tSltCtl:\tEnable: AttnBtn- PwrFlt- MRL- PresDet- CmdCplt- HPIrq- LinkChg-\r\n\t\t\tControl: AttnInd Unknown, PwrInd Unknown, Power- Interlock-\r\n\t\tSltSta:\tStatus: AttnBtn- PowerFlt- MRL- CmdCplt- PresDet+ Interlock-\r\n\t\t\tChanged: MRL- PresDet- LinkState-\r\n\t\tRootCtl: ErrCorrectable+ ErrNon-Fatal+ ErrFatal+ PMEIntEna+ CRSVisible-\r\n\t\tRootCap: CRSVisible-\r\n\t\tRootSta: PME ReqID 0000, PMEStatus- PMEPending-\r\n\t\tDevCap2: Completion Timeout: Range ABC, TimeoutDis+, LTR+, OBFF Not Supported ARIFwd+\r\n\t\t\t AtomicOpsCap: Routing- 32bit- 64bit- 128bitCAS-\r\n\t\tDevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-, LTR+, OBFF Disabled ARIFwd-\r\n\t\t\t AtomicOpsCtl: ReqEn- EgressBlck-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -3.5dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [80] MSI: Enable+ Count=1\/1 Maskable- 64bit-\r\n\t\tAddress: fee4100c  Data: 49b0\r\n\tCapabilities: [90] Subsystem: Intel Corporation Device 7270\r\n\tCapabilities: [a0] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0+,D1-,D2-,D3hot+,D3cold+)\r\n\t\tStatus: D0 NoSoftRst- PME-Enable- DSel=0 DScale=0 PME-\r\n\r\n## 00:1c.0 is a bridge from 00 to 01-01\r\n\r\nSummary of buses:\r\n\r\n00: Primary host bus\r\n\t1c.0 Bridge to 01-01\r\n",
+                "irq": "0",
+                "correctable_errors": false,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "00:1c.4 PCI bridge: Intel Corporation C620 Series Chipset Family PCI Express Root Port #5 (rev f4)\r",
+                "address": "00:1c.4",
+                "type": "PCI bridge",
+                "description": " Intel Corporation C620 Series Chipset Family PCI Express Root Port #5 (rev f4)",
+                "verbose_output": "\r\nSummary of buses:\r\n\r\n"
+            },
+            {
+                "output": "01:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981\r",
+                "address": "01:00.0",
+                "type": "Non-Volatile memory controller",
+                "description": " Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981",
+                "verbose_output": "01:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981 (prog-if 02 [NVM Express])\r\n\tSubsystem: Samsung Electronics Co Ltd Device a801\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tRegion 0: Memory at 90510000 (64-bit, non-prefetchable)\r\n\tCapabilities: [40] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\tCapabilities: [50] MSI: Enable- Count=1\/32 Maskable- 64bit+\r\n\t\tAddress: 0000000000000000  Data: 0000\r\n\tCapabilities: [70] Express (v2) Endpoint, MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0, Latency L0s unlimited, L1 unlimited\r\n\t\t\tExtTag- AttnBtn- AttnInd- PwrInd- RBE+ FLReset+ SlotPowerLimit 25.000W\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd+ ExtTag- PhantFunc- AuxPwr- NoSnoop- FLReset-\r\n\t\t\tMaxPayload 128 bytes, MaxReadReq 512 bytes\r\n\t\tDevSta:\tCorrErr+ NonFatalErr- FatalErr- UnsupReq+ AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #0, Speed 8GT\/s, Width x4, ASPM not supported\r\n\t\t\tClockPM- Surprise- LLActRep- BwNot- ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-\r\n\t\tDevCap2: Completion Timeout: Range ABCD, TimeoutDis+, LTR+, OBFF Not Supported\r\n\t\tDevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-, LTR+, OBFF Disabled\r\n\t\t\t AtomicOpsCtl: ReqEn-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [b0] MSI-X: Enable+ Count=33 Masked-\r\n\t\tVector table: BAR=0 offset=00003000\r\n\t\tPBA: BAR=0 offset=00002000\r\n\r\n\r\nSummary of buses:\r\n\r\n01: Secondary host bus (?)\r\n",
+                "irq": "0",
+                "correctable_errors": true,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "02:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981\r",
+                "address": "02:00.0",
+                "type": "Non-Volatile memory controller",
+                "description": " Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981",
+                "verbose_output": "02:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981 (prog-if 02 [NVM Express])\r\n\tSubsystem: Samsung Electronics Co Ltd Device a801\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tRegion 0: Memory at 90410000 (64-bit, non-prefetchable)\r\n\tCapabilities: [40] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\tCapabilities: [50] MSI: Enable- Count=1\/32 Maskable- 64bit+\r\n\t\tAddress: 0000000000000000  Data: 0000\r\n\tCapabilities: [70] Express (v2) Endpoint, MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0, Latency L0s unlimited, L1 unlimited\r\n\t\t\tExtTag- AttnBtn- AttnInd- PwrInd- RBE+ FLReset+ SlotPowerLimit 25.000W\r\n\t\tDevCtl:\tCorrErr- NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd+ ExtTag- PhantFunc- AuxPwr- NoSnoop- FLReset-\r\n\t\t\tMaxPayload 128 bytes, MaxReadReq 512 bytes\r\n\t\tDevSta:\tCorrErr+ NonFatalErr- FatalErr- UnsupReq+ AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #0, Speed 8GT\/s, Width x4, ASPM not supported\r\n\t\t\tClockPM- Surprise- LLActRep- BwNot- ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-\r\n\t\tDevCap2: Completion Timeout: Range ABCD, TimeoutDis+, LTR+, OBFF Not Supported\r\n\t\tDevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-, LTR+, OBFF Disabled\r\n\t\t\t AtomicOpsCtl: ReqEn-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [b0] MSI-X: Enable+ Count=33 Masked-\r\n\t\tVector table: BAR=0 offset=00003000\r\n\t\tPBA: BAR=0 offset=00002000\r\n\r\n\r\nSummary of buses:\r\n\r\n02: Secondary host bus (?)\r\n",
+                "irq": "0",
+                "correctable_errors": true,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "17:00.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port A (rev 04)\r",
+                "address": "17:00.0",
+                "type": "PCI bridge",
+                "description": " Intel Corporation Sky Lake-E PCI Express Root Port A (rev 04)",
+                "verbose_output": "17:00.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port A (rev 04) (prog-if 00 [Normal decode])\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tBus: primary=17, secondary=18, subordinate=18, sec-latency=0\r\n\tI\/O behind bridge: 0000f000-00000fff [empty]\r\n\tMemory behind bridge: b0200000-b02fffff [size=1M]\r\n\tPrefetchable memory behind bridge: 00000000fff00000-00000000000fffff [empty]\r\n\tSecondary status: 66MHz- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- <SERR- <PERR-\r\n\tBridgeCtl: Parity+ SERR+ NoISA- VGA- VGA16- MAbort- >Reset- FastB2B-\r\n\t\tPriDiscTmr- SecDiscTmr- DiscTmrStat- DiscTmrSERREn-\r\n\tCapabilities: [40] Subsystem: Intel Corporation Device 0000\r\n\tCapabilities: [60] MSI: Enable+ Count=1\/2 Maskable+ 64bit-\r\n\t\tAddress: fee7100c  Data: 49b0\r\n\t\tMasking: 00000002  Pending: 00000000\r\n\tCapabilities: [90] Express (v2) Root Port (Slot+), MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0\r\n\t\t\tExtTag+ RBE+\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd- ExtTag+ PhantFunc- AuxPwr- NoSnoop-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 128 bytes\r\n\t\tDevSta:\tCorrErr- NonFatalErr- FatalErr- UnsupReq- AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #1, Speed 8GT\/s, Width x4, ASPM L1, Exit Latency L1 <16us\r\n\t\t\tClockPM- Surprise+ LLActRep+ BwNot+ ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive+ BWMgmt- ABWMgmt-\r\n\t\tSltCap:\tAttnBtn- PwrCtrl- MRL- AttnInd- PwrInd- HotPlug- Surprise-\r\n\t\t\tSlot #9, PowerLimit 0.000W; Interlock- NoCompl-\r\n\t\tSltCtl:\tEnable: AttnBtn- PwrFlt- MRL- PresDet- CmdCplt- HPIrq- LinkChg-\r\n\t\t\tControl: AttnInd Off, PwrInd Off, Power- Interlock-\r\n\t\tSltSta:\tStatus: AttnBtn- PowerFlt- MRL- CmdCplt- PresDet+ Interlock-\r\n\t\t\tChanged: MRL- PresDet- LinkState-\r\n\t\tRootCtl: ErrCorrectable+ ErrNon-Fatal+ ErrFatal+ PMEIntEna+ CRSVisible-\r\n\t\tRootCap: CRSVisible+\r\n\t\tRootSta: PME ReqID 0000, PMEStatus- PMEPending-\r\n\t\tDevCap2: Completion Timeout: Range BCD, TimeoutDis+, LTR-, OBFF Not Supported ARIFwd+\r\n\t\t\t AtomicOpsCap: Routing- 32bit+ 64bit+ 128bitCAS+\r\n\t\tDevCtl2: Completion Timeout: 260ms to 900ms, TimeoutDis-, LTR-, OBFF Disabled ARIFwd-\r\n\t\t\t AtomicOpsCtl: ReqEn- EgressBlck-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [e0] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0+,D1-,D2-,D3hot+,D3cold+)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\r\n## 17:00.0 is a bridge from 17 to 18-18\r\n\r\nSummary of buses:\r\n\r\n17: Secondary host bus (?)\r\n\t00.0 Bridge to 18-18\r\n",
+                "irq": "0",
+                "correctable_errors": false,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "17:01.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port B (rev 04)\r",
+                "address": "17:01.0",
+                "type": "PCI bridge",
+                "description": " Intel Corporation Sky Lake-E PCI Express Root Port B (rev 04)",
+                "verbose_output": "17:01.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port B (rev 04) (prog-if 00 [Normal decode])\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tBus: primary=17, secondary=19, subordinate=19, sec-latency=0\r\n\tI\/O behind bridge: 0000f000-00000fff [empty]\r\n\tMemory behind bridge: b0100000-b01fffff [size=1M]\r\n\tPrefetchable memory behind bridge: 00000000fff00000-00000000000fffff [empty]\r\n\tSecondary status: 66MHz- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- <SERR- <PERR-\r\n\tBridgeCtl: Parity+ SERR+ NoISA- VGA- VGA16- MAbort- >Reset- FastB2B-\r\n\t\tPriDiscTmr- SecDiscTmr- DiscTmrStat- DiscTmrSERREn-\r\n\tCapabilities: [40] Subsystem: Intel Corporation Device 0000\r\n\tCapabilities: [60] MSI: Enable+ Count=1\/2 Maskable+ 64bit-\r\n\t\tAddress: fee8100c  Data: 49b0\r\n\t\tMasking: 00000002  Pending: 00000000\r\n\tCapabilities: [90] Express (v2) Root Port (Slot+), MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0\r\n\t\t\tExtTag+ RBE+\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd- ExtTag+ PhantFunc- AuxPwr- NoSnoop-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 128 bytes\r\n\t\tDevSta:\tCorrErr- NonFatalErr- FatalErr- UnsupReq- AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #2, Speed 8GT\/s, Width x4, ASPM L1, Exit Latency L1 <16us\r\n\t\t\tClockPM- Surprise+ LLActRep+ BwNot+ ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive+ BWMgmt- ABWMgmt-\r\n\t\tSltCap:\tAttnBtn- PwrCtrl- MRL- AttnInd- PwrInd- HotPlug- Surprise-\r\n\t\t\tSlot #10, PowerLimit 0.000W; Interlock- NoCompl-\r\n\t\tSltCtl:\tEnable: AttnBtn- PwrFlt- MRL- PresDet- CmdCplt- HPIrq- LinkChg-\r\n\t\t\tControl: AttnInd Off, PwrInd Off, Power- Interlock-\r\n\t\tSltSta:\tStatus: AttnBtn- PowerFlt- MRL- CmdCplt- PresDet+ Interlock-\r\n\t\t\tChanged: MRL- PresDet- LinkState-\r\n\t\tRootCtl: ErrCorrectable+ ErrNon-Fatal+ ErrFatal+ PMEIntEna+ CRSVisible-\r\n\t\tRootCap: CRSVisible+\r\n\t\tRootSta: PME ReqID 0000, PMEStatus- PMEPending-\r\n\t\tDevCap2: Completion Timeout: Range BCD, TimeoutDis+, LTR-, OBFF Not Supported ARIFwd+\r\n\t\t\t AtomicOpsCap: Routing- 32bit+ 64bit+ 128bitCAS+\r\n\t\tDevCtl2: Completion Timeout: 260ms to 900ms, TimeoutDis-, LTR-, OBFF Disabled ARIFwd-\r\n\t\t\t AtomicOpsCtl: ReqEn- EgressBlck-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [e0] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0+,D1-,D2-,D3hot+,D3cold+)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\r\n## 17:01.0 is a bridge from 17 to 19-19\r\n\r\nSummary of buses:\r\n\r\n17: Secondary host bus (?)\r\n\t01.0 Bridge to 19-19\r\n",
+                "irq": "0",
+                "correctable_errors": false,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "17:02.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port C (rev 04)\r",
+                "address": "17:02.0",
+                "type": "PCI bridge",
+                "description": " Intel Corporation Sky Lake-E PCI Express Root Port C (rev 04)",
+                "verbose_output": "17:02.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port C (rev 04) (prog-if 00 [Normal decode])\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tBus: primary=17, secondary=1a, subordinate=1a, sec-latency=0\r\n\tI\/O behind bridge: 0000f000-00000fff [empty]\r\n\tMemory behind bridge: b0000000-b00fffff [size=1M]\r\n\tPrefetchable memory behind bridge: 00000000fff00000-00000000000fffff [empty]\r\n\tSecondary status: 66MHz- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- <SERR- <PERR-\r\n\tBridgeCtl: Parity+ SERR+ NoISA- VGA- VGA16- MAbort- >Reset- FastB2B-\r\n\t\tPriDiscTmr- SecDiscTmr- DiscTmrStat- DiscTmrSERREn-\r\n\tCapabilities: [40] Subsystem: Intel Corporation Device 0000\r\n\tCapabilities: [60] MSI: Enable+ Count=1\/2 Maskable+ 64bit-\r\n\t\tAddress: fee9100c  Data: 49b0\r\n\t\tMasking: 00000002  Pending: 00000000\r\n\tCapabilities: [90] Express (v2) Root Port (Slot+), MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0\r\n\t\t\tExtTag+ RBE+\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd- ExtTag+ PhantFunc- AuxPwr- NoSnoop-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 128 bytes\r\n\t\tDevSta:\tCorrErr- NonFatalErr- FatalErr- UnsupReq- AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #3, Speed 8GT\/s, Width x4, ASPM L1, Exit Latency L1 <16us\r\n\t\t\tClockPM- Surprise+ LLActRep+ BwNot+ ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive+ BWMgmt- ABWMgmt-\r\n\t\tSltCap:\tAttnBtn- PwrCtrl- MRL- AttnInd- PwrInd- HotPlug- Surprise-\r\n\t\t\tSlot #11, PowerLimit 0.000W; Interlock- NoCompl-\r\n\t\tSltCtl:\tEnable: AttnBtn- PwrFlt- MRL- PresDet- CmdCplt- HPIrq- LinkChg-\r\n\t\t\tControl: AttnInd Off, PwrInd Off, Power- Interlock-\r\n\t\tSltSta:\tStatus: AttnBtn- PowerFlt- MRL- CmdCplt- PresDet+ Interlock-\r\n\t\t\tChanged: MRL- PresDet- LinkState-\r\n\t\tRootCtl: ErrCorrectable+ ErrNon-Fatal+ ErrFatal+ PMEIntEna+ CRSVisible-\r\n\t\tRootCap: CRSVisible+\r\n\t\tRootSta: PME ReqID 0000, PMEStatus- PMEPending-\r\n\t\tDevCap2: Completion Timeout: Range BCD, TimeoutDis+, LTR-, OBFF Not Supported ARIFwd+\r\n\t\t\t AtomicOpsCap: Routing- 32bit+ 64bit+ 128bitCAS+\r\n\t\tDevCtl2: Completion Timeout: 260ms to 900ms, TimeoutDis-, LTR-, OBFF Disabled ARIFwd-\r\n\t\t\t AtomicOpsCtl: ReqEn- EgressBlck-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [e0] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0+,D1-,D2-,D3hot+,D3cold+)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\r\n## 17:02.0 is a bridge from 17 to 1a-1a\r\n\r\nSummary of buses:\r\n\r\n17: Secondary host bus (?)\r\n\t02.0 Bridge to 1a-1a\r\n",
+                "irq": "0",
+                "correctable_errors": false,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "17:03.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port D (rev 04)\r",
+                "address": "17:03.0",
+                "type": "PCI bridge",
+                "description": " Intel Corporation Sky Lake-E PCI Express Root Port D (rev 04)",
+                "verbose_output": "17:03.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port D (rev 04) (prog-if 00 [Normal decode])\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tBus: primary=17, secondary=1b, subordinate=1b, sec-latency=0\r\n\tI\/O behind bridge: 0000f000-00000fff [empty]\r\n\tMemory behind bridge: aff00000-afffffff [size=1M]\r\n\tPrefetchable memory behind bridge: 00000000fff00000-00000000000fffff [empty]\r\n\tSecondary status: 66MHz- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- <SERR- <PERR-\r\n\tBridgeCtl: Parity+ SERR+ NoISA- VGA- VGA16- MAbort- >Reset- FastB2B-\r\n\t\tPriDiscTmr- SecDiscTmr- DiscTmrStat- DiscTmrSERREn-\r\n\tCapabilities: [40] Subsystem: Intel Corporation Device 0000\r\n\tCapabilities: [60] MSI: Enable+ Count=1\/2 Maskable+ 64bit-\r\n\t\tAddress: feea100c  Data: 49b0\r\n\t\tMasking: 00000002  Pending: 00000000\r\n\tCapabilities: [90] Express (v2) Root Port (Slot+), MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0\r\n\t\t\tExtTag+ RBE+\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd- ExtTag+ PhantFunc- AuxPwr- NoSnoop-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 128 bytes\r\n\t\tDevSta:\tCorrErr- NonFatalErr- FatalErr- UnsupReq- AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #4, Speed 8GT\/s, Width x4, ASPM L1, Exit Latency L1 <16us\r\n\t\t\tClockPM- Surprise+ LLActRep+ BwNot+ ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive+ BWMgmt- ABWMgmt-\r\n\t\tSltCap:\tAttnBtn- PwrCtrl- MRL- AttnInd- PwrInd- HotPlug- Surprise-\r\n\t\t\tSlot #12, PowerLimit 0.000W; Interlock- NoCompl-\r\n\t\tSltCtl:\tEnable: AttnBtn- PwrFlt- MRL- PresDet- CmdCplt- HPIrq- LinkChg-\r\n\t\t\tControl: AttnInd Off, PwrInd Off, Power- Interlock-\r\n\t\tSltSta:\tStatus: AttnBtn- PowerFlt- MRL- CmdCplt- PresDet+ Interlock-\r\n\t\t\tChanged: MRL- PresDet- LinkState-\r\n\t\tRootCtl: ErrCorrectable+ ErrNon-Fatal+ ErrFatal+ PMEIntEna+ CRSVisible-\r\n\t\tRootCap: CRSVisible+\r\n\t\tRootSta: PME ReqID 0000, PMEStatus- PMEPending-\r\n\t\tDevCap2: Completion Timeout: Range BCD, TimeoutDis+, LTR-, OBFF Not Supported ARIFwd+\r\n\t\t\t AtomicOpsCap: Routing- 32bit+ 64bit+ 128bitCAS+\r\n\t\tDevCtl2: Completion Timeout: 260ms to 900ms, TimeoutDis-, LTR-, OBFF Disabled ARIFwd-\r\n\t\t\t AtomicOpsCtl: ReqEn- EgressBlck-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [e0] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0+,D1-,D2-,D3hot+,D3cold+)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\r\n## 17:03.0 is a bridge from 17 to 1b-1b\r\n\r\nSummary of buses:\r\n\r\n17: Secondary host bus (?)\r\n\t03.0 Bridge to 1b-1b\r\n",
+                "irq": "0",
+                "correctable_errors": false,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "18:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981\r",
+                "address": "18:00.0",
+                "type": "Non-Volatile memory controller",
+                "description": " Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981",
+                "verbose_output": "18:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981 (prog-if 02 [NVM Express])\r\n\tSubsystem: Samsung Electronics Co Ltd Device a801\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tRegion 0: Memory at b0210000 (64-bit, non-prefetchable)\r\n\tCapabilities: [40] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\tCapabilities: [50] MSI: Enable- Count=1\/32 Maskable- 64bit+\r\n\t\tAddress: 0000000000000000  Data: 0000\r\n\tCapabilities: [70] Express (v2) Endpoint, MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0, Latency L0s unlimited, L1 unlimited\r\n\t\t\tExtTag- AttnBtn- AttnInd- PwrInd- RBE+ FLReset+ SlotPowerLimit 0.000W\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd+ ExtTag- PhantFunc- AuxPwr- NoSnoop- FLReset-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 512 bytes\r\n\t\tDevSta:\tCorrErr+ NonFatalErr- FatalErr- UnsupReq+ AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #0, Speed 8GT\/s, Width x4, ASPM not supported\r\n\t\t\tClockPM- Surprise- LLActRep- BwNot- ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-\r\n\t\tDevCap2: Completion Timeout: Range ABCD, TimeoutDis+, LTR+, OBFF Not Supported\r\n\t\tDevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-, LTR-, OBFF Disabled\r\n\t\t\t AtomicOpsCtl: ReqEn-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [b0] MSI-X: Enable+ Count=33 Masked-\r\n\t\tVector table: BAR=0 offset=00003000\r\n\t\tPBA: BAR=0 offset=00002000\r\n\r\n\r\nSummary of buses:\r\n\r\n18: Secondary host bus (?)\r\n",
+                "irq": "0",
+                "correctable_errors": true,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "19:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981\r",
+                "address": "19:00.0",
+                "type": "Non-Volatile memory controller",
+                "description": " Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981",
+                "verbose_output": "19:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981 (prog-if 02 [NVM Express])\r\n\tSubsystem: Samsung Electronics Co Ltd Device a801\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tRegion 0: Memory at b0110000 (64-bit, non-prefetchable)\r\n\tCapabilities: [40] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\tCapabilities: [50] MSI: Enable- Count=1\/32 Maskable- 64bit+\r\n\t\tAddress: 0000000000000000  Data: 0000\r\n\tCapabilities: [70] Express (v2) Endpoint, MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0, Latency L0s unlimited, L1 unlimited\r\n\t\t\tExtTag- AttnBtn- AttnInd- PwrInd- RBE+ FLReset+ SlotPowerLimit 0.000W\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd+ ExtTag- PhantFunc- AuxPwr- NoSnoop- FLReset-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 512 bytes\r\n\t\tDevSta:\tCorrErr+ NonFatalErr- FatalErr- UnsupReq+ AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #0, Speed 8GT\/s, Width x4, ASPM not supported\r\n\t\t\tClockPM- Surprise- LLActRep- BwNot- ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-\r\n\t\tDevCap2: Completion Timeout: Range ABCD, TimeoutDis+, LTR+, OBFF Not Supported\r\n\t\tDevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-, LTR-, OBFF Disabled\r\n\t\t\t AtomicOpsCtl: ReqEn-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [b0] MSI-X: Enable+ Count=33 Masked-\r\n\t\tVector table: BAR=0 offset=00003000\r\n\t\tPBA: BAR=0 offset=00002000\r\n\r\n\r\nSummary of buses:\r\n\r\n19: Secondary host bus (?)\r\n",
+                "irq": "0",
+                "correctable_errors": true,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "1a:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981\r",
+                "address": "1a:00.0",
+                "type": "Non-Volatile memory controller",
+                "description": " Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981",
+                "verbose_output": "1a:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981 (prog-if 02 [NVM Express])\r\n\tSubsystem: Samsung Electronics Co Ltd Device a801\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tRegion 0: Memory at b0010000 (64-bit, non-prefetchable)\r\n\tCapabilities: [40] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\tCapabilities: [50] MSI: Enable- Count=1\/32 Maskable- 64bit+\r\n\t\tAddress: 0000000000000000  Data: 0000\r\n\tCapabilities: [70] Express (v2) Endpoint, MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0, Latency L0s unlimited, L1 unlimited\r\n\t\t\tExtTag- AttnBtn- AttnInd- PwrInd- RBE+ FLReset+ SlotPowerLimit 0.000W\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd+ ExtTag- PhantFunc- AuxPwr- NoSnoop- FLReset-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 512 bytes\r\n\t\tDevSta:\tCorrErr+ NonFatalErr- FatalErr- UnsupReq+ AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #0, Speed 8GT\/s, Width x4, ASPM not supported\r\n\t\t\tClockPM- Surprise- LLActRep- BwNot- ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-\r\n\t\tDevCap2: Completion Timeout: Range ABCD, TimeoutDis+, LTR+, OBFF Not Supported\r\n\t\tDevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-, LTR-, OBFF Disabled\r\n\t\t\t AtomicOpsCtl: ReqEn-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [b0] MSI-X: Enable+ Count=33 Masked-\r\n\t\tVector table: BAR=0 offset=00003000\r\n\t\tPBA: BAR=0 offset=00002000\r\n\r\n\r\nSummary of buses:\r\n\r\n1a: Secondary host bus (?)\r\n",
+                "irq": "0",
+                "correctable_errors": true,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "1b:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981\r",
+                "address": "1b:00.0",
+                "type": "Non-Volatile memory controller",
+                "description": " Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981",
+                "verbose_output": "1b:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981 (prog-if 02 [NVM Express])\r\n\tSubsystem: Samsung Electronics Co Ltd Device a801\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tRegion 0: Memory at aff10000 (64-bit, non-prefetchable)\r\n\tCapabilities: [40] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\tCapabilities: [50] MSI: Enable- Count=1\/32 Maskable- 64bit+\r\n\t\tAddress: 0000000000000000  Data: 0000\r\n\tCapabilities: [70] Express (v2) Endpoint, MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0, Latency L0s unlimited, L1 unlimited\r\n\t\t\tExtTag- AttnBtn- AttnInd- PwrInd- RBE+ FLReset+ SlotPowerLimit 0.000W\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd+ ExtTag- PhantFunc- AuxPwr- NoSnoop- FLReset-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 512 bytes\r\n\t\tDevSta:\tCorrErr+ NonFatalErr- FatalErr- UnsupReq+ AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #0, Speed 8GT\/s, Width x4, ASPM not supported\r\n\t\t\tClockPM- Surprise- LLActRep- BwNot- ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-\r\n\t\tDevCap2: Completion Timeout: Range ABCD, TimeoutDis+, LTR+, OBFF Not Supported\r\n\t\tDevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-, LTR-, OBFF Disabled\r\n\t\t\t AtomicOpsCtl: ReqEn-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [b0] MSI-X: Enable+ Count=33 Masked-\r\n\t\tVector table: BAR=0 offset=00003000\r\n\t\tPBA: BAR=0 offset=00002000\r\n\r\n\r\nSummary of buses:\r\n\r\n1b: Secondary host bus (?)\r\n",
+                "irq": "0",
+                "correctable_errors": true,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "3a:00.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port A (rev 04)\r",
+                "address": "3a:00.0",
+                "type": "PCI bridge",
+                "description": " Intel Corporation Sky Lake-E PCI Express Root Port A (rev 04)",
+                "verbose_output": "3a:00.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port A (rev 04) (prog-if 00 [Normal decode])\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tBus: primary=3a, secondary=3b, subordinate=3f, sec-latency=0\r\n\tI\/O behind bridge: 0000f000-00000fff [empty]\r\n\tMemory behind bridge: b8200000-b86fffff [size=5M]\r\n\tPrefetchable memory behind bridge: 00000000fff00000-00000000000fffff [empty]\r\n\tSecondary status: 66MHz- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort+ <SERR- <PERR-\r\n\tBridgeCtl: Parity+ SERR+ NoISA- VGA- VGA16- MAbort- >Reset- FastB2B-\r\n\t\tPriDiscTmr- SecDiscTmr- DiscTmrStat- DiscTmrSERREn-\r\n\tCapabilities: [40] Subsystem: Intel Corporation Device 0000\r\n\tCapabilities: [60] MSI: Enable+ Count=1\/2 Maskable+ 64bit-\r\n\t\tAddress: feeb100c  Data: 49b0\r\n\t\tMasking: 00000002  Pending: 00000000\r\n\tCapabilities: [90] Express (v2) Root Port (Slot+), MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0\r\n\t\t\tExtTag+ RBE+\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd- ExtTag+ PhantFunc- AuxPwr- NoSnoop-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 128 bytes\r\n\t\tDevSta:\tCorrErr- NonFatalErr- FatalErr- UnsupReq- AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #5, Speed 8GT\/s, Width x16, ASPM L1, Exit Latency L1 <16us\r\n\t\t\tClockPM- Surprise+ LLActRep+ BwNot+ ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x16 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive+ BWMgmt- ABWMgmt-\r\n\t\tSltCap:\tAttnBtn- PwrCtrl- MRL- AttnInd- PwrInd- HotPlug- Surprise-\r\n\t\t\tSlot #13, PowerLimit 0.000W; Interlock- NoCompl-\r\n\t\tSltCtl:\tEnable: AttnBtn- PwrFlt- MRL- PresDet- CmdCplt- HPIrq- LinkChg-\r\n\t\t\tControl: AttnInd Off, PwrInd Off, Power- Interlock-\r\n\t\tSltSta:\tStatus: AttnBtn- PowerFlt- MRL- CmdCplt- PresDet+ Interlock-\r\n\t\t\tChanged: MRL- PresDet- LinkState-\r\n\t\tRootCtl: ErrCorrectable+ ErrNon-Fatal+ ErrFatal+ PMEIntEna+ CRSVisible-\r\n\t\tRootCap: CRSVisible+\r\n\t\tRootSta: PME ReqID 0000, PMEStatus- PMEPending-\r\n\t\tDevCap2: Completion Timeout: Range BCD, TimeoutDis+, LTR-, OBFF Not Supported ARIFwd+\r\n\t\t\t AtomicOpsCap: Routing- 32bit+ 64bit+ 128bitCAS+\r\n\t\tDevCtl2: Completion Timeout: 260ms to 900ms, TimeoutDis-, LTR-, OBFF Disabled ARIFwd-\r\n\t\t\t AtomicOpsCtl: ReqEn- EgressBlck-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [e0] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0+,D1-,D2-,D3hot+,D3cold+)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\r\n## 3a:00.0 is a bridge from 3a to 3b-3f\r\n\r\nSummary of buses:\r\n\r\n3a: Secondary host bus (?)\r\n\t00.0 Bridge to 3b-3f\r\n",
+                "irq": "0",
+                "correctable_errors": false,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x16"
+            },
+            {
+                "output": "3b:00.0 PCI bridge: Intel Corporation Device 37c0 (rev 04)\r",
+                "address": "3b:00.0",
+                "type": "PCI bridge",
+                "description": " Intel Corporation Device 37c0 (rev 04)",
+                "verbose_output": "3b:00.0 PCI bridge: Intel Corporation Device 37c0 (rev 04) (prog-if 00 [Normal decode])\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 255\r\n\tRegion 0: Memory at b8600000 (64-bit, non-prefetchable)\r\n\tBus: primary=3b, secondary=3c, subordinate=3f, sec-latency=0\r\n\tI\/O behind bridge: 0000f000-00000fff [empty]\r\n\tMemory behind bridge: b8300000-b85fffff [size=3M]\r\n\tPrefetchable memory behind bridge: 00000000fff00000-00000000000fffff [empty]\r\n\tSecondary status: 66MHz- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort+ <SERR- <PERR-\r\n\tBridgeCtl: Parity+ SERR+ NoISA- VGA- VGA16- MAbort- >Reset- FastB2B-\r\n\t\tPriDiscTmr- SecDiscTmr- DiscTmrStat- DiscTmrSERREn-\r\n\tCapabilities: [40] Express (v2) Upstream Port, MSI 00\r\n\t\tDevCap:\tMaxPayload 512 bytes, PhantFunc 0\r\n\t\t\tExtTag- AttnBtn- AttnInd- PwrInd- RBE+ SlotPowerLimit 0.000W\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd- ExtTag- PhantFunc- AuxPwr- NoSnoop-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 512 bytes\r\n\t\tDevSta:\tCorrErr+ NonFatalErr- FatalErr- UnsupReq+ AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #0, Speed 8GT\/s, Width x16, ASPM L1, Exit Latency L1 <32us\r\n\t\t\tClockPM- Surprise- LLActRep- BwNot- ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM+ AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x16 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-\r\n\t\tDevCap2: Completion Timeout: Not Supported, TimeoutDis-, LTR-, OBFF Not Supported\r\n\t\t\t AtomicOpsCap: Routing-\r\n\t\tDevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-, LTR-, OBFF Disabled\r\n\t\t\t AtomicOpsCtl: EgressBlck-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [80] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0+,D1-,D2-,D3hot+,D3cold+)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\tCapabilities: [88] Subsystem: Intel Corporation Device 0000\r\n\r\n## 3b:00.0 is a bridge from 3b to 3c-3f\r\n\r\nSummary of buses:\r\n\r\n3b: Secondary host bus (?)\r\n\t00.0 Bridge to 3c-3f\r\n",
+                "irq": "255",
+                "correctable_errors": true,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x16"
+            },
+            {
+                "output": "3c:00.0 PCI bridge: Intel Corporation Device 37c2 (rev 04)\r",
+                "address": "3c:00.0",
+                "type": "PCI bridge",
+                "description": " Intel Corporation Device 37c2 (rev 04)",
+                "verbose_output": "3c:00.0 PCI bridge: Intel Corporation Device 37c2 (rev 04) (prog-if 00 [Normal decode])\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 255\r\n\tBus: primary=3c, secondary=3d, subordinate=3d, sec-latency=0\r\n\tI\/O behind bridge: 0000f000-00000fff [empty]\r\n\tMemory behind bridge: b8500000-b85fffff [size=1M]\r\n\tPrefetchable memory behind bridge: 00000000fff00000-00000000000fffff [empty]\r\n\tSecondary status: 66MHz- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort+ <SERR- <PERR-\r\n\tBridgeCtl: Parity+ SERR+ NoISA- VGA- VGA16- MAbort- >Reset- FastB2B-\r\n\t\tPriDiscTmr- SecDiscTmr- DiscTmrStat- DiscTmrSERREn-\r\n\tCapabilities: [40] Express (v2) Downstream Port (Slot-), MSI 00\r\n\t\tDevCap:\tMaxPayload 512 bytes, PhantFunc 0\r\n\t\t\tExtTag- RBE+\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd- ExtTag- PhantFunc- AuxPwr- NoSnoop-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 512 bytes\r\n\t\tDevSta:\tCorrErr+ NonFatalErr- FatalErr- UnsupReq+ AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #1, Speed 2.5GT\/s, Width x1, ASPM L0s L1, Exit Latency L0s <64ns, L1 <1us\r\n\t\t\tClockPM- Surprise- LLActRep- BwNot- ASPMOptComp-\r\n\t\tLnkCtl:\tASPM Disabled; Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 2.5GT\/s (ok), Width x1 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-\r\n\t\tDevCap2: Completion Timeout: Not Supported, TimeoutDis-, LTR-, OBFF Not Supported ARIFwd+\r\n\t\t\t AtomicOpsCap: Routing-\r\n\t\tDevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-, LTR-, OBFF Disabled ARIFwd+\r\n\t\t\t AtomicOpsCtl: EgressBlck-\r\n\t\tLnkCtl2: Target Link Speed: 2.5GT\/s, EnterCompliance- SpeedDis-, Selectable De-emphasis: -6dB\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete-, EqualizationPhase1-\r\n\t\t\t EqualizationPhase2-, EqualizationPhase3-, LinkEqualizationRequest-\r\n\tCapabilities: [80] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0+,D1-,D2-,D3hot+,D3cold+)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\tCapabilities: [88] Subsystem: Intel Corporation Device 0000\r\n\r\n## 3c:00.0 is a bridge from 3c to 3d-3d\r\n\r\nSummary of buses:\r\n\r\n3c: Secondary host bus (?)\r\n\t00.0 Bridge to 3d-3d\r\n",
+                "irq": "255",
+                "correctable_errors": true,
+                "fatal_errors": false,
+                "speed": "2.5GT\/s",
+                "width": "x1"
+            },
+            {
+                "output": "3c:01.0 PCI bridge: Intel Corporation Device 37c3 (rev 04)\r",
+                "address": "3c:01.0",
+                "type": "PCI bridge",
+                "description": " Intel Corporation Device 37c3 (rev 04)",
+                "verbose_output": "3c:01.0 PCI bridge: Intel Corporation Device 37c3 (rev 04) (prog-if 00 [Normal decode])\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 255\r\n\tBus: primary=3c, secondary=3e, subordinate=3e, sec-latency=0\r\n\tI\/O behind bridge: 0000f000-00000fff [empty]\r\n\tMemory behind bridge: b8400000-b84fffff [size=1M]\r\n\tPrefetchable memory behind bridge: 00000000fff00000-00000000000fffff [empty]\r\n\tSecondary status: 66MHz- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort+ <SERR- <PERR-\r\n\tBridgeCtl: Parity+ SERR+ NoISA- VGA- VGA16- MAbort- >Reset- FastB2B-\r\n\t\tPriDiscTmr- SecDiscTmr- DiscTmrStat- DiscTmrSERREn-\r\n\tCapabilities: [40] Express (v2) Downstream Port (Slot-), MSI 00\r\n\t\tDevCap:\tMaxPayload 512 bytes, PhantFunc 0\r\n\t\t\tExtTag- RBE+\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd- ExtTag- PhantFunc- AuxPwr- NoSnoop-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 512 bytes\r\n\t\tDevSta:\tCorrErr+ NonFatalErr- FatalErr- UnsupReq+ AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #2, Speed 2.5GT\/s, Width x1, ASPM L0s L1, Exit Latency L0s <64ns, L1 <1us\r\n\t\t\tClockPM- Surprise- LLActRep- BwNot- ASPMOptComp-\r\n\t\tLnkCtl:\tASPM Disabled; Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 2.5GT\/s (ok), Width x1 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-\r\n\t\tDevCap2: Completion Timeout: Not Supported, TimeoutDis-, LTR-, OBFF Not Supported ARIFwd+\r\n\t\t\t AtomicOpsCap: Routing-\r\n\t\tDevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-, LTR-, OBFF Disabled ARIFwd+\r\n\t\t\t AtomicOpsCtl: EgressBlck-\r\n\t\tLnkCtl2: Target Link Speed: 2.5GT\/s, EnterCompliance- SpeedDis-, Selectable De-emphasis: -6dB\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete-, EqualizationPhase1-\r\n\t\t\t EqualizationPhase2-, EqualizationPhase3-, LinkEqualizationRequest-\r\n\tCapabilities: [80] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0+,D1-,D2-,D3hot+,D3cold+)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\tCapabilities: [88] Subsystem: Intel Corporation Device 0000\r\n\r\n## 3c:01.0 is a bridge from 3c to 3e-3e\r\n\r\nSummary of buses:\r\n\r\n3c: Secondary host bus (?)\r\n\t01.0 Bridge to 3e-3e\r\n",
+                "irq": "255",
+                "correctable_errors": true,
+                "fatal_errors": false,
+                "speed": "2.5GT\/s",
+                "width": "x1"
+            },
+            {
+                "output": "3c:02.0 PCI bridge: Intel Corporation Device 37c4 (rev 04)\r",
+                "address": "3c:02.0",
+                "type": "PCI bridge",
+                "description": " Intel Corporation Device 37c4 (rev 04)",
+                "verbose_output": "3c:02.0 PCI bridge: Intel Corporation Device 37c4 (rev 04) (prog-if 00 [Normal decode])\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 255\r\n\tBus: primary=3c, secondary=3f, subordinate=3f, sec-latency=0\r\n\tI\/O behind bridge: 0000f000-00000fff [empty]\r\n\tMemory behind bridge: b8300000-b83fffff [size=1M]\r\n\tPrefetchable memory behind bridge: 00000000fff00000-00000000000fffff [empty]\r\n\tSecondary status: 66MHz- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort+ <SERR- <PERR-\r\n\tBridgeCtl: Parity+ SERR+ NoISA- VGA- VGA16- MAbort- >Reset- FastB2B-\r\n\t\tPriDiscTmr- SecDiscTmr- DiscTmrStat- DiscTmrSERREn-\r\n\tCapabilities: [40] Express (v2) Downstream Port (Slot-), MSI 00\r\n\t\tDevCap:\tMaxPayload 512 bytes, PhantFunc 0\r\n\t\t\tExtTag- RBE+\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd- ExtTag- PhantFunc- AuxPwr- NoSnoop-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 512 bytes\r\n\t\tDevSta:\tCorrErr+ NonFatalErr- FatalErr- UnsupReq+ AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #3, Speed 2.5GT\/s, Width x1, ASPM L0s L1, Exit Latency L0s <64ns, L1 <1us\r\n\t\t\tClockPM- Surprise- LLActRep- BwNot- ASPMOptComp-\r\n\t\tLnkCtl:\tASPM Disabled; Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 2.5GT\/s (ok), Width x1 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-\r\n\t\tDevCap2: Completion Timeout: Not Supported, TimeoutDis-, LTR-, OBFF Not Supported ARIFwd+\r\n\t\t\t AtomicOpsCap: Routing-\r\n\t\tDevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-, LTR-, OBFF Disabled ARIFwd+\r\n\t\t\t AtomicOpsCtl: EgressBlck-\r\n\t\tLnkCtl2: Target Link Speed: 2.5GT\/s, EnterCompliance- SpeedDis-, Selectable De-emphasis: -6dB\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete-, EqualizationPhase1-\r\n\t\t\t EqualizationPhase2-, EqualizationPhase3-, LinkEqualizationRequest-\r\n\tCapabilities: [80] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0+,D1-,D2-,D3hot+,D3cold+)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\tCapabilities: [88] Subsystem: Intel Corporation Device 0000\r\n\r\n## 3c:02.0 is a bridge from 3c to 3f-3f\r\n\r\nSummary of buses:\r\n\r\n3c: Secondary host bus (?)\r\n\t02.0 Bridge to 3f-3f\r\n",
+                "irq": "255",
+                "correctable_errors": true,
+                "fatal_errors": false,
+                "speed": "2.5GT\/s",
+                "width": "x1"
+            },
+            {
+                "output": "5d:00.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port A (rev 04)\r",
+                "address": "5d:00.0",
+                "type": "PCI bridge",
+                "description": " Intel Corporation Sky Lake-E PCI Express Root Port A (rev 04)",
+                "verbose_output": "5d:00.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port A (rev 04) (prog-if 00 [Normal decode])\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tBus: primary=5d, secondary=5e, subordinate=5e, sec-latency=0\r\n\tI\/O behind bridge: 0000f000-00000fff [empty]\r\n\tMemory behind bridge: c5e00000-c5efffff [size=1M]\r\n\tPrefetchable memory behind bridge: 00000000fff00000-00000000000fffff [empty]\r\n\tSecondary status: 66MHz- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- <SERR- <PERR-\r\n\tBridgeCtl: Parity+ SERR+ NoISA- VGA- VGA16- MAbort- >Reset- FastB2B-\r\n\t\tPriDiscTmr- SecDiscTmr- DiscTmrStat- DiscTmrSERREn-\r\n\tCapabilities: [40] Subsystem: Intel Corporation Device 0000\r\n\tCapabilities: [60] MSI: Enable+ Count=1\/2 Maskable+ 64bit-\r\n\t\tAddress: feec100c  Data: 49b0\r\n\t\tMasking: 00000002  Pending: 00000000\r\n\tCapabilities: [90] Express (v2) Root Port (Slot+), MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0\r\n\t\t\tExtTag+ RBE+\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd- ExtTag+ PhantFunc- AuxPwr- NoSnoop-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 128 bytes\r\n\t\tDevSta:\tCorrErr- NonFatalErr- FatalErr- UnsupReq- AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #9, Speed 8GT\/s, Width x4, ASPM L1, Exit Latency L1 <16us\r\n\t\t\tClockPM- Surprise+ LLActRep+ BwNot+ ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive+ BWMgmt- ABWMgmt-\r\n\t\tSltCap:\tAttnBtn- PwrCtrl- MRL- AttnInd- PwrInd- HotPlug- Surprise-\r\n\t\t\tSlot #5, PowerLimit 0.000W; Interlock- NoCompl-\r\n\t\tSltCtl:\tEnable: AttnBtn- PwrFlt- MRL- PresDet- CmdCplt- HPIrq- LinkChg-\r\n\t\t\tControl: AttnInd Off, PwrInd Off, Power- Interlock-\r\n\t\tSltSta:\tStatus: AttnBtn- PowerFlt- MRL- CmdCplt- PresDet+ Interlock-\r\n\t\t\tChanged: MRL- PresDet- LinkState-\r\n\t\tRootCtl: ErrCorrectable+ ErrNon-Fatal+ ErrFatal+ PMEIntEna+ CRSVisible-\r\n\t\tRootCap: CRSVisible+\r\n\t\tRootSta: PME ReqID 0000, PMEStatus- PMEPending-\r\n\t\tDevCap2: Completion Timeout: Range BCD, TimeoutDis+, LTR-, OBFF Not Supported ARIFwd+\r\n\t\t\t AtomicOpsCap: Routing- 32bit+ 64bit+ 128bitCAS+\r\n\t\tDevCtl2: Completion Timeout: 260ms to 900ms, TimeoutDis-, LTR-, OBFF Disabled ARIFwd-\r\n\t\t\t AtomicOpsCtl: ReqEn- EgressBlck-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [e0] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0+,D1-,D2-,D3hot+,D3cold+)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\r\n## 5d:00.0 is a bridge from 5d to 5e-5e\r\n\r\nSummary of buses:\r\n\r\n5d: Secondary host bus (?)\r\n\t00.0 Bridge to 5e-5e\r\n",
+                "irq": "0",
+                "correctable_errors": false,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "5d:01.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port B (rev 04)\r",
+                "address": "5d:01.0",
+                "type": "PCI bridge",
+                "description": " Intel Corporation Sky Lake-E PCI Express Root Port B (rev 04)",
+                "verbose_output": "5d:01.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port B (rev 04) (prog-if 00 [Normal decode])\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tBus: primary=5d, secondary=5f, subordinate=5f, sec-latency=0\r\n\tI\/O behind bridge: 0000f000-00000fff [empty]\r\n\tMemory behind bridge: c5d00000-c5dfffff [size=1M]\r\n\tPrefetchable memory behind bridge: 00000000fff00000-00000000000fffff [empty]\r\n\tSecondary status: 66MHz- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- <SERR- <PERR-\r\n\tBridgeCtl: Parity+ SERR+ NoISA- VGA- VGA16- MAbort- >Reset- FastB2B-\r\n\t\tPriDiscTmr- SecDiscTmr- DiscTmrStat- DiscTmrSERREn-\r\n\tCapabilities: [40] Subsystem: Intel Corporation Device 0000\r\n\tCapabilities: [60] MSI: Enable+ Count=1\/2 Maskable+ 64bit-\r\n\t\tAddress: fee0100c  Data: 49a0\r\n\t\tMasking: 00000002  Pending: 00000000\r\n\tCapabilities: [90] Express (v2) Root Port (Slot+), MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0\r\n\t\t\tExtTag+ RBE+\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd- ExtTag+ PhantFunc- AuxPwr- NoSnoop-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 128 bytes\r\n\t\tDevSta:\tCorrErr- NonFatalErr- FatalErr- UnsupReq- AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #10, Speed 8GT\/s, Width x4, ASPM L1, Exit Latency L1 <16us\r\n\t\t\tClockPM- Surprise+ LLActRep+ BwNot+ ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive+ BWMgmt- ABWMgmt-\r\n\t\tSltCap:\tAttnBtn- PwrCtrl- MRL- AttnInd- PwrInd- HotPlug- Surprise-\r\n\t\t\tSlot #6, PowerLimit 0.000W; Interlock- NoCompl-\r\n\t\tSltCtl:\tEnable: AttnBtn- PwrFlt- MRL- PresDet- CmdCplt- HPIrq- LinkChg-\r\n\t\t\tControl: AttnInd Off, PwrInd Off, Power- Interlock-\r\n\t\tSltSta:\tStatus: AttnBtn- PowerFlt- MRL- CmdCplt- PresDet+ Interlock-\r\n\t\t\tChanged: MRL- PresDet- LinkState-\r\n\t\tRootCtl: ErrCorrectable+ ErrNon-Fatal+ ErrFatal+ PMEIntEna+ CRSVisible-\r\n\t\tRootCap: CRSVisible+\r\n\t\tRootSta: PME ReqID 0000, PMEStatus- PMEPending-\r\n\t\tDevCap2: Completion Timeout: Range BCD, TimeoutDis+, LTR-, OBFF Not Supported ARIFwd+\r\n\t\t\t AtomicOpsCap: Routing- 32bit+ 64bit+ 128bitCAS+\r\n\t\tDevCtl2: Completion Timeout: 260ms to 900ms, TimeoutDis-, LTR-, OBFF Disabled ARIFwd-\r\n\t\t\t AtomicOpsCtl: ReqEn- EgressBlck-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [e0] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0+,D1-,D2-,D3hot+,D3cold+)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\r\n## 5d:01.0 is a bridge from 5d to 5f-5f\r\n\r\nSummary of buses:\r\n\r\n5d: Secondary host bus (?)\r\n\t01.0 Bridge to 5f-5f\r\n",
+                "irq": "0",
+                "correctable_errors": false,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "5d:02.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port C (rev 04)\r",
+                "address": "5d:02.0",
+                "type": "PCI bridge",
+                "description": " Intel Corporation Sky Lake-E PCI Express Root Port C (rev 04)",
+                "verbose_output": "5d:02.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port C (rev 04) (prog-if 00 [Normal decode])\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tBus: primary=5d, secondary=60, subordinate=60, sec-latency=0\r\n\tI\/O behind bridge: 0000f000-00000fff [empty]\r\n\tMemory behind bridge: c5c00000-c5cfffff [size=1M]\r\n\tPrefetchable memory behind bridge: 00000000fff00000-00000000000fffff [empty]\r\n\tSecondary status: 66MHz- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- <SERR- <PERR-\r\n\tBridgeCtl: Parity+ SERR+ NoISA- VGA- VGA16- MAbort- >Reset- FastB2B-\r\n\t\tPriDiscTmr- SecDiscTmr- DiscTmrStat- DiscTmrSERREn-\r\n\tCapabilities: [40] Subsystem: Intel Corporation Device 0000\r\n\tCapabilities: [60] MSI: Enable+ Count=1\/2 Maskable+ 64bit-\r\n\t\tAddress: fee1100c  Data: 49b0\r\n\t\tMasking: 00000002  Pending: 00000000\r\n\tCapabilities: [90] Express (v2) Root Port (Slot+), MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0\r\n\t\t\tExtTag+ RBE+\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd- ExtTag+ PhantFunc- AuxPwr- NoSnoop-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 128 bytes\r\n\t\tDevSta:\tCorrErr- NonFatalErr- FatalErr- UnsupReq- AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #11, Speed 8GT\/s, Width x4, ASPM L1, Exit Latency L1 <16us\r\n\t\t\tClockPM- Surprise+ LLActRep+ BwNot+ ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive+ BWMgmt- ABWMgmt-\r\n\t\tSltCap:\tAttnBtn- PwrCtrl- MRL- AttnInd- PwrInd- HotPlug- Surprise-\r\n\t\t\tSlot #7, PowerLimit 0.000W; Interlock- NoCompl-\r\n\t\tSltCtl:\tEnable: AttnBtn- PwrFlt- MRL- PresDet- CmdCplt- HPIrq- LinkChg-\r\n\t\t\tControl: AttnInd Off, PwrInd Off, Power- Interlock-\r\n\t\tSltSta:\tStatus: AttnBtn- PowerFlt- MRL- CmdCplt- PresDet+ Interlock-\r\n\t\t\tChanged: MRL- PresDet- LinkState-\r\n\t\tRootCtl: ErrCorrectable+ ErrNon-Fatal+ ErrFatal+ PMEIntEna+ CRSVisible-\r\n\t\tRootCap: CRSVisible+\r\n\t\tRootSta: PME ReqID 0000, PMEStatus- PMEPending-\r\n\t\tDevCap2: Completion Timeout: Range BCD, TimeoutDis+, LTR-, OBFF Not Supported ARIFwd+\r\n\t\t\t AtomicOpsCap: Routing- 32bit+ 64bit+ 128bitCAS+\r\n\t\tDevCtl2: Completion Timeout: 260ms to 900ms, TimeoutDis-, LTR-, OBFF Disabled ARIFwd-\r\n\t\t\t AtomicOpsCtl: ReqEn- EgressBlck-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [e0] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0+,D1-,D2-,D3hot+,D3cold+)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\r\n## 5d:02.0 is a bridge from 5d to 60-60\r\n\r\nSummary of buses:\r\n\r\n5d: Secondary host bus (?)\r\n\t02.0 Bridge to 60-60\r\n",
+                "irq": "0",
+                "correctable_errors": false,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "5d:03.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port D (rev 04)\r",
+                "address": "5d:03.0",
+                "type": "PCI bridge",
+                "description": " Intel Corporation Sky Lake-E PCI Express Root Port D (rev 04)",
+                "verbose_output": "5d:03.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port D (rev 04) (prog-if 00 [Normal decode])\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tBus: primary=5d, secondary=61, subordinate=61, sec-latency=0\r\n\tI\/O behind bridge: 0000f000-00000fff [empty]\r\n\tMemory behind bridge: c5b00000-c5bfffff [size=1M]\r\n\tPrefetchable memory behind bridge: 00000000fff00000-00000000000fffff [empty]\r\n\tSecondary status: 66MHz- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- <SERR- <PERR-\r\n\tBridgeCtl: Parity+ SERR+ NoISA- VGA- VGA16- MAbort- >Reset- FastB2B-\r\n\t\tPriDiscTmr- SecDiscTmr- DiscTmrStat- DiscTmrSERREn-\r\n\tCapabilities: [40] Subsystem: Intel Corporation Device 0000\r\n\tCapabilities: [60] MSI: Enable+ Count=1\/2 Maskable+ 64bit-\r\n\t\tAddress: fee2100c  Data: 49b0\r\n\t\tMasking: 00000002  Pending: 00000000\r\n\tCapabilities: [90] Express (v2) Root Port (Slot+), MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0\r\n\t\t\tExtTag+ RBE+\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd- ExtTag+ PhantFunc- AuxPwr- NoSnoop-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 128 bytes\r\n\t\tDevSta:\tCorrErr- NonFatalErr- FatalErr- UnsupReq- AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #12, Speed 8GT\/s, Width x4, ASPM L1, Exit Latency L1 <16us\r\n\t\t\tClockPM- Surprise+ LLActRep+ BwNot+ ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive+ BWMgmt- ABWMgmt-\r\n\t\tSltCap:\tAttnBtn- PwrCtrl- MRL- AttnInd- PwrInd- HotPlug- Surprise-\r\n\t\t\tSlot #8, PowerLimit 0.000W; Interlock- NoCompl-\r\n\t\tSltCtl:\tEnable: AttnBtn- PwrFlt- MRL- PresDet- CmdCplt- HPIrq- LinkChg-\r\n\t\t\tControl: AttnInd Off, PwrInd Off, Power- Interlock-\r\n\t\tSltSta:\tStatus: AttnBtn- PowerFlt- MRL- CmdCplt- PresDet+ Interlock-\r\n\t\t\tChanged: MRL- PresDet- LinkState-\r\n\t\tRootCtl: ErrCorrectable+ ErrNon-Fatal+ ErrFatal+ PMEIntEna+ CRSVisible-\r\n\t\tRootCap: CRSVisible+\r\n\t\tRootSta: PME ReqID 0000, PMEStatus- PMEPending-\r\n\t\tDevCap2: Completion Timeout: Range BCD, TimeoutDis+, LTR-, OBFF Not Supported ARIFwd+\r\n\t\t\t AtomicOpsCap: Routing- 32bit+ 64bit+ 128bitCAS+\r\n\t\tDevCtl2: Completion Timeout: 260ms to 900ms, TimeoutDis-, LTR-, OBFF Disabled ARIFwd-\r\n\t\t\t AtomicOpsCtl: ReqEn- EgressBlck-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [e0] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0+,D1-,D2-,D3hot+,D3cold+)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\r\n## 5d:03.0 is a bridge from 5d to 61-61\r\n\r\nSummary of buses:\r\n\r\n5d: Secondary host bus (?)\r\n\t03.0 Bridge to 61-61\r\n",
+                "irq": "0",
+                "correctable_errors": false,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "5e:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981\r",
+                "address": "5e:00.0",
+                "type": "Non-Volatile memory controller",
+                "description": " Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981",
+                "verbose_output": "5e:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981 (prog-if 02 [NVM Express])\r\n\tSubsystem: Samsung Electronics Co Ltd Device a801\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tRegion 0: Memory at c5e10000 (64-bit, non-prefetchable)\r\n\tCapabilities: [40] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\tCapabilities: [50] MSI: Enable- Count=1\/32 Maskable- 64bit+\r\n\t\tAddress: 0000000000000000  Data: 0000\r\n\tCapabilities: [70] Express (v2) Endpoint, MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0, Latency L0s unlimited, L1 unlimited\r\n\t\t\tExtTag- AttnBtn- AttnInd- PwrInd- RBE+ FLReset+ SlotPowerLimit 0.000W\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd+ ExtTag- PhantFunc- AuxPwr- NoSnoop- FLReset-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 512 bytes\r\n\t\tDevSta:\tCorrErr+ NonFatalErr- FatalErr- UnsupReq+ AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #0, Speed 8GT\/s, Width x4, ASPM not supported\r\n\t\t\tClockPM- Surprise- LLActRep- BwNot- ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-\r\n\t\tDevCap2: Completion Timeout: Range ABCD, TimeoutDis+, LTR+, OBFF Not Supported\r\n\t\tDevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-, LTR-, OBFF Disabled\r\n\t\t\t AtomicOpsCtl: ReqEn-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [b0] MSI-X: Enable+ Count=33 Masked-\r\n\t\tVector table: BAR=0 offset=00003000\r\n\t\tPBA: BAR=0 offset=00002000\r\n\r\n\r\nSummary of buses:\r\n\r\n5e: Secondary host bus (?)\r\n",
+                "irq": "0",
+                "correctable_errors": true,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "5f:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981\r",
+                "address": "5f:00.0",
+                "type": "Non-Volatile memory controller",
+                "description": " Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981",
+                "verbose_output": "5f:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981 (prog-if 02 [NVM Express])\r\n\tSubsystem: Samsung Electronics Co Ltd Device a801\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tRegion 0: Memory at c5d10000 (64-bit, non-prefetchable)\r\n\tCapabilities: [40] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\tCapabilities: [50] MSI: Enable- Count=1\/32 Maskable- 64bit+\r\n\t\tAddress: 0000000000000000  Data: 0000\r\n\tCapabilities: [70] Express (v2) Endpoint, MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0, Latency L0s unlimited, L1 unlimited\r\n\t\t\tExtTag- AttnBtn- AttnInd- PwrInd- RBE+ FLReset+ SlotPowerLimit 0.000W\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd+ ExtTag- PhantFunc- AuxPwr- NoSnoop- FLReset-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 512 bytes\r\n\t\tDevSta:\tCorrErr+ NonFatalErr- FatalErr- UnsupReq+ AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #0, Speed 8GT\/s, Width x4, ASPM not supported\r\n\t\t\tClockPM- Surprise- LLActRep- BwNot- ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-\r\n\t\tDevCap2: Completion Timeout: Range ABCD, TimeoutDis+, LTR+, OBFF Not Supported\r\n\t\tDevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-, LTR-, OBFF Disabled\r\n\t\t\t AtomicOpsCtl: ReqEn-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [b0] MSI-X: Enable+ Count=33 Masked-\r\n\t\tVector table: BAR=0 offset=00003000\r\n\t\tPBA: BAR=0 offset=00002000\r\n\r\n\r\nSummary of buses:\r\n\r\n5f: Secondary host bus (?)\r\n",
+                "irq": "0",
+                "correctable_errors": true,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "60:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981\r",
+                "address": "60:00.0",
+                "type": "Non-Volatile memory controller",
+                "description": " Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981",
+                "verbose_output": "60:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981 (prog-if 02 [NVM Express])\r\n\tSubsystem: Samsung Electronics Co Ltd Device a801\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tRegion 0: Memory at c5c10000 (64-bit, non-prefetchable)\r\n\tCapabilities: [40] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\tCapabilities: [50] MSI: Enable- Count=1\/32 Maskable- 64bit+\r\n\t\tAddress: 0000000000000000  Data: 0000\r\n\tCapabilities: [70] Express (v2) Endpoint, MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0, Latency L0s unlimited, L1 unlimited\r\n\t\t\tExtTag- AttnBtn- AttnInd- PwrInd- RBE+ FLReset+ SlotPowerLimit 0.000W\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd+ ExtTag- PhantFunc- AuxPwr- NoSnoop- FLReset-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 512 bytes\r\n\t\tDevSta:\tCorrErr+ NonFatalErr- FatalErr- UnsupReq+ AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #0, Speed 8GT\/s, Width x4, ASPM not supported\r\n\t\t\tClockPM- Surprise- LLActRep- BwNot- ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-\r\n\t\tDevCap2: Completion Timeout: Range ABCD, TimeoutDis+, LTR+, OBFF Not Supported\r\n\t\tDevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-, LTR-, OBFF Disabled\r\n\t\t\t AtomicOpsCtl: ReqEn-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [b0] MSI-X: Enable+ Count=33 Masked-\r\n\t\tVector table: BAR=0 offset=00003000\r\n\t\tPBA: BAR=0 offset=00002000\r\n\r\n\r\nSummary of buses:\r\n\r\n60: Secondary host bus (?)\r\n",
+                "irq": "0",
+                "correctable_errors": true,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "61:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981\r",
+                "address": "61:00.0",
+                "type": "Non-Volatile memory controller",
+                "description": " Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981",
+                "verbose_output": "61:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981 (prog-if 02 [NVM Express])\r\n\tSubsystem: Samsung Electronics Co Ltd Device a801\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tRegion 0: Memory at c5b10000 (64-bit, non-prefetchable)\r\n\tCapabilities: [40] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\tCapabilities: [50] MSI: Enable- Count=1\/32 Maskable- 64bit+\r\n\t\tAddress: 0000000000000000  Data: 0000\r\n\tCapabilities: [70] Express (v2) Endpoint, MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0, Latency L0s unlimited, L1 unlimited\r\n\t\t\tExtTag- AttnBtn- AttnInd- PwrInd- RBE+ FLReset+ SlotPowerLimit 0.000W\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd+ ExtTag- PhantFunc- AuxPwr- NoSnoop- FLReset-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 512 bytes\r\n\t\tDevSta:\tCorrErr+ NonFatalErr- FatalErr- UnsupReq+ AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #0, Speed 8GT\/s, Width x4, ASPM not supported\r\n\t\t\tClockPM- Surprise- LLActRep- BwNot- ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-\r\n\t\tDevCap2: Completion Timeout: Range ABCD, TimeoutDis+, LTR+, OBFF Not Supported\r\n\t\tDevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-, LTR-, OBFF Disabled\r\n\t\t\t AtomicOpsCtl: ReqEn-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [b0] MSI-X: Enable+ Count=33 Masked-\r\n\t\tVector table: BAR=0 offset=00003000\r\n\t\tPBA: BAR=0 offset=00002000\r\n\r\n\r\nSummary of buses:\r\n\r\n61: Secondary host bus (?)\r\n",
+                "irq": "0",
+                "correctable_errors": true,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "85:00.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port A (rev 04)\r",
+                "address": "85:00.0",
+                "type": "PCI bridge",
+                "description": " Intel Corporation Sky Lake-E PCI Express Root Port A (rev 04)",
+                "verbose_output": "85:00.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port A (rev 04) (prog-if 00 [Normal decode])\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tBus: primary=85, secondary=86, subordinate=86, sec-latency=0\r\n\tI\/O behind bridge: 0000f000-00000fff [empty]\r\n\tMemory behind bridge: df000000-dfffffff [size=16M]\r\n\tPrefetchable memory behind bridge: 00000000fff00000-00000000000fffff [empty]\r\n\tSecondary status: 66MHz- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- <SERR- <PERR-\r\n\tBridgeCtl: Parity+ SERR+ NoISA- VGA- VGA16- MAbort- >Reset- FastB2B-\r\n\t\tPriDiscTmr- SecDiscTmr- DiscTmrStat- DiscTmrSERREn-\r\n\tCapabilities: [40] Subsystem: Intel Corporation Device 0000\r\n\tCapabilities: [60] MSI: Enable+ Count=1\/2 Maskable+ 64bit-\r\n\t\tAddress: fee3100c  Data: 49b0\r\n\t\tMasking: 00000002  Pending: 00000000\r\n\tCapabilities: [90] Express (v2) Root Port (Slot+), MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0\r\n\t\t\tExtTag+ RBE+\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd- ExtTag+ PhantFunc- AuxPwr- NoSnoop-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 128 bytes\r\n\t\tDevSta:\tCorrErr- NonFatalErr- FatalErr- UnsupReq- AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #1, Speed 8GT\/s, Width x8, ASPM L1, Exit Latency L1 <16us\r\n\t\t\tClockPM- Surprise+ LLActRep+ BwNot+ ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x8 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive+ BWMgmt- ABWMgmt-\r\n\t\tSltCap:\tAttnBtn- PwrCtrl- MRL- AttnInd- PwrInd- HotPlug- Surprise-\r\n\t\t\tSlot #17, PowerLimit 0.000W; Interlock- NoCompl-\r\n\t\tSltCtl:\tEnable: AttnBtn- PwrFlt- MRL- PresDet- CmdCplt- HPIrq- LinkChg-\r\n\t\t\tControl: AttnInd Off, PwrInd Off, Power- Interlock-\r\n\t\tSltSta:\tStatus: AttnBtn- PowerFlt- MRL- CmdCplt- PresDet+ Interlock-\r\n\t\t\tChanged: MRL- PresDet- LinkState-\r\n\t\tRootCtl: ErrCorrectable+ ErrNon-Fatal+ ErrFatal+ PMEIntEna+ CRSVisible-\r\n\t\tRootCap: CRSVisible+\r\n\t\tRootSta: PME ReqID 0000, PMEStatus- PMEPending-\r\n\t\tDevCap2: Completion Timeout: Range BCD, TimeoutDis+, LTR-, OBFF Not Supported ARIFwd+\r\n\t\t\t AtomicOpsCap: Routing- 32bit+ 64bit+ 128bitCAS+\r\n\t\tDevCtl2: Completion Timeout: 260ms to 900ms, TimeoutDis-, LTR-, OBFF Disabled ARIFwd-\r\n\t\t\t AtomicOpsCtl: ReqEn- EgressBlck-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [e0] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0+,D1-,D2-,D3hot+,D3cold+)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\r\n## 85:00.0 is a bridge from 85 to 86-86\r\n\r\nSummary of buses:\r\n\r\n85: Secondary host bus (?)\r\n\t00.0 Bridge to 86-86\r\n",
+                "irq": "0",
+                "correctable_errors": false,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x8"
+            },
+            {
+                "output": "85:02.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port C (rev 04)\r",
+                "address": "85:02.0",
+                "type": "PCI bridge",
+                "description": " Intel Corporation Sky Lake-E PCI Express Root Port C (rev 04)",
+                "verbose_output": "85:02.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port C (rev 04) (prog-if 00 [Normal decode])\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tBus: primary=85, secondary=87, subordinate=87, sec-latency=0\r\n\tI\/O behind bridge: 0000f000-00000fff [empty]\r\n\tMemory behind bridge: de000000-deffffff [size=16M]\r\n\tPrefetchable memory behind bridge: 00000000fff00000-00000000000fffff [empty]\r\n\tSecondary status: 66MHz- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- <SERR- <PERR-\r\n\tBridgeCtl: Parity+ SERR+ NoISA- VGA- VGA16- MAbort- >Reset- FastB2B-\r\n\t\tPriDiscTmr- SecDiscTmr- DiscTmrStat- DiscTmrSERREn-\r\n\tCapabilities: [40] Subsystem: Intel Corporation Device 0000\r\n\tCapabilities: [60] MSI: Enable+ Count=1\/2 Maskable+ 64bit-\r\n\t\tAddress: fee4200c  Data: 49b0\r\n\t\tMasking: 00000002  Pending: 00000000\r\n\tCapabilities: [90] Express (v2) Root Port (Slot+), MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0\r\n\t\t\tExtTag+ RBE+\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd- ExtTag+ PhantFunc- AuxPwr- NoSnoop-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 128 bytes\r\n\t\tDevSta:\tCorrErr- NonFatalErr- FatalErr- UnsupReq- AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #3, Speed 8GT\/s, Width x8, ASPM L1, Exit Latency L1 <16us\r\n\t\t\tClockPM- Surprise+ LLActRep+ BwNot+ ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x8 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive+ BWMgmt- ABWMgmt-\r\n\t\tSltCap:\tAttnBtn- PwrCtrl- MRL- AttnInd- PwrInd- HotPlug- Surprise-\r\n\t\t\tSlot #19, PowerLimit 0.000W; Interlock- NoCompl-\r\n\t\tSltCtl:\tEnable: AttnBtn- PwrFlt- MRL- PresDet- CmdCplt- HPIrq- LinkChg-\r\n\t\t\tControl: AttnInd Off, PwrInd Off, Power- Interlock-\r\n\t\tSltSta:\tStatus: AttnBtn- PowerFlt- MRL- CmdCplt- PresDet+ Interlock-\r\n\t\t\tChanged: MRL- PresDet- LinkState-\r\n\t\tRootCtl: ErrCorrectable+ ErrNon-Fatal+ ErrFatal+ PMEIntEna+ CRSVisible-\r\n\t\tRootCap: CRSVisible+\r\n\t\tRootSta: PME ReqID 0000, PMEStatus- PMEPending-\r\n\t\tDevCap2: Completion Timeout: Range BCD, TimeoutDis+, LTR-, OBFF Not Supported ARIFwd+\r\n\t\t\t AtomicOpsCap: Routing- 32bit+ 64bit+ 128bitCAS+\r\n\t\tDevCtl2: Completion Timeout: 260ms to 900ms, TimeoutDis-, LTR-, OBFF Disabled ARIFwd-\r\n\t\t\t AtomicOpsCtl: ReqEn- EgressBlck-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [e0] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0+,D1-,D2-,D3hot+,D3cold+)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\r\n## 85:02.0 is a bridge from 85 to 87-87\r\n\r\nSummary of buses:\r\n\r\n85: Secondary host bus (?)\r\n\t02.0 Bridge to 87-87\r\n",
+                "irq": "0",
+                "correctable_errors": false,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x8"
+            },
+            {
+                "output": "86:00.0 Unassigned class [ff00]: Microsoft Corporation Device b204\r",
+                "address": "86:00.0",
+                "type": "Unassigned class [ff00]",
+                "description": " Microsoft Corporation Device b204",
+                "verbose_output": "86:00.0 Unassigned class [ff00]: Microsoft Corporation Device b204\r\n\tSubsystem: Microsoft Corporation Device 0400\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tRegion 0: Memory at df000000 (32-bit, non-prefetchable)\r\n\tCapabilities: [50] MSI: Enable+ Count=4\/4 Maskable- 64bit+\r\n\t\tAddress: 00000000fee2f00c  Data: 49b4\r\n\tCapabilities: [78] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)\r\n\t\tStatus: D0 NoSoftRst- PME-Enable- DSel=0 DScale=0 PME-\r\n\tCapabilities: [80] Express (v2) Endpoint, MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0, Latency L0s <64ns, L1 <1us\r\n\t\t\tExtTag- AttnBtn- AttnInd- PwrInd- RBE+ FLReset- SlotPowerLimit 0.000W\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd+ ExtTag- PhantFunc- AuxPwr- NoSnoop-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 512 bytes\r\n\t\tDevSta:\tCorrErr+ NonFatalErr- FatalErr- UnsupReq+ AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #1, Speed 8GT\/s, Width x8, ASPM not supported\r\n\t\t\tClockPM- Surprise- LLActRep- BwNot- ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x8 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-\r\n\t\tDevCap2: Completion Timeout: Range ABCD, TimeoutDis+, LTR-, OBFF Not Supported\r\n\t\tDevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-, LTR-, OBFF Disabled\r\n\t\t\t AtomicOpsCtl: ReqEn-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\r\n\r\nSummary of buses:\r\n\r\n86: Secondary host bus (?)\r\n",
+                "irq": "0",
+                "correctable_errors": true,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x8"
+            },
+            {
+                "output": "87:00.0 Unassigned class [ff00]: Microsoft Corporation Device b205\r",
+                "address": "87:00.0",
+                "type": "Unassigned class [ff00]",
+                "description": " Microsoft Corporation Device b205",
+                "verbose_output": "87:00.0 Unassigned class [ff00]: Microsoft Corporation Device b205\r\n\tSubsystem: Microsoft Corporation Device 0400\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tRegion 0: Memory at de000000 (32-bit, non-prefetchable)\r\n\tCapabilities: [50] MSI: Enable+ Count=4\/4 Maskable- 64bit+\r\n\t\tAddress: 00000000fee1f00c  Data: 49b4\r\n\tCapabilities: [78] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)\r\n\t\tStatus: D0 NoSoftRst- PME-Enable- DSel=0 DScale=0 PME-\r\n\tCapabilities: [80] Express (v2) Endpoint, MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0, Latency L0s <64ns, L1 <1us\r\n\t\t\tExtTag- AttnBtn- AttnInd- PwrInd- RBE+ FLReset- SlotPowerLimit 0.000W\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd+ ExtTag- PhantFunc- AuxPwr- NoSnoop-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 512 bytes\r\n\t\tDevSta:\tCorrErr+ NonFatalErr- FatalErr- UnsupReq+ AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #1, Speed 8GT\/s, Width x8, ASPM not supported\r\n\t\t\tClockPM- Surprise- LLActRep- BwNot- ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x8 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-\r\n\t\tDevCap2: Completion Timeout: Range ABCD, TimeoutDis+, LTR-, OBFF Not Supported\r\n\t\tDevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-, LTR-, OBFF Disabled\r\n\t\t\t AtomicOpsCtl: ReqEn-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\r\n\r\nSummary of buses:\r\n\r\n87: Secondary host bus (?)\r\n",
+                "irq": "0",
+                "correctable_errors": true,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x8"
+            },
+            {
+                "output": "ae:00.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port A (rev 04)\r",
+                "address": "ae:00.0",
+                "type": "PCI bridge",
+                "description": " Intel Corporation Sky Lake-E PCI Express Root Port A (rev 04)",
+                "verbose_output": "ae:00.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port A (rev 04) (prog-if 00 [Normal decode])\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tBus: primary=ae, secondary=af, subordinate=af, sec-latency=0\r\n\tI\/O behind bridge: 0000f000-00000fff [empty]\r\n\tMemory behind bridge: ee600000-ee6fffff [size=1M]\r\n\tPrefetchable memory behind bridge: 00000000fff00000-00000000000fffff [empty]\r\n\tSecondary status: 66MHz- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- <SERR- <PERR-\r\n\tBridgeCtl: Parity+ SERR+ NoISA- VGA- VGA16- MAbort- >Reset- FastB2B-\r\n\t\tPriDiscTmr- SecDiscTmr- DiscTmrStat- DiscTmrSERREn-\r\n\tCapabilities: [40] Subsystem: Intel Corporation Device 0000\r\n\tCapabilities: [60] MSI: Enable+ Count=1\/2 Maskable+ 64bit-\r\n\t\tAddress: fee5200c  Data: 49b0\r\n\t\tMasking: 00000002  Pending: 00000000\r\n\tCapabilities: [90] Express (v2) Root Port (Slot+), MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0\r\n\t\t\tExtTag+ RBE+\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd- ExtTag+ PhantFunc- AuxPwr- NoSnoop-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 128 bytes\r\n\t\tDevSta:\tCorrErr- NonFatalErr- FatalErr- UnsupReq- AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #5, Speed 8GT\/s, Width x4, ASPM L1, Exit Latency L1 <16us\r\n\t\t\tClockPM- Surprise+ LLActRep+ BwNot+ ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive+ BWMgmt- ABWMgmt-\r\n\t\tSltCap:\tAttnBtn- PwrCtrl- MRL- AttnInd- PwrInd- HotPlug- Surprise-\r\n\t\t\tSlot #3, PowerLimit 0.000W; Interlock- NoCompl-\r\n\t\tSltCtl:\tEnable: AttnBtn- PwrFlt- MRL- PresDet- CmdCplt- HPIrq- LinkChg-\r\n\t\t\tControl: AttnInd Off, PwrInd Off, Power- Interlock-\r\n\t\tSltSta:\tStatus: AttnBtn- PowerFlt- MRL- CmdCplt- PresDet+ Interlock-\r\n\t\t\tChanged: MRL- PresDet- LinkState-\r\n\t\tRootCtl: ErrCorrectable+ ErrNon-Fatal+ ErrFatal+ PMEIntEna+ CRSVisible-\r\n\t\tRootCap: CRSVisible+\r\n\t\tRootSta: PME ReqID 0000, PMEStatus- PMEPending-\r\n\t\tDevCap2: Completion Timeout: Range BCD, TimeoutDis+, LTR-, OBFF Not Supported ARIFwd+\r\n\t\t\t AtomicOpsCap: Routing- 32bit+ 64bit+ 128bitCAS+\r\n\t\tDevCtl2: Completion Timeout: 260ms to 900ms, TimeoutDis-, LTR-, OBFF Disabled ARIFwd-\r\n\t\t\t AtomicOpsCtl: ReqEn- EgressBlck-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [e0] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0+,D1-,D2-,D3hot+,D3cold+)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\r\n## ae:00.0 is a bridge from ae to af-af\r\n\r\nSummary of buses:\r\n\r\nae: Secondary host bus (?)\r\n\t00.0 Bridge to af-af\r\n",
+                "irq": "0",
+                "correctable_errors": false,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "ae:01.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port B (rev 04)\r",
+                "address": "ae:01.0",
+                "type": "PCI bridge",
+                "description": " Intel Corporation Sky Lake-E PCI Express Root Port B (rev 04)",
+                "verbose_output": "ae:01.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port B (rev 04) (prog-if 00 [Normal decode])\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tBus: primary=ae, secondary=b0, subordinate=b0, sec-latency=0\r\n\tI\/O behind bridge: 0000f000-00000fff [empty]\r\n\tMemory behind bridge: ee500000-ee5fffff [size=1M]\r\n\tPrefetchable memory behind bridge: 00000000fff00000-00000000000fffff [empty]\r\n\tSecondary status: 66MHz- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- <SERR- <PERR-\r\n\tBridgeCtl: Parity+ SERR+ NoISA- VGA- VGA16- MAbort- >Reset- FastB2B-\r\n\t\tPriDiscTmr- SecDiscTmr- DiscTmrStat- DiscTmrSERREn-\r\n\tCapabilities: [40] Subsystem: Intel Corporation Device 0000\r\n\tCapabilities: [60] MSI: Enable+ Count=1\/2 Maskable+ 64bit-\r\n\t\tAddress: fee6100c  Data: 49b0\r\n\t\tMasking: 00000002  Pending: 00000000\r\n\tCapabilities: [90] Express (v2) Root Port (Slot+), MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0\r\n\t\t\tExtTag+ RBE+\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd- ExtTag+ PhantFunc- AuxPwr- NoSnoop-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 128 bytes\r\n\t\tDevSta:\tCorrErr- NonFatalErr- FatalErr- UnsupReq- AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #6, Speed 8GT\/s, Width x4, ASPM L1, Exit Latency L1 <16us\r\n\t\t\tClockPM- Surprise+ LLActRep+ BwNot+ ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive+ BWMgmt- ABWMgmt-\r\n\t\tSltCap:\tAttnBtn- PwrCtrl- MRL- AttnInd- PwrInd- HotPlug- Surprise-\r\n\t\t\tSlot #4, PowerLimit 0.000W; Interlock- NoCompl-\r\n\t\tSltCtl:\tEnable: AttnBtn- PwrFlt- MRL- PresDet- CmdCplt- HPIrq- LinkChg-\r\n\t\t\tControl: AttnInd Off, PwrInd Off, Power- Interlock-\r\n\t\tSltSta:\tStatus: AttnBtn- PowerFlt- MRL- CmdCplt- PresDet+ Interlock-\r\n\t\t\tChanged: MRL- PresDet- LinkState-\r\n\t\tRootCtl: ErrCorrectable+ ErrNon-Fatal+ ErrFatal+ PMEIntEna+ CRSVisible-\r\n\t\tRootCap: CRSVisible+\r\n\t\tRootSta: PME ReqID 0000, PMEStatus- PMEPending-\r\n\t\tDevCap2: Completion Timeout: Range BCD, TimeoutDis+, LTR-, OBFF Not Supported ARIFwd+\r\n\t\t\t AtomicOpsCap: Routing- 32bit+ 64bit+ 128bitCAS+\r\n\t\tDevCtl2: Completion Timeout: 260ms to 900ms, TimeoutDis-, LTR-, OBFF Disabled ARIFwd-\r\n\t\t\t AtomicOpsCtl: ReqEn- EgressBlck-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [e0] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0+,D1-,D2-,D3hot+,D3cold+)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\r\n## ae:01.0 is a bridge from ae to b0-b0\r\n\r\nSummary of buses:\r\n\r\nae: Secondary host bus (?)\r\n\t01.0 Bridge to b0-b0\r\n",
+                "irq": "0",
+                "correctable_errors": false,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "ae:02.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port C (rev 04)\r",
+                "address": "ae:02.0",
+                "type": "PCI bridge",
+                "description": " Intel Corporation Sky Lake-E PCI Express Root Port C (rev 04)",
+                "verbose_output": "ae:02.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port C (rev 04) (prog-if 00 [Normal decode])\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tBus: primary=ae, secondary=b1, subordinate=b1, sec-latency=0\r\n\tI\/O behind bridge: 0000f000-00000fff [empty]\r\n\tMemory behind bridge: ee400000-ee4fffff [size=1M]\r\n\tPrefetchable memory behind bridge: 00002efffe000000-00002effffffffff [size=32M]\r\n\tSecondary status: 66MHz- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort+ <SERR- <PERR-\r\n\tBridgeCtl: Parity+ SERR+ NoISA- VGA- VGA16- MAbort- >Reset- FastB2B-\r\n\t\tPriDiscTmr- SecDiscTmr- DiscTmrStat- DiscTmrSERREn-\r\n\tCapabilities: [40] Subsystem: Intel Corporation Device 0000\r\n\tCapabilities: [60] MSI: Enable+ Count=1\/2 Maskable+ 64bit-\r\n\t\tAddress: fee7200c  Data: 49b0\r\n\t\tMasking: 00000002  Pending: 00000000\r\n\tCapabilities: [90] Express (v2) Root Port (Slot+), MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0\r\n\t\t\tExtTag+ RBE+\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd- ExtTag+ PhantFunc- AuxPwr- NoSnoop-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 128 bytes\r\n\t\tDevSta:\tCorrErr- NonFatalErr- FatalErr- UnsupReq- AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #7, Speed 8GT\/s, Width x8, ASPM L1, Exit Latency L1 <16us\r\n\t\t\tClockPM- Surprise+ LLActRep+ BwNot+ ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x8 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive+ BWMgmt- ABWMgmt-\r\n\t\tSltCap:\tAttnBtn- PwrCtrl- MRL- AttnInd- PwrInd- HotPlug- Surprise-\r\n\t\t\tSlot #21, PowerLimit 0.000W; Interlock- NoCompl-\r\n\t\tSltCtl:\tEnable: AttnBtn- PwrFlt- MRL- PresDet- CmdCplt- HPIrq- LinkChg-\r\n\t\t\tControl: AttnInd Off, PwrInd Off, Power- Interlock-\r\n\t\tSltSta:\tStatus: AttnBtn- PowerFlt- MRL- CmdCplt- PresDet+ Interlock-\r\n\t\t\tChanged: MRL- PresDet- LinkState-\r\n\t\tRootCtl: ErrCorrectable+ ErrNon-Fatal+ ErrFatal+ PMEIntEna+ CRSVisible-\r\n\t\tRootCap: CRSVisible+\r\n\t\tRootSta: PME ReqID 0000, PMEStatus- PMEPending-\r\n\t\tDevCap2: Completion Timeout: Range BCD, TimeoutDis+, LTR-, OBFF Not Supported ARIFwd+\r\n\t\t\t AtomicOpsCap: Routing- 32bit+ 64bit+ 128bitCAS+\r\n\t\tDevCtl2: Completion Timeout: 260ms to 900ms, TimeoutDis-, LTR-, OBFF Disabled ARIFwd+\r\n\t\t\t AtomicOpsCtl: ReqEn- EgressBlck-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -3.5dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [e0] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0+,D1-,D2-,D3hot+,D3cold+)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\r\n## ae:02.0 is a bridge from ae to b1-b1\r\n\r\nSummary of buses:\r\n\r\nae: Secondary host bus (?)\r\n\t02.0 Bridge to b1-b1\r\n",
+                "irq": "0",
+                "correctable_errors": false,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x8"
+            },
+            {
+                "output": "af:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981\r",
+                "address": "af:00.0",
+                "type": "Non-Volatile memory controller",
+                "description": " Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981",
+                "verbose_output": "af:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981 (prog-if 02 [NVM Express])\r\n\tSubsystem: Samsung Electronics Co Ltd Device a801\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tRegion 0: Memory at ee610000 (64-bit, non-prefetchable)\r\n\tCapabilities: [40] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\tCapabilities: [50] MSI: Enable- Count=1\/32 Maskable- 64bit+\r\n\t\tAddress: 0000000000000000  Data: 0000\r\n\tCapabilities: [70] Express (v2) Endpoint, MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0, Latency L0s unlimited, L1 unlimited\r\n\t\t\tExtTag- AttnBtn- AttnInd- PwrInd- RBE+ FLReset+ SlotPowerLimit 0.000W\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd+ ExtTag- PhantFunc- AuxPwr- NoSnoop- FLReset-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 512 bytes\r\n\t\tDevSta:\tCorrErr+ NonFatalErr- FatalErr- UnsupReq+ AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #0, Speed 8GT\/s, Width x4, ASPM not supported\r\n\t\t\tClockPM- Surprise- LLActRep- BwNot- ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-\r\n\t\tDevCap2: Completion Timeout: Range ABCD, TimeoutDis+, LTR+, OBFF Not Supported\r\n\t\tDevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-, LTR-, OBFF Disabled\r\n\t\t\t AtomicOpsCtl: ReqEn-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [b0] MSI-X: Enable+ Count=33 Masked-\r\n\t\tVector table: BAR=0 offset=00003000\r\n\t\tPBA: BAR=0 offset=00002000\r\n\r\n\r\nSummary of buses:\r\n\r\naf: Secondary host bus (?)\r\n",
+                "irq": "0",
+                "correctable_errors": true,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "b0:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981\r",
+                "address": "b0:00.0",
+                "type": "Non-Volatile memory controller",
+                "description": " Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981",
+                "verbose_output": "b0:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981 (prog-if 02 [NVM Express])\r\n\tSubsystem: Samsung Electronics Co Ltd Device a801\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tRegion 0: Memory at ee510000 (64-bit, non-prefetchable)\r\n\tCapabilities: [40] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\tCapabilities: [50] MSI: Enable- Count=1\/32 Maskable- 64bit+\r\n\t\tAddress: 0000000000000000  Data: 0000\r\n\tCapabilities: [70] Express (v2) Endpoint, MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0, Latency L0s unlimited, L1 unlimited\r\n\t\t\tExtTag- AttnBtn- AttnInd- PwrInd- RBE+ FLReset+ SlotPowerLimit 0.000W\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd+ ExtTag- PhantFunc- AuxPwr- NoSnoop- FLReset-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 512 bytes\r\n\t\tDevSta:\tCorrErr+ NonFatalErr- FatalErr- UnsupReq+ AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #0, Speed 8GT\/s, Width x4, ASPM not supported\r\n\t\t\tClockPM- Surprise- LLActRep- BwNot- ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-\r\n\t\tDevCap2: Completion Timeout: Range ABCD, TimeoutDis+, LTR+, OBFF Not Supported\r\n\t\tDevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-, LTR-, OBFF Disabled\r\n\t\t\t AtomicOpsCtl: ReqEn-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [b0] MSI-X: Enable+ Count=33 Masked-\r\n\t\tVector table: BAR=0 offset=00003000\r\n\t\tPBA: BAR=0 offset=00002000\r\n\r\n\r\nSummary of buses:\r\n\r\nb0: Secondary host bus (?)\r\n",
+                "irq": "0",
+                "correctable_errors": true,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "b1:00.0 Ethernet controller: Mellanox Technologies MT27710 Family [ConnectX-4 Lx]\r",
+                "address": "b1:00.0",
+                "type": "Ethernet controller",
+                "description": " Mellanox Technologies MT27710 Family [ConnectX-4 Lx]",
+                "verbose_output": "b1:00.0 Ethernet controller: Mellanox Technologies MT27710 Family [ConnectX-4 Lx]\r\n\tSubsystem: Mellanox Technologies Device 0190\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tRegion 0: Memory at <ignored> (64-bit, prefetchable)\r\n\tCapabilities: [60] Express (v2) Endpoint, MSI 00\r\n\t\tDevCap:\tMaxPayload 512 bytes, PhantFunc 0, Latency L0s unlimited, L1 unlimited\r\n\t\t\tExtTag+ AttnBtn- AttnInd- PwrInd- RBE+ FLReset+ SlotPowerLimit 0.000W\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd+ ExtTag+ PhantFunc- AuxPwr- NoSnoop- FLReset-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 512 bytes\r\n\t\tDevSta:\tCorrErr+ NonFatalErr- FatalErr- UnsupReq+ AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #0, Speed 8GT\/s, Width x8, ASPM not supported\r\n\t\t\tClockPM- Surprise- LLActRep- BwNot- ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x8 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-\r\n\t\tDevCap2: Completion Timeout: Range ABCD, TimeoutDis+, LTR-, OBFF Not Supported\r\n\t\tDevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-, LTR-, OBFF Disabled\r\n\t\t\t AtomicOpsCtl: ReqEn-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [48] Vital Product Data\r\n\t\tNot readable\r\n\tCapabilities: [9c] MSI-X: Enable+ Count=64 Masked-\r\n\t\tVector table: BAR=0 offset=00002000\r\n\t\tPBA: BAR=0 offset=00003000\r\n\tCapabilities: [c0] Vendor Specific Information: Len=18 <?>\r\n\tCapabilities: [40] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=375mA PME(D0-,D1-,D2-,D3hot-,D3cold+)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\r\n\r\nSummary of buses:\r\n\r\nb1: Secondary host bus (?)\r\n",
+                "irq": "0",
+                "correctable_errors": true,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x8"
+            },
+            {
+                "output": "d7:00.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port A (rev 04)\r",
+                "address": "d7:00.0",
+                "type": "PCI bridge",
+                "description": " Intel Corporation Sky Lake-E PCI Express Root Port A (rev 04)",
+                "verbose_output": "d7:00.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port A (rev 04) (prog-if 00 [Normal decode])\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tBus: primary=d7, secondary=d8, subordinate=d8, sec-latency=0\r\n\tI\/O behind bridge: 0000f000-00000fff [empty]\r\n\tMemory behind bridge: fbe00000-fbefffff [size=1M]\r\n\tPrefetchable memory behind bridge: 00000000fff00000-00000000000fffff [empty]\r\n\tSecondary status: 66MHz- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- <SERR- <PERR-\r\n\tBridgeCtl: Parity+ SERR+ NoISA- VGA- VGA16- MAbort- >Reset- FastB2B-\r\n\t\tPriDiscTmr- SecDiscTmr- DiscTmrStat- DiscTmrSERREn-\r\n\tCapabilities: [40] Subsystem: Intel Corporation Device 0000\r\n\tCapabilities: [60] MSI: Enable+ Count=1\/2 Maskable+ 64bit-\r\n\t\tAddress: fee8200c  Data: 49b0\r\n\t\tMasking: 00000002  Pending: 00000000\r\n\tCapabilities: [90] Express (v2) Root Port (Slot+), MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0\r\n\t\t\tExtTag+ RBE+\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd- ExtTag+ PhantFunc- AuxPwr- NoSnoop-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 128 bytes\r\n\t\tDevSta:\tCorrErr- NonFatalErr- FatalErr- UnsupReq- AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #9, Speed 8GT\/s, Width x4, ASPM L1, Exit Latency L1 <16us\r\n\t\t\tClockPM- Surprise+ LLActRep+ BwNot+ ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive+ BWMgmt- ABWMgmt-\r\n\t\tSltCap:\tAttnBtn- PwrCtrl- MRL- AttnInd- PwrInd- HotPlug- Surprise-\r\n\t\t\tSlot #23, PowerLimit 0.000W; Interlock- NoCompl-\r\n\t\tSltCtl:\tEnable: AttnBtn- PwrFlt- MRL- PresDet- CmdCplt- HPIrq- LinkChg-\r\n\t\t\tControl: AttnInd Off, PwrInd Off, Power- Interlock-\r\n\t\tSltSta:\tStatus: AttnBtn- PowerFlt- MRL- CmdCplt- PresDet+ Interlock-\r\n\t\t\tChanged: MRL- PresDet- LinkState-\r\n\t\tRootCtl: ErrCorrectable+ ErrNon-Fatal+ ErrFatal+ PMEIntEna+ CRSVisible-\r\n\t\tRootCap: CRSVisible+\r\n\t\tRootSta: PME ReqID 0000, PMEStatus- PMEPending-\r\n\t\tDevCap2: Completion Timeout: Range BCD, TimeoutDis+, LTR-, OBFF Not Supported ARIFwd+\r\n\t\t\t AtomicOpsCap: Routing- 32bit+ 64bit+ 128bitCAS+\r\n\t\tDevCtl2: Completion Timeout: 260ms to 900ms, TimeoutDis-, LTR-, OBFF Disabled ARIFwd-\r\n\t\t\t AtomicOpsCtl: ReqEn- EgressBlck-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -3.5dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [e0] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0+,D1-,D2-,D3hot+,D3cold+)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\r\n## d7:00.0 is a bridge from d7 to d8-d8\r\n\r\nSummary of buses:\r\n\r\nd7: Secondary host bus (?)\r\n\t00.0 Bridge to d8-d8\r\n",
+                "irq": "0",
+                "correctable_errors": false,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "d7:01.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port B (rev 04)\r",
+                "address": "d7:01.0",
+                "type": "PCI bridge",
+                "description": " Intel Corporation Sky Lake-E PCI Express Root Port B (rev 04)",
+                "verbose_output": "d7:01.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port B (rev 04) (prog-if 00 [Normal decode])\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tBus: primary=d7, secondary=d9, subordinate=d9, sec-latency=0\r\n\tI\/O behind bridge: 0000f000-00000fff [empty]\r\n\tMemory behind bridge: fbd00000-fbdfffff [size=1M]\r\n\tPrefetchable memory behind bridge: 00000000fff00000-00000000000fffff [empty]\r\n\tSecondary status: 66MHz- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- <SERR- <PERR-\r\n\tBridgeCtl: Parity+ SERR+ NoISA- VGA- VGA16- MAbort- >Reset- FastB2B-\r\n\t\tPriDiscTmr- SecDiscTmr- DiscTmrStat- DiscTmrSERREn-\r\n\tCapabilities: [40] Subsystem: Intel Corporation Device 0000\r\n\tCapabilities: [60] MSI: Enable+ Count=1\/2 Maskable+ 64bit-\r\n\t\tAddress: fee9200c  Data: 49b0\r\n\t\tMasking: 00000002  Pending: 00000000\r\n\tCapabilities: [90] Express (v2) Root Port (Slot+), MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0\r\n\t\t\tExtTag+ RBE+\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd- ExtTag+ PhantFunc- AuxPwr- NoSnoop-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 128 bytes\r\n\t\tDevSta:\tCorrErr- NonFatalErr- FatalErr- UnsupReq- AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #10, Speed 8GT\/s, Width x4, ASPM L1, Exit Latency L1 <16us\r\n\t\t\tClockPM- Surprise+ LLActRep+ BwNot+ ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive+ BWMgmt- ABWMgmt-\r\n\t\tSltCap:\tAttnBtn- PwrCtrl- MRL- AttnInd- PwrInd- HotPlug- Surprise-\r\n\t\t\tSlot #24, PowerLimit 0.000W; Interlock- NoCompl-\r\n\t\tSltCtl:\tEnable: AttnBtn- PwrFlt- MRL- PresDet- CmdCplt- HPIrq- LinkChg-\r\n\t\t\tControl: AttnInd Off, PwrInd Off, Power- Interlock-\r\n\t\tSltSta:\tStatus: AttnBtn- PowerFlt- MRL- CmdCplt- PresDet+ Interlock-\r\n\t\t\tChanged: MRL- PresDet- LinkState-\r\n\t\tRootCtl: ErrCorrectable+ ErrNon-Fatal+ ErrFatal+ PMEIntEna+ CRSVisible-\r\n\t\tRootCap: CRSVisible+\r\n\t\tRootSta: PME ReqID 0000, PMEStatus- PMEPending-\r\n\t\tDevCap2: Completion Timeout: Range BCD, TimeoutDis+, LTR-, OBFF Not Supported ARIFwd+\r\n\t\t\t AtomicOpsCap: Routing- 32bit+ 64bit+ 128bitCAS+\r\n\t\tDevCtl2: Completion Timeout: 260ms to 900ms, TimeoutDis-, LTR-, OBFF Disabled ARIFwd-\r\n\t\t\t AtomicOpsCtl: ReqEn- EgressBlck-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [e0] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0+,D1-,D2-,D3hot+,D3cold+)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\r\n## d7:01.0 is a bridge from d7 to d9-d9\r\n\r\nSummary of buses:\r\n\r\nd7: Secondary host bus (?)\r\n\t01.0 Bridge to d9-d9\r\n",
+                "irq": "0",
+                "correctable_errors": false,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "d7:02.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port C (rev 04)\r",
+                "address": "d7:02.0",
+                "type": "PCI bridge",
+                "description": " Intel Corporation Sky Lake-E PCI Express Root Port C (rev 04)",
+                "verbose_output": "d7:02.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port C (rev 04) (prog-if 00 [Normal decode])\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tBus: primary=d7, secondary=da, subordinate=da, sec-latency=0\r\n\tI\/O behind bridge: 0000f000-00000fff [empty]\r\n\tMemory behind bridge: fbc00000-fbcfffff [size=1M]\r\n\tPrefetchable memory behind bridge: 00000000fff00000-00000000000fffff [empty]\r\n\tSecondary status: 66MHz- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- <SERR- <PERR-\r\n\tBridgeCtl: Parity+ SERR+ NoISA- VGA- VGA16- MAbort- >Reset- FastB2B-\r\n\t\tPriDiscTmr- SecDiscTmr- DiscTmrStat- DiscTmrSERREn-\r\n\tCapabilities: [40] Subsystem: Intel Corporation Device 0000\r\n\tCapabilities: [60] MSI: Enable+ Count=1\/2 Maskable+ 64bit-\r\n\t\tAddress: feea200c  Data: 49b0\r\n\t\tMasking: 00000002  Pending: 00000000\r\n\tCapabilities: [90] Express (v2) Root Port (Slot+), MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0\r\n\t\t\tExtTag+ RBE+\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd- ExtTag+ PhantFunc- AuxPwr- NoSnoop-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 128 bytes\r\n\t\tDevSta:\tCorrErr- NonFatalErr- FatalErr- UnsupReq- AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #11, Speed 8GT\/s, Width x4, ASPM L1, Exit Latency L1 <16us\r\n\t\t\tClockPM- Surprise+ LLActRep+ BwNot+ ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive+ BWMgmt- ABWMgmt-\r\n\t\tSltCap:\tAttnBtn- PwrCtrl- MRL- AttnInd- PwrInd- HotPlug- Surprise-\r\n\t\t\tSlot #25, PowerLimit 0.000W; Interlock- NoCompl-\r\n\t\tSltCtl:\tEnable: AttnBtn- PwrFlt- MRL- PresDet- CmdCplt- HPIrq- LinkChg-\r\n\t\t\tControl: AttnInd Off, PwrInd Off, Power- Interlock-\r\n\t\tSltSta:\tStatus: AttnBtn- PowerFlt- MRL- CmdCplt- PresDet+ Interlock-\r\n\t\t\tChanged: MRL- PresDet- LinkState-\r\n\t\tRootCtl: ErrCorrectable+ ErrNon-Fatal+ ErrFatal+ PMEIntEna+ CRSVisible-\r\n\t\tRootCap: CRSVisible+\r\n\t\tRootSta: PME ReqID 0000, PMEStatus- PMEPending-\r\n\t\tDevCap2: Completion Timeout: Range BCD, TimeoutDis+, LTR-, OBFF Not Supported ARIFwd+\r\n\t\t\t AtomicOpsCap: Routing- 32bit+ 64bit+ 128bitCAS+\r\n\t\tDevCtl2: Completion Timeout: 260ms to 900ms, TimeoutDis-, LTR-, OBFF Disabled ARIFwd-\r\n\t\t\t AtomicOpsCtl: ReqEn- EgressBlck-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [e0] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0+,D1-,D2-,D3hot+,D3cold+)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\r\n## d7:02.0 is a bridge from d7 to da-da\r\n\r\nSummary of buses:\r\n\r\nd7: Secondary host bus (?)\r\n\t02.0 Bridge to da-da\r\n",
+                "irq": "0",
+                "correctable_errors": false,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "d7:03.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port D (rev 04)\r",
+                "address": "d7:03.0",
+                "type": "PCI bridge",
+                "description": " Intel Corporation Sky Lake-E PCI Express Root Port D (rev 04)",
+                "verbose_output": "d7:03.0 PCI bridge: Intel Corporation Sky Lake-E PCI Express Root Port D (rev 04) (prog-if 00 [Normal decode])\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tBus: primary=d7, secondary=db, subordinate=db, sec-latency=0\r\n\tI\/O behind bridge: 0000f000-00000fff [empty]\r\n\tMemory behind bridge: fbb00000-fbbfffff [size=1M]\r\n\tPrefetchable memory behind bridge: 00000000fff00000-00000000000fffff [empty]\r\n\tSecondary status: 66MHz- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- <SERR- <PERR-\r\n\tBridgeCtl: Parity+ SERR+ NoISA- VGA- VGA16- MAbort- >Reset- FastB2B-\r\n\t\tPriDiscTmr- SecDiscTmr- DiscTmrStat- DiscTmrSERREn-\r\n\tCapabilities: [40] Subsystem: Intel Corporation Device 0000\r\n\tCapabilities: [60] MSI: Enable+ Count=1\/2 Maskable+ 64bit-\r\n\t\tAddress: feeb200c  Data: 49b0\r\n\t\tMasking: 00000002  Pending: 00000000\r\n\tCapabilities: [90] Express (v2) Root Port (Slot+), MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0\r\n\t\t\tExtTag+ RBE+\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd- ExtTag+ PhantFunc- AuxPwr- NoSnoop-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 128 bytes\r\n\t\tDevSta:\tCorrErr- NonFatalErr- FatalErr- UnsupReq- AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #12, Speed 8GT\/s, Width x4, ASPM L1, Exit Latency L1 <16us\r\n\t\t\tClockPM- Surprise+ LLActRep+ BwNot+ ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive+ BWMgmt- ABWMgmt-\r\n\t\tSltCap:\tAttnBtn- PwrCtrl- MRL- AttnInd- PwrInd- HotPlug- Surprise-\r\n\t\t\tSlot #26, PowerLimit 0.000W; Interlock- NoCompl-\r\n\t\tSltCtl:\tEnable: AttnBtn- PwrFlt- MRL- PresDet- CmdCplt- HPIrq- LinkChg-\r\n\t\t\tControl: AttnInd Off, PwrInd Off, Power- Interlock-\r\n\t\tSltSta:\tStatus: AttnBtn- PowerFlt- MRL- CmdCplt- PresDet+ Interlock-\r\n\t\t\tChanged: MRL- PresDet- LinkState-\r\n\t\tRootCtl: ErrCorrectable+ ErrNon-Fatal+ ErrFatal+ PMEIntEna+ CRSVisible-\r\n\t\tRootCap: CRSVisible+\r\n\t\tRootSta: PME ReqID 0000, PMEStatus- PMEPending-\r\n\t\tDevCap2: Completion Timeout: Range BCD, TimeoutDis+, LTR-, OBFF Not Supported ARIFwd+\r\n\t\t\t AtomicOpsCap: Routing- 32bit+ 64bit+ 128bitCAS+\r\n\t\tDevCtl2: Completion Timeout: 260ms to 900ms, TimeoutDis-, LTR-, OBFF Disabled ARIFwd-\r\n\t\t\t AtomicOpsCtl: ReqEn- EgressBlck-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [e0] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0+,D1-,D2-,D3hot+,D3cold+)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\r\n## d7:03.0 is a bridge from d7 to db-db\r\n\r\nSummary of buses:\r\n\r\nd7: Secondary host bus (?)\r\n\t03.0 Bridge to db-db\r\n",
+                "irq": "0",
+                "correctable_errors": false,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "d8:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981\r",
+                "address": "d8:00.0",
+                "type": "Non-Volatile memory controller",
+                "description": " Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981",
+                "verbose_output": "d8:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981 (prog-if 02 [NVM Express])\r\n\tSubsystem: Samsung Electronics Co Ltd Device a801\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tRegion 0: Memory at fbe10000 (64-bit, non-prefetchable)\r\n\tCapabilities: [40] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\tCapabilities: [50] MSI: Enable- Count=1\/32 Maskable- 64bit+\r\n\t\tAddress: 0000000000000000  Data: 0000\r\n\tCapabilities: [70] Express (v2) Endpoint, MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0, Latency L0s unlimited, L1 unlimited\r\n\t\t\tExtTag- AttnBtn- AttnInd- PwrInd- RBE+ FLReset+ SlotPowerLimit 0.000W\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd+ ExtTag- PhantFunc- AuxPwr- NoSnoop- FLReset-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 512 bytes\r\n\t\tDevSta:\tCorrErr+ NonFatalErr- FatalErr- UnsupReq+ AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #0, Speed 8GT\/s, Width x4, ASPM not supported\r\n\t\t\tClockPM- Surprise- LLActRep- BwNot- ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-\r\n\t\tDevCap2: Completion Timeout: Range ABCD, TimeoutDis+, LTR+, OBFF Not Supported\r\n\t\tDevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-, LTR-, OBFF Disabled\r\n\t\t\t AtomicOpsCtl: ReqEn-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -3.5dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [b0] MSI-X: Enable+ Count=33 Masked-\r\n\t\tVector table: BAR=0 offset=00003000\r\n\t\tPBA: BAR=0 offset=00002000\r\n\r\n\r\nSummary of buses:\r\n\r\nd8: Secondary host bus (?)\r\n",
+                "irq": "0",
+                "correctable_errors": true,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "d9:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981\r",
+                "address": "d9:00.0",
+                "type": "Non-Volatile memory controller",
+                "description": " Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981",
+                "verbose_output": "d9:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981 (prog-if 02 [NVM Express])\r\n\tSubsystem: Samsung Electronics Co Ltd Device a801\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tRegion 0: Memory at fbd10000 (64-bit, non-prefetchable)\r\n\tCapabilities: [40] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\tCapabilities: [50] MSI: Enable- Count=1\/32 Maskable- 64bit+\r\n\t\tAddress: 0000000000000000  Data: 0000\r\n\tCapabilities: [70] Express (v2) Endpoint, MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0, Latency L0s unlimited, L1 unlimited\r\n\t\t\tExtTag- AttnBtn- AttnInd- PwrInd- RBE+ FLReset+ SlotPowerLimit 0.000W\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd+ ExtTag- PhantFunc- AuxPwr- NoSnoop- FLReset-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 512 bytes\r\n\t\tDevSta:\tCorrErr+ NonFatalErr- FatalErr- UnsupReq+ AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #0, Speed 8GT\/s, Width x4, ASPM not supported\r\n\t\t\tClockPM- Surprise- LLActRep- BwNot- ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-\r\n\t\tDevCap2: Completion Timeout: Range ABCD, TimeoutDis+, LTR+, OBFF Not Supported\r\n\t\tDevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-, LTR-, OBFF Disabled\r\n\t\t\t AtomicOpsCtl: ReqEn-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [b0] MSI-X: Enable+ Count=33 Masked-\r\n\t\tVector table: BAR=0 offset=00003000\r\n\t\tPBA: BAR=0 offset=00002000\r\n\r\n\r\nSummary of buses:\r\n\r\nd9: Secondary host bus (?)\r\n",
+                "irq": "0",
+                "correctable_errors": true,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "da:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981\r",
+                "address": "da:00.0",
+                "type": "Non-Volatile memory controller",
+                "description": " Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981",
+                "verbose_output": "da:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981 (prog-if 02 [NVM Express])\r\n\tSubsystem: Samsung Electronics Co Ltd Device a801\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tRegion 0: Memory at fbc10000 (64-bit, non-prefetchable)\r\n\tCapabilities: [40] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\tCapabilities: [50] MSI: Enable- Count=1\/32 Maskable- 64bit+\r\n\t\tAddress: 0000000000000000  Data: 0000\r\n\tCapabilities: [70] Express (v2) Endpoint, MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0, Latency L0s unlimited, L1 unlimited\r\n\t\t\tExtTag- AttnBtn- AttnInd- PwrInd- RBE+ FLReset+ SlotPowerLimit 0.000W\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd+ ExtTag- PhantFunc- AuxPwr- NoSnoop- FLReset-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 512 bytes\r\n\t\tDevSta:\tCorrErr+ NonFatalErr- FatalErr- UnsupReq+ AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #0, Speed 8GT\/s, Width x4, ASPM not supported\r\n\t\t\tClockPM- Surprise- LLActRep- BwNot- ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-\r\n\t\tDevCap2: Completion Timeout: Range ABCD, TimeoutDis+, LTR+, OBFF Not Supported\r\n\t\tDevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-, LTR-, OBFF Disabled\r\n\t\t\t AtomicOpsCtl: ReqEn-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [b0] MSI-X: Enable+ Count=33 Masked-\r\n\t\tVector table: BAR=0 offset=00003000\r\n\t\tPBA: BAR=0 offset=00002000\r\n\r\n\r\nSummary of buses:\r\n\r\nda: Secondary host bus (?)\r\n",
+                "irq": "0",
+                "correctable_errors": true,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            },
+            {
+                "output": "db:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981\r",
+                "address": "db:00.0",
+                "type": "Non-Volatile memory controller",
+                "description": " Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981",
+                "verbose_output": "db:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981\/PM981 (prog-if 02 [NVM Express])\r\n\tSubsystem: Samsung Electronics Co Ltd Device a801\r\n\tControl: I\/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+\r\n\tStatus: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-\r\n\tLatency: 0, Cache Line Size: 64 bytes\r\n\tInterrupt: pin A routed to IRQ 0\r\n\tRegion 0: Memory at fbb10000 (64-bit, non-prefetchable)\r\n\tCapabilities: [40] Power Management version 3\r\n\t\tFlags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)\r\n\t\tStatus: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-\r\n\tCapabilities: [50] MSI: Enable- Count=1\/32 Maskable- 64bit+\r\n\t\tAddress: 0000000000000000  Data: 0000\r\n\tCapabilities: [70] Express (v2) Endpoint, MSI 00\r\n\t\tDevCap:\tMaxPayload 256 bytes, PhantFunc 0, Latency L0s unlimited, L1 unlimited\r\n\t\t\tExtTag- AttnBtn- AttnInd- PwrInd- RBE+ FLReset+ SlotPowerLimit 0.000W\r\n\t\tDevCtl:\tCorrErr+ NonFatalErr+ FatalErr+ UnsupReq-\r\n\t\t\tRlxdOrd+ ExtTag- PhantFunc- AuxPwr- NoSnoop- FLReset-\r\n\t\t\tMaxPayload 256 bytes, MaxReadReq 512 bytes\r\n\t\tDevSta:\tCorrErr+ NonFatalErr- FatalErr- UnsupReq+ AuxPwr- TransPend-\r\n\t\tLnkCap:\tPort #0, Speed 8GT\/s, Width x4, ASPM not supported\r\n\t\t\tClockPM- Surprise- LLActRep- BwNot- ASPMOptComp+\r\n\t\tLnkCtl:\tASPM Disabled; RCB 64 bytes Disabled- CommClk+\r\n\t\t\tExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-\r\n\t\tLnkSta:\tSpeed 8GT\/s (ok), Width x4 (ok)\r\n\t\t\tTrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-\r\n\t\tDevCap2: Completion Timeout: Range ABCD, TimeoutDis+, LTR+, OBFF Not Supported\r\n\t\tDevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-, LTR-, OBFF Disabled\r\n\t\t\t AtomicOpsCtl: ReqEn-\r\n\t\tLnkCtl2: Target Link Speed: 8GT\/s, EnterCompliance- SpeedDis-\r\n\t\t\t Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-\r\n\t\t\t Compliance De-emphasis: -6dB\r\n\t\tLnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+, EqualizationPhase1+\r\n\t\t\t EqualizationPhase2+, EqualizationPhase3+, LinkEqualizationRequest-\r\n\tCapabilities: [b0] MSI-X: Enable+ Count=33 Masked-\r\n\t\tVector table: BAR=0 offset=00003000\r\n\t\tPBA: BAR=0 offset=00002000\r\n\r\n\r\nSummary of buses:\r\n\r\ndb: Secondary host bus (?)\r\n",
+                "irq": "0",
+                "correctable_errors": true,
+                "fatal_errors": false,
+                "speed": "8GT\/s",
+                "width": "x4"
+            }
+        ],
+        "exec_time": 0.43925499916077,
+        "time": 8.1589374542236
+    },
+    "uefi": {
+        "uefi": true,
+        "exec_time": 0.063830375671387,
+        "time": 0.063830375671387
+    },
+    "dmesg": {
+        "disks": {
+            "count": 0
+        },
+        "exec_time": 0,
+        "time": 0
+    },
+    "action": "update_record",
+    "net": {
+        "interfaces": [
+            {
+                "dev": "Ethernet",
+                "mac": "28:16:a8:fd:dd:84",
+                "ip": "192.168.237.143",
+                "netmask": "255.255.0.0",
+                "gateway": "192.168.0.1"
+            }
+        ],
+        "option_roms": [
+
+        ],
+        "eeproms": [
+
+        ],
+        "exec_time": 0.047874689102173,
+        "time": 0.047874689102173
+    },
+    "disk": {
+        "disks": [
+            {
+                "device": "\/dev\/sda",
+                "model": "ST12000NM0538-2K2101",
+                "serial": "ZHZ0395B",
+                "firmware": "CN02",
+                "advertised_link_speed": "6.0",
+                "current_link_speed": "6.0",
+                "frozen": "Unknown",
+                "tool": "smartctl.exe",
+                "unique_string": "ST12000NM0538-2K2101-CN02"
+            },
+            {
+                "device": "\/dev\/sdv",
+                "frozen": "Unknown",
+                "tool": "smartctl.exe",
+                "model": "Unknown",
+                "firmware": "Unknown",
+                "unique_string": "Unknown-Unknown"
+            }
+        ],
+        "unique_disks": [
+            {
+                "count": "1",
+                "model": "ST12000NM0538-2K2101",
+                "firmware": "CN02",
+                "unique_string": "ST12000NM0538-2K2101-CN02"
+            },
+            {
+                "count": "1",
+                "model": "Unknown",
+                "firmware": "Unknown",
+                "unique_string": "Unknown-Unknown"
+            }
+        ],
+        "arcconf_data": {
+            "controllers": [
+
+            ],
+            "exec_time": 0
+        },
+        "exec_time": 1.3358776569366,
+        "time": 1.7906877994537
+    },
+    "tpm": {
+        "version": "7.63.13.6400",
+        "revision_id": "IFX",
+        "exec_time": 0.15459442138672,
+        "time": 0.1555917263031
+    },
+    "reboot": false,
+    "shutdown": false,
+    "vnc_connection_string": "MTIxNwBjAG15c3Fs",
+    "rdp_connection_string": "MTIxOABjAG15c3Fs",
+    "ssh_connection_string": "MTIxOQBjAG15c3Fs",
+    "connection_status": "alive",
+    "last_found_alive": 1607097993.3884,
+    "sol_connection_string": "MTIyMABjAG15c3Fs",
+    "machine_name": "VSE0G6IZXDR-311",
+    "location": "R30U04N04",
+    "chain": null,
+    "chain_index": null,
+    "host_group": null,
+    "workflow": "deploy-windows-server2019-17763.107.101029-1455",
+    "finished_workflow": "deploy-windows-server2019-17763.107.101029-1455",
+    "username": "jack.zornes",
+    "host_engine_version": "",
+    "deployment_finished": false,
+    "platform": {
+        "system": "Windows",
+        "node": "VSE0G6IZXDR-311",
+        "release": "10",
+        "version": "10.0.17763",
+        "machine": "AMD64",
+        "exec_time": 0,
+        "time": 0
+    },
+    "checked_out_to": "morgan.cain",
+    "clocks": {
+        "exec_time": 0,
+        "time": 0
+    },
+    "ticket": "402541",
+    "cpld": {
+        "sequence_cpld_version": "Unknown",
+        "secure_cpld_version": "00000014",
+        "exec_time": 0,
+        "time": 0.24832081794739
+    },
+    "my_host_users": [
+        "joey.chien"
+    ],
+    "id": "5dd346860b4b0229ac288371"
+}
