@@ -850,20 +850,6 @@ def add_column_data(azure_devops_data: dict, console_server_data: dict, all_issu
 
     add_inventory_column(console_server_data, current_setup, inventory_data)
 
-    # tally_storage: dict = add_machine_name_column(initial_point, user_clean_pipes, worksheet, structure,
-    #                                               console_server_data, user_virtual_machines,
-    #                                               virtual_machines_data, tally_storage)
-    #
-    # write_status_field_column(initial_point, user_clean_pipes, worksheet, structure,
-    #                           console_server_data, user_virtual_machines, virtual_machines_data)
-    #
-    # add_trr_column(initial_point, user_clean_pipes, worksheet, structure, console_server_data)
-    #
-    # add_type_column(initial_point, user_clean_pipes, worksheet, structure, console_server_data, azure_devops_data)
-    #
-    # write_item_column(initial_point, user_clean_pipes, worksheet, structure, console_server_data,
-    #                   virtual_machines_data, user_virtual_machines)
-
 
 def is_inventory_data(inventory_data: dict, current_item: str) -> str:
     if not current_item:
@@ -1560,9 +1546,9 @@ def add_header_items_under_testing(current_setup: dict) -> None:
 
     worksheet.merge_range(f'C{upper_header}:G{upper_header}', f'VSE - Console Server',
                           structure.teal_middle_14)
-    worksheet.write(f'I{upper_header}', f'Inventory', structure.teal_middle_14)
+    worksheet.write(f'I{upper_header}', f'Outdated', structure.light_red_middle_14)
     worksheet.merge_range(f'K{upper_header}:M{upper_header}', f'Console Server', structure.teal_middle_14)
-    worksheet.merge_range(f'O{upper_header}:P{upper_header}', f'Inventory', structure.teal_middle_14)
+    worksheet.merge_range(f'O{upper_header}:P{upper_header}', f'Outdated', structure.light_red_middle_14)
 
 
 def get_user_pipes(user_systems):

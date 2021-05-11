@@ -43,6 +43,12 @@ console_server_data: dict = {}
 # Stores Overall Workload of each VSE employee based on 'checked out to' in Console Server
 overall_workload: dict = {}
 
+# Commodity Serial Numbers
+all_serial: list = []
+
+# Commodity Part Numbers
+all_part_numbers: list = []
+
 
 async def generate_console_server_json(client: asyncio, host_id: str) -> str:
     """
@@ -272,6 +278,8 @@ def store_system_data(system_json: dict, pipe_name: str):
         # Upper for consistent comparison
         upper_machine_name = str(current_system_data.get('machine_name', 'None'))
 
+        connection_status = str(system_json.get('connection_status', 'None'))
+
         # Stores checked_out_to for pipe-level work
         clean_username: str = checked_out_to.lower().replace('.', '_')
 
@@ -287,6 +295,11 @@ def store_system_data(system_json: dict, pipe_name: str):
         # Last Time Alive
         raw_last_found_alive = str(system_json.get('last_found_alive', 'None'))
         current_system_data['last_found_alive']: dict = calculate_last_time_alive(raw_last_found_alive)
+
+        # Machine Serial Number
+        machine_serial_number: str = system_json.get('bmc', {}).get('fru', {}).get('product', {}).get('serial')
+
+        machine_product_name: str = system_json.get('bmc', {}).get('fru', {}).get('product', {}).get('name')
 
         # Comment / Status
         current_system_data['comment']: dict = str(system_json.
@@ -354,9 +367,10 @@ def store_system_data(system_json: dict, pipe_name: str):
         unique_dimms: dict = system_json.get('dmi', {}).get('unique_dimms', 'None')
         for unique_dimm in unique_dimms:
             part_number: list = unique_dimm.get('part')
-            part_number_split: list = unique_dimm.get('part').split(' ')
-
             count = int(unique_dimm.get('count'))
+
+            if 'P4511' in part_number:
+                print(f'{part_number} - {count} - {pipe_name}')
 
             if not part_number:
                 pass
@@ -365,10 +379,55 @@ def store_system_data(system_json: dict, pipe_name: str):
                     console_server_data['inventory']['commodities']['dimms'][part_number] = count
                 else:
                     console_server_data['inventory']['commodities']['dimms'][part_number] += count
+
                 if part_number not in console_server_data[pipe_name]['pipe_data']['pipe_inventory']['dimms']:
                     console_server_data[pipe_name]['pipe_data']['pipe_inventory']['dimms'][part_number] = count
                 else:
                     console_server_data[pipe_name]['pipe_data']['pipe_inventory']['dimms'][part_number] += count
+
+                try:
+                    current_commodity: dict = {'pipe_name': pipe_name,
+                                               'connection_status': connection_status,
+                                               'last_found_alive': current_system_data['last_found_alive'],
+                                               'machine_unique_id': f'{machine_product_name}-'
+                                                                    f'{machine_serial_number}',
+                                               'machine_sku': machine_product_name,
+                                               'machine_serial': machine_serial_number,
+                                               'supplier': unique_dimm['manufacturer'],
+                                               'machine_name': upper_machine_name,
+                                               'commodity_type': 'NVMe',
+                                               'part_number': part_number,
+                                               'count': count,
+                                               'type': 'DIMM'}
+
+                    all_part_numbers.append(current_commodity)
+                except KeyError:
+                    pass
+
+        all_dimms: dict = system_json.get('dmi', {}).get('dimms')
+        if not all_dimms:
+            pass
+
+        else:
+            for current_dimm in all_dimms:
+                if not current_dimm:
+                    pass
+                else:
+                    try:
+                        current_commodity: dict = {'pipe_name': pipe_name,
+                                                   'connection_status': connection_status,
+                                                   'machine_unique_id': f'{machine_product_name}-'
+                                                                        f'{machine_serial_number}',
+                                                   'machine_sku': machine_product_name,
+                                                   'machine_serial': machine_serial_number,
+                                                   'machine_name': upper_machine_name,
+                                                   'commodity_type': 'DIMM',
+                                                   'part_number': current_dimm['part'],
+                                                   'serial_number': current_dimm['serial']}
+                        all_serial.append(current_commodity)
+                    except KeyError:
+                        pass
+
         current_system_data['unique_dimms']: dict = unique_dimms
 
         # NVMes
@@ -395,7 +454,52 @@ def store_system_data(system_json: dict, pipe_name: str):
                 else:
                     console_server_data[pipe_name]['pipe_data']['pipe_inventory']['nvmes'][nvme_model] += count
 
+                try:
+                    current_commodity: dict = {'pipe_name': pipe_name,
+                                               'connection_status': connection_status,
+                                               'last_found_alive': current_system_data['last_found_alive'],
+                                               'machine_unique_id': f'{machine_product_name}-'
+                                                                    f'{machine_serial_number}',
+                                               'machine_sku': machine_product_name,
+                                               'machine_serial': machine_serial_number,
+                                               'machine_name': upper_machine_name,
+                                               'commodity_type': 'NVMe',
+                                               'part_number': nvme_model,
+                                               'count': count,
+                                               'type': 'NVMe'}
+
+                    all_part_numbers.append(current_commodity)
+                except KeyError:
+                    pass
+
         current_system_data['unique_nvmes']: dict = unique_nvmes
+
+        all_nvmes: dict = system_json.get('nvme', {}).get('nvmes')
+        if not all_nvmes:
+            pass
+
+        else:
+            for current_nvme in all_nvmes:
+
+                if not current_nvme:
+                    pass
+
+                else:
+                    try:
+                        current_commodity: dict = {'pipe_name': pipe_name,
+                                                   'connection_status': connection_status,
+                                                   'machine_unique_id': f'{machine_product_name}-'
+                                                                        f'{machine_serial_number}',
+                                                   'machine_sku': machine_product_name,
+                                                   'machine_serial': machine_serial_number,
+                                                   'machine_name': upper_machine_name,
+                                                   'commodity_type': 'NVMe',
+                                                   'part_number': current_nvme['model'],
+                                                   'serial_number': current_nvme['serial']}
+
+                        all_serial.append(current_commodity)
+                    except KeyError:
+                        pass
 
         # Disks
         current_system_data['system_disks']: dict = str(system_json.
@@ -422,7 +526,52 @@ def store_system_data(system_json: dict, pipe_name: str):
                 else:
                     console_server_data[pipe_name]['pipe_data']['pipe_inventory']['disks'][disk_part_number] += count
 
+                try:
+                    current_commodity: dict = {'pipe_name': pipe_name,
+                                               'connection_status': connection_status,
+                                               'last_found_alive': current_system_data['last_found_alive'],
+                                               'machine_unique_id': f'{machine_product_name}-'
+                                                                    f'{machine_serial_number}',
+                                               'machine_sku': machine_product_name,
+                                               'machine_serial': machine_serial_number,
+                                               'machine_name': upper_machine_name,
+                                               'commodity_type': 'NVMe',
+                                               'part_number': disk_part_number,
+                                               'count': count,
+                                               'type': 'Disk'}
+
+                    all_part_numbers.append(current_commodity)
+                except KeyError:
+                    pass
+
         current_system_data['unique_disks']: dict = unique_disks
+
+        all_disks: dict = system_json.get('disk', {}).get('disks')
+        if not all_disks:
+            pass
+
+        else:
+            for current_disk in all_disks:
+                if not current_disk:
+                    pass
+
+                else:
+                    try:
+                        current_commodity: dict = {'pipe_name': pipe_name,
+                                                   'connection_status': connection_status,
+                                                   'machine_unique_id': f'{machine_product_name}-'
+                                                                        f'{machine_serial_number}',
+                                                   'machine_sku': machine_product_name,
+                                                   'machine_serial': machine_serial_number,
+                                                   'machine_name': upper_machine_name,
+                                                   'commodity_type': 'Disk',
+                                                   'part_number': current_disk['model'],
+                                                   'serial_number': current_disk['serial']}
+                        all_serial.append(current_commodity)
+
+                    except KeyError:
+                        pass
+
 
         count_username(clean_username)
         store_machine_name(clean_username, upper_machine_name)
@@ -567,6 +716,11 @@ def main_method() -> dict:
     json_file: dict = write_host_groups_json()
     host_groups_page: dict = json_file['host_groups']
 
+    # import json
+    # foo = json.dumps(json_file, sort_keys=True, indent=4)
+    # print(foo)
+    # input()
+
     # Logs skipped or collected data based on naming of Host Groups
     log_total: list = []
     log_skipped: list = []
@@ -613,77 +767,77 @@ def main_method() -> dict:
         console_server_data[host_group_name]: dict = {}
 
         # Host Groups that are actually getting data from
-        if 'Pipe-' in host_group_name and 'OFFLINE' not in host_group_name and 'OFFLINE' not in status:
+        # if 'Pipe-' in host_group_name and 'OFFLINE' not in host_group_name and 'OFFLINE' not in status:
 
-            # Tells users progress
-            print(f'\t\t- Collect  |  {Fore.GREEN}Success{Style.RESET_ALL}   |  {host_group_name}')
-            log_total.append(1)
-            log_collect.append(1)
+        # Tells users progress
+        print(f'\t\t- Collect  |  {Fore.GREEN}Success{Style.RESET_ALL}   |  {host_group_name}')
+        log_total.append(1)
+        log_collect.append(1)
 
-            # Get all system data from Pipe
-            current_pipe: dict = console_server_data[host_group_name]
-            console_server_data[host_group_name]['pipe_data']: dict = {}
+        # Get all system data from Pipe
+        current_pipe: dict = console_server_data[host_group_name]
+        console_server_data[host_group_name]['pipe_data']: dict = {}
 
-            # Stores
-            current_pipe['pipe_data']: dict = {}
+        # Stores
+        current_pipe['pipe_data']: dict = {}
 
-            current_pipe['pipe_data']['pipe_inventory']: dict = {}
-            current_pipe['pipe_data']['pipe_inventory']['dimms']: dict = {}
-            current_pipe['pipe_data']['pipe_inventory']['nvmes']: dict = {}
-            current_pipe['pipe_data']['pipe_inventory']['disks']: dict = {}
+        current_pipe['pipe_data']['pipe_inventory']: dict = {}
+        current_pipe['pipe_data']['pipe_inventory']['dimms']: dict = {}
+        current_pipe['pipe_data']['pipe_inventory']['nvmes']: dict = {}
+        current_pipe['pipe_data']['pipe_inventory']['disks']: dict = {}
 
-            # Stores total systems in Pipe (non-vm or anything else)
-            current_pipe['setup_data']: dict = {}
-            current_pipe['setup_data']['total_systems']: dict = []
-            current_pipe['setup_data']['systems_with_ticket']: dict = []
+        # Stores total systems in Pipe (non-vm or anything else)
+        current_pipe['setup_data']: dict = {}
+        current_pipe['setup_data']['total_systems']: dict = []
+        current_pipe['setup_data']['systems_with_ticket']: dict = []
 
-            # Runs async and stores data in module-level dictionary
-            asyncio.run(start_loop(host_ids, host_group_name))
+        # Runs async and stores data in module-level dictionary
+        asyncio.run(start_loop(host_ids, host_group_name))
 
-            # Store all system data from Pipe
-            current_pipe['description']: str = description
-            current_pipe['host_group_status']: str = status
-            current_pipe['host_id']: str = host_id
-            current_pipe['host_ids']: list = host_ids
-            current_pipe['checked_out_to']: str = checked_out_to
+        # Store all system data from Pipe
+        current_pipe['description']: str = description
+        current_pipe['host_group_status']: str = status
+        current_pipe['host_id']: str = host_id
+        current_pipe['host_ids']: list = host_ids
+        current_pipe['checked_out_to']: str = checked_out_to
 
-            # Get and store ticket information
-            group_unique_tickets: list = list(set(current_pipe_tickets))
-            current_pipe['group_unique_tickets']: list = group_unique_tickets
-            current_pipe_tickets.clear()
+        # Get and store ticket information
+        group_unique_tickets: list = list(set(current_pipe_tickets))
+        current_pipe['group_unique_tickets']: list = group_unique_tickets
+        current_pipe_tickets.clear()
 
-            # Store information for setup dashboard later
-            current_pipe['ticket_tally']: dict = {}
-            current_pipe['ticket_tally']['systems_with_tickets']: dict = sum(total_tickets_in_pipe)
-            current_pipe['ticket_tally']['total_systems']: dict = sum(total_systems_in_pipe)
-            current_pipe['ticket_tally']['total_vms']: dict = sum(total_vms)
+        # Store information for setup dashboard later
+        current_pipe['ticket_tally']: dict = {}
+        current_pipe['ticket_tally']['systems_with_tickets']: dict = sum(total_tickets_in_pipe)
+        current_pipe['ticket_tally']['total_systems']: dict = sum(total_systems_in_pipe)
+        current_pipe['ticket_tally']['total_vms']: dict = sum(total_vms)
 
-            # Clear information on pipe tally for next iteration
-            total_vms.clear()
-            total_tickets_in_pipe.clear()
-            total_systems_in_pipe.clear()
+        # Clear information on pipe tally for next iteration
+        total_vms.clear()
+        total_tickets_in_pipe.clear()
+        total_systems_in_pipe.clear()
 
-        # Encourages naming convention and extracting only pipes that are going to be in QUAL
-        elif 'Pipe-' not in host_group_name:
-            print(f'\t\tX Skipped  |  non-pipe  |  {host_group_name}')
-            log_total.append(1)
-            log_skipped.append(1)
-            log_non_pipes.append(1)
-            pass
-
-        elif 'OFFLINE' in host_group_name and 'OFFLINE' in status:
-            print(f'\t\tX Skipped  |  offline   |  {host_group_name}')
-            log_total.append(1)
-            log_skipped.append(1)
-            log_off_lines.append(1)
-            pass
-
-        elif 'IDLE' in host_group_name and 'IDLE' in status:
-            print(f'\t\tX Skipped  |  idle   |  {host_group_name}')
-            log_total.append(1)
-            log_skipped.append(1)
-            log_idle.append(1)
-            pass
+        # # Encourages naming convention and extracting only pipes that are going to be in QUAL
+        # elif 'Pipe-' not in host_group_name:
+        #     print(f'\t\tX Skipped  |  non-pipe  |  {host_group_name}')
+        #     log_total.append(1)
+        #     log_skipped.append(1)
+        #     log_non_pipes.append(1)
+        #     pass
+        #
+        # elif 'OFFLINE' in host_group_name and 'OFFLINE' in status:
+        #     print(f'\t\tX Skipped  |  offline   |  {host_group_name}')
+        #     log_total.append(1)
+        #     log_skipped.append(1)
+        #     log_off_lines.append(1)
+        #     pass
+        #
+        # elif 'IDLE' in host_group_name and 'IDLE' in status:
+        #     print(f'\t\tX Skipped  |  idle   |  {host_group_name}')
+        #     log_total.append(1)
+        #     log_skipped.append(1)
+        #     log_idle.append(1)
+        #     pass
 
     # Stores host groups level information for Setup information later
     console_server_data['host_groups_data']: dict = {}
@@ -700,8 +854,7 @@ def main_method() -> dict:
     # Sorted to keep consistent alphabetic order
     console_server_data['virtual_machine_data']: list = virtual_machine_data
 
-    # import json
-    # print(json.dumps(console_server_data, sort_keys=True, indent=4))
-    # input()
+    console_server_data['all_serial']: list = all_serial
+    console_server_data['all_part_numbers']: list = all_part_numbers
 
     return console_server_data

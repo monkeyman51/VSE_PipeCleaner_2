@@ -88,6 +88,7 @@ def drive_access_prompt() -> None:
 
     try:
         subprocess.call(fr'net use z: \\172.30.1.100\pxe /u:172.30.0.100\{username} {password}', shell=True)
+
     except OSError:
         print(f'\t{Fore.RED}Wrong Credentials{Style.RESET_ALL} - Please try again.')
         drive_access_prompt()
@@ -113,7 +114,58 @@ def initialize_text_color() -> None:
     enable_text_color()
 
 
-def run_terminal(version_number: str, default_user_name: str, current_location: str) -> None:
+def get_available_chooses() -> str:
+    """
+    Give user chooses between default, send, and inventory.
+    :return:
+    """
+    print(f'\n\tChoose between these options...')
+    print(f'\tn -> Normal Mode')
+    print(f'\ti -> Inventory Mode')
+    print(f'\ts -> Send Inventory')
+    print(f'\tt -> Total Inventory')
+    return input(f'\n\tChoose option: ')
+
+
+def get_user_response_on_chooses(user_response: str) -> str:
+    """
+    Get response based on user input from terminal.
+    :param user_response:
+    :return:
+    """
+    user_input: str = user_response.upper()
+
+    if user_input == 'N':
+        return 'N'
+
+    elif 'NORMAL' in user_response:
+        return 'N'
+
+    elif user_input == 'I':
+        return 'I'
+
+    elif 'INVENTORY' in user_input:
+        return 'I'
+
+    elif user_input == 'S':
+        return 'S'
+
+    elif 'SEND' in user_input:
+        return 'S'
+
+    elif 'TOTAL' in user_input:
+        return 'T'
+
+    elif user_input == 'T':
+        return 'T'
+
+    else:
+        print(f'\t{Fore.RED}Unavailable response{Style.RESET_ALL}...')
+        user_chose: str = get_available_chooses()
+        get_user_response_on_chooses(user_chose)
+
+
+def run_terminal(version_number: str, default_user_name: str, current_location: str) -> str:
     """
     Generic Intro for Pipe Cleaner including Banner, Intro Sentence, and Local Network checks.
     Then asks for user Role.
@@ -122,3 +174,6 @@ def run_terminal(version_number: str, default_user_name: str, current_location: 
     show_pipe_cleaner_banner()
     show_intro_sentence(version_number, default_user_name, current_location)
     check_local_network()
+
+    user_chose: str = get_available_chooses()
+    return get_user_response_on_chooses(user_chose)

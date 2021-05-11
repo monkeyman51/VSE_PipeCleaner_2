@@ -614,12 +614,66 @@ def store_tickets_data(raw_tickets_data: list, attached_file_names: dict, consol
             all_tickets_data[ticket_id] = ticket_data
 
         except json.decoder.JSONDecodeError:
-            print(f'\tMicrosoft Azure DevOps did not return all data. Recollecting...\n')
+            print(f'\tMicrosoft Azure DevOps did not return all data.')
+            print(f'\tError is at TRR {ticket_id}. Recollecting...\n')
             main_method(console_server_data)
 
         except KeyError:
-            print(f'\tMicrosoft Azure DevOps did not return all data. Recollecting...\n')
-            main_method(console_server_data)
+            print(f'\tNo Description Table... Grabbing from Summary Table Instead in TRR')
+
+            ticket_json: dict = json.loads(raw_ticket_data)
+
+            # For some reason the ticket_json["id"] data type is int
+            ticket_id: str = str(ticket_json["id"])
+            # print(f'\t\t- Collect  |  {Fore.GREEN}Success{Style.RESET_ALL}   |  {ticket_id}')
+
+            # Table Data
+            table_data = ticket_json['fields']['Custom.Summary']
+            table_data_soup = BeautifulSoup(table_data, 'html.parser')
+
+            table_rows: list = table_data_soup.findAll('tr')
+            table_data: dict = get_clean_table_data(table_rows)
+
+            ticket_data['qcl_parts']: list = get_qcl_parts(table_data)
+
+            # Checking for CRDs later
+            server_bios: str = table_data.get('server_bios', 'None')
+            server_bmc: str = table_data.get('server_bmc', 'None')
+            server_cpld: str = table_data.get('server_cpld', 'None')
+            server_os: str = table_data.get('server_os', 'None')
+
+            if server_bios != 'None' and server_bios != '':
+                all_bios.append(server_bios)
+            if server_bmc != 'None' and server_bmc != '':
+                all_bmc.append(server_bmc)
+            if server_cpld != 'None' and server_cpld != '':
+                all_cpld.append(server_cpld)
+            if server_os != 'None' and server_os != '':
+                all_os.append(server_os)
+
+            # Table Data Stored
+            ticket_data['table_data']: dict = table_data
+
+            ticket_data['title'] = ticket_json['fields']['System.Title']
+
+            ticket_data['trr_type']: int = ticket_json.get('fields', {}).get('Custom.TRRType')
+
+            # Due Dates
+            ticket_data['due_dates']: dict = access_due_dates(ticket_json)
+
+            # Assigned To
+            ticket_data['assigned_to']: str = ticket_json['fields']['System.AssignedTo']['displayName']
+
+            ticket_data['attachment_file_paths']: dict = check_attachment_files(ticket_json,
+                                                                                attached_file_names, ticket_id)
+
+            # State of Qual
+            ticket_data['state']: str = ticket_json['fields']['System.State']
+
+            # Test Plans Hyperlink, used later for Async
+            ticket_data['test_plan_hyperlink']: str = get_test_plan_hyperlink(ticket_json)
+
+            all_tickets_data[ticket_id] = ticket_data
 
     all_tickets_data['unique_bios'] = list(set(all_bios))
     all_tickets_data['unique_bmc'] = list(set(all_bmc))

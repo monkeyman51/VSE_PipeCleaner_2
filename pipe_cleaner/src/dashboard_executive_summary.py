@@ -19,6 +19,8 @@ from pipe_cleaner.src.dashboard_write import parsed_date
 from pipe_cleaner.src.data_ado import main_method as get_all_ticket_data
 from pipe_cleaner.src.data_console_server import main_method as get_console_server_data
 from pipe_cleaner.src.dashboard_inventory import main_method as add_dashboard_inventory
+from pipe_cleaner.src.dashboard_all_serial import main_method as add_all_serial
+from pipe_cleaner.src.dashboard_all_part_numbers import main_method as add_all_part_numbers
 from pipe_cleaner.src.excel_properties import Structure
 
 import os
@@ -421,51 +423,6 @@ def set_excel_column_width(columns_width: tuple, worksheet: xlsxwriter, structur
         worksheet.set_column(f'{current_letter}:{current_letter}',
                              columns_width[index],
                              structure.white)
-
-    # sheet_title: str = excel_setup.get('sheet_title')
-    # site_location: str = excel_setup.get('site_location')
-    # worksheet = excel_setup.get('current_worksheet')
-    # structure = excel_setup.get('structure')
-    #
-    # total_pipes = str(len(console_server_data) - 1)
-    #
-    # time: str = strftime('%I:%M %p')
-    # date: str = strftime('%m/%d/%Y')
-    #
-    # # Set Top Plane of Excel Sheet
-    # top_plane_height: int = 13
-    #
-    # # Structure of the Excel Sheet
-    # set_layout(worksheet, structure)
-    # set_column_names(top_plane_height, worksheet, structure)
-    #
-    # # Freeze Planes
-    # worksheet.freeze_panes(top_plane_height, 3)
-    #
-    # while top_plane_height < 500:
-    #     worksheet.set_row(top_plane_height, 16.5, structure.white)
-    #     top_plane_height += 1
-    #
-    # # Top Left Plane
-    # worksheet.insert_image('A1', 'pipe_cleaner/img/vse_logo.png')
-    # worksheet.write('B5', f' Pipe Cleaner - {sheet_title}', structure.big_blue_font)
-    # worksheet.write('B6', f'       {site_location}', structure.bold_italic_blue_font)
-    # worksheet.write('B7', f'       Total Pipes - {total_pipes}', structure.bold_italic_blue_font)
-    # worksheet.write('B9', f'       {date} - {time}', structure.italic_blue_font)
-    #
-    # worksheet.write('D5', f'Categories:', structure.teal_left)
-    # worksheet.write('E5', f'Comparison:', structure.teal_left)
-    # worksheet.write('D6', f'Testing:', structure.big_blue_font)
-    # worksheet.write('D7', f'Not Included:', structure.big_blue_font)
-    # worksheet.write('D9', f'PM Review:', structure.big_blue_font)
-    # worksheet.write('D11', f'Setup Review:', structure.big_blue_font)
-    #
-    # worksheet.write('E5', f'', structure.bold_italic_blue_font)
-    # worksheet.write('E6', f'BIOS, BMC, CPLD, OS, SSD Part Number and Firmware',
-    #                 structure.bold_italic_blue_font)
-    # worksheet.write('E7', f'TPM', structure.bold_italic_blue_font)
-    # worksheet.write('E9', f'BIOS, BMC, CPLD, OS, SSD Part Number and Firmware', structure.bold_italic_blue_font)
-    # worksheet.write('E11', f'Systems with Tickets out of Total Tickets', structure.bold_italic_blue_font)
 
 
 def set_layout(worksheet, structure):
@@ -1166,42 +1123,6 @@ def write_description_column(processed_console_server, console_server_data, curr
 
         worksheet.set_row(max_number, 3.75, structure.white)
         current_position = max_number + 2
-
-    # letter: str = 'C'
-    # worksheet: xlsxwriter = current_setup.get('worksheet')
-    # structure: xlsxwriter = current_setup.get('structure')
-    # current_position: int = current_setup.get('body_position')
-    #
-    # for index, pipe_name in enumerate(processed_console_server, start=0):
-    #
-    #     current_color: xlsxwriter = get_current_color(index, structure)
-    #     pipe_hyperlink: str = get_pipe_hyperlink(console_server_data, pipe_name)
-    #     clean_pipe_name: str = f' {process_pipe_name(pipe_name)}'
-    #
-    #     total_tickets: int = get_total_tickets(pipe_name, processed_console_server)
-    #     max_number: int = current_position + total_tickets - 1
-    #
-    #     base_position: str = get_base_position(letter, current_position)
-    #     merge_position: str = get_merge_position(base_position, letter, max_number)
-    #
-    #     if check_missing(pipe_name) == 'None':
-    #         if total_tickets >= 2:
-    #             add_empty_merge_cell(merge_position, structure, worksheet)
-    #             add_empty_hyperlink_cell(base_position, pipe_hyperlink, current_setup)
-    #         else:
-    #             add_empty_hyperlink_cell(base_position, pipe_hyperlink, current_setup)
-    #             set_single_ticket_row(current_position, worksheet)
-    #
-    #     elif total_tickets >= 2:
-    #         worksheet.merge_range(merge_position, clean_pipe_name, current_color)
-    #         worksheet.write_url(base_position, pipe_hyperlink, current_color, string=clean_pipe_name)
-    #
-    #     else:
-    #         worksheet.write_url(base_position, pipe_hyperlink, current_color, string=clean_pipe_name)
-    #         set_single_ticket_row(current_position, worksheet)
-    #
-    #     worksheet.set_row(max_number, 3.75, structure.white)
-    #     current_position: int = max_number + 2
 
 
 def add_trr_type_column(processed_console_server, azure_devops_data, current_setup):
@@ -1964,10 +1885,7 @@ def create_excel_output(pipe_cleaner_version: str, default_user_name: str, site_
 
     final_data: dict = compare_data(console_server_data, azure_devops_data)
     all_issues: list = get_all_issues()
-    # import json
-    # foo = json.dumps(all_issues, sort_keys=True, indent=4)
-    # print(foo)
-    # input()
+
     all_checks: list = get_total_checks()
     missing_tally: str = get_missing_tally()
     mismatch_tally: str = get_mismatch_tally()
@@ -1996,6 +1914,10 @@ def create_excel_output(pipe_cleaner_version: str, default_user_name: str, site_
 
     add_dashboard_inventory(azure_devops_data, console_server_data, current_setup, all_issues)
 
+    add_all_serial(azure_devops_data, console_server_data, current_setup, all_issues)
+
+    add_all_part_numbers(console_server_data, current_setup)
+
     try:
         workbook.close()
     except xlsxwriter.workbook.FileCreateError:
@@ -2003,4 +1925,4 @@ def create_excel_output(pipe_cleaner_version: str, default_user_name: str, site_
         print(f'\tPlease close the dashboard.xlsx to create a new dashboard.xlsx')
         print(f'\tPress {Fore.BLUE}ENTER{Style.RESET_ALL} to try again...', end='')
         input()
-        create_excel_output()
+        create_excel_output(pipe_cleaner_version, default_user_name, site_location)

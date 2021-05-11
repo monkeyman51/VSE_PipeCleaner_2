@@ -1,7 +1,5 @@
 from colorama import Fore, Style
 
-from pipe_cleaner.extra.jokes import get_joke
-
 row_length = 112
 space = '  '
 
