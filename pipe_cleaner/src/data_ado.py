@@ -415,75 +415,6 @@ def get_skudoc_drive_file_path(file_names_from_drive_paths: list, attachment_fil
     return download_attachment_file_from_ticket(ticket_json, attachment_file_name, skudoc_path, ticket_id)
 
 
-def check_attachment_files(ticket_json: dict, attached_file_name_paths: dict, ticket_id: str) -> dict:
-    """
-    Get actual due date from ADO
-    :param ticket_json:
-    :param attached_file_name_paths:
-    :param ticket_id:
-    :return:
-    """
-    drive_file_paths: dict = {}
-
-    # Get all attachment file names from TRR for easier iteration later
-    attachment_file_names_from_ticket: list = []
-    attachment_files = ticket_json.get('relations', {})
-    for file in attachment_files:
-        if file['rel'] in 'AttachedFile':
-            attachment_file_name = file['attributes']['name']
-            attachment_file_names_from_ticket.append(attachment_file_name)
-
-    # Iterates through the file names found in the attachment folder within the TRR
-    for attachment_file_name in attachment_file_names_from_ticket:
-
-        crd_file_names: list = attached_file_name_paths.get('crd')
-        skudoc_file_names: list = attached_file_name_paths.get('skudoc')
-        attachment_file_name: str = attachment_file_name.upper().replace('.XLSX', '.xlsx')
-
-        # CRD - Checks whether attachment file is a CRD
-        if check_crd_file_name(attachment_file_name) is True:
-            crd_drive_path: str = get_crd_drive_file_path(crd_file_names, attachment_file_name,
-                                                          ticket_json, ticket_id, attached_file_name_paths)
-            drive_file_paths['crd_drive_path'] = crd_drive_path
-
-        if check_skudoc_file_name(attachment_file_name) is True:
-            skudoc_drive_path: str = get_skudoc_drive_file_path(skudoc_file_names, attachment_file_name,
-                                                                ticket_json, ticket_id, attached_file_name_paths)
-            drive_file_paths['skudoc_drive_path'] = skudoc_drive_path
-
-        # # SKUDOC
-        # if any(attachment_file_name in file_path_name for file_path_name in skudoc_file_names):
-        #     skudoc_drive_path: str = get_drive_path('SKUDOC', attachment_file_name, attached_file_name_paths)
-        #     drive_file_paths['skudoc_drive_path'] = skudoc_drive_path
-        #     print(f'IN: SKUDOC - {attachment_file_name}')
-        #     pass
-        #
-        # else:
-        #     crd_path: str = attached_file_name_paths.get('base_paths', {}).get('crd_path')
-        #     skudoc_drive_path: str = get_attachment_file(ticket_json, crd_path, ticket_id, attachment_file_name)
-        #     drive_file_paths['skudoc_drive_path'] = skudoc_drive_path
-        #     print(f'OUT: SKUDOC - {attachment_file_name}')
-        #     pass
-
-        # for file_skudoc_path in skudoc_file_names:
-        #     if attachment_file_name in file_skudoc_path and '.xlsx' in attachment_file_name \
-        #             and 'CRD' not in attachment_file_name and attachment_file_name[0] == 'M' \
-        #             and 'GEN' in attachment_file_name:
-        #
-        #         drive_file_paths['skudoc_file_path'] = attachment_file_name
-        #
-        #     elif attachment_file_name not in file_skudoc_path and '.xlsx' in attachment_file_name \
-        #             and 'CRD' not in attachment_file_name and attachment_file_name[0] == 'M' \
-        #             and 'GEN' in attachment_file_name:
-        #
-        #         skudoc_path: str = attached_file_name_paths.get('base_paths', {}).get('skudoc_path')
-        #         get_attachment_file(ticket_json, skudoc_path, ticket_id, attachment_file_name)
-        #         drive_file_paths['skudoc_file_path'] = file_skudoc_path
-        #         break
-
-    return drive_file_paths
-
-
 def clean_component_value(component_value: str) -> str:
     """
     Cleans component to make easier to call value through key later
@@ -538,7 +469,7 @@ def access_due_dates(ticket_json) -> dict:
     return due_dates
 
 
-def store_tickets_data(raw_tickets_data: list, attached_file_names: dict, console_server_data: dict) -> dict:
+def store_tickets_data(raw_tickets_data: list, console_server_data: dict) -> dict:
     """
 
     """
@@ -602,9 +533,6 @@ def store_tickets_data(raw_tickets_data: list, attached_file_names: dict, consol
             # Assigned To
             ticket_data['assigned_to']: str = ticket_json['fields']['System.AssignedTo']['displayName']
 
-            ticket_data['attachment_file_paths']: dict = check_attachment_files(ticket_json,
-                                                                                attached_file_names, ticket_id)
-
             # State of Qual
             ticket_data['state']: str = ticket_json['fields']['System.State']
 
@@ -663,9 +591,6 @@ def store_tickets_data(raw_tickets_data: list, attached_file_names: dict, consol
 
             # Assigned To
             ticket_data['assigned_to']: str = ticket_json['fields']['System.AssignedTo']['displayName']
-
-            ticket_data['attachment_file_paths']: dict = check_attachment_files(ticket_json,
-                                                                                attached_file_names, ticket_id)
 
             # State of Qual
             ticket_data['state']: str = ticket_json['fields']['System.State']
@@ -1024,22 +949,6 @@ def get_existing_attachment_files(current_path: str, document_paths: dict, proce
     return existing_attachment_files
 
 
-def get_documents_from_shared_drive() -> dict:
-    """
-    Get CRD, SKUDOCs, or Datasheets from VSE shared drive.
-    """
-    document_paths: dict = get_shared_drive_paths()
-    processor_generations: tuple = ('Gen_5.x', 'Gen_6.x', 'Gen_7.x', 'Gen_8.x')
-
-    check_attachment_folders(document_paths, processor_generations)
-
-    crd_file_names: list = get_existing_attachment_files('crd_path', document_paths, processor_generations)
-    skudoc_file_names: list = get_existing_attachment_files('skudoc_path', document_paths, processor_generations)
-    other_file_names: list = get_existing_attachment_files('other_path', document_paths, processor_generations)
-
-    return {'crd': crd_file_names, 'skudoc': skudoc_file_names, 'other': other_file_names, 'base_paths': document_paths}
-
-
 def get_shared_drive_paths() -> dict:
     shared_drive_path: str = r'\\172.30.1.100\pxe\Kirkland_Lab\Microsoft_CSI\Documentation\PipeCleaner_Attachments'
 
@@ -1061,8 +970,6 @@ def main_method(console_server_data: dict):
     """
     ticket_urls: list = get_ticket_urls(console_server_data)
 
-    attached_file_names: dict = get_documents_from_shared_drive()
-
     raw_tickets_data: list = asyncio.run(get_ticket_data(ticket_urls))
 
-    return store_tickets_data(raw_tickets_data, attached_file_names, console_server_data)
+    return store_tickets_data(raw_tickets_data, console_server_data)

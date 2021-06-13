@@ -7,6 +7,7 @@ from openpyxl import load_workbook
 from openpyxl.styles import Alignment
 
 from colorama import Fore, Style
+import win32com.client as client
 
 
 def get_file_path(user_name: str, root_path: str, file_number: str) -> str:
@@ -62,15 +63,17 @@ def get_clean_user_name(default_user_name):
 
 def get_file_number(root_file_path: str) -> str:
     """
-    Get file names for providing new unique name.
-    :param root_file_path:
-    :return:
+    Need to provide new unique name for documenting transaction logs.
     """
     try:
         raw_file_names: list = os.listdir(root_file_path)
 
-        if len(raw_file_names) == 0:
+        if len(raw_file_names) == 1 and raw_file_names[0] == '_inventory_transactions.xlsx':
             return '00001'
+
+        elif len(raw_file_names) == 0:
+            return '00001'
+
         else:
             raw_numbers: list = []
             for raw_file_name in raw_file_names:
@@ -94,7 +97,7 @@ def get_file_number(root_file_path: str) -> str:
                 except ValueError:
                     pass
 
-            clean_non_zero_names = sorted(list(set(non_zero_names)))
+            clean_non_zero_names: list = sorted(list(set(non_zero_names)))
             latest_file_number = int(clean_non_zero_names[-1])
             latest_file_number += 1
 
@@ -153,13 +156,13 @@ def get_file_name_number(latest_file_number):
         return latest_file_number
 
 
-def read_inventory_file() -> list:
+def read_inventory_file(inventory_file_name: str) -> list:
     """
     Read inventory excel file to print in the terminal output.  Used for confirming user the content before sending.
     :return:
     """
     try:
-        excel_sheet = load_workbook(filename='inventory_transaction.xlsx')['Inventory Template']
+        excel_sheet = load_workbook(filename=inventory_file_name)['Inventory Template']
 
         inventory_transaction: dict = get_inventory_transaction_data(excel_sheet)
         inventory_rows: dict = get_inventory_rows(inventory_transaction)
@@ -236,14 +239,12 @@ def get_column_data(letter: str, sheet) -> list:
     return column_data
 
 
-def print_file_data() -> list:
+def print_file_data(inventory_file: list) -> list:
     """
     Print in terminal output in Pipe Cleaner to showcase the filled in data already before finalizing send
     data to Z: Drive
     """
-    file_data: list = read_inventory_file()
-
-    for index, row in enumerate(file_data, start=1):
+    for index, row in enumerate(inventory_file, start=1):
         print(f'\n\tInventory Transaction #{index}:')
 
         if not row[0] or row[0] == 'Fill Here':
@@ -296,7 +297,7 @@ def print_file_data() -> list:
         else:
             print(f'\t\tNotes:     {row[9]}')
 
-    return file_data
+    return inventory_file
 
 
 def get_user_send_response() -> str:
@@ -341,7 +342,7 @@ def get_last_entry_row(excel_sheet) -> int:
         index += 1
 
 
-def add_row_data(workbook, worksheet, file_path, file_data, last_row, user_name) -> None:
+def add_row_data(workbook, worksheet, file_path, file_data, last_row, user_name, task_name) -> None:
     for index, row in enumerate(file_data, start=0):
         number: int = last_row + index
 
@@ -358,6 +359,7 @@ def add_row_data(workbook, worksheet, file_path, file_data, last_row, user_name)
         worksheet[f'M{number}'] = str(row[7])
         worksheet[f'N{number}'] = str(row[8])
         worksheet[f'O{number}'] = str(row[9])
+        worksheet[f'P{number}'] = task_name
 
         cell_00 = worksheet[f'C{number}']
         cell_00.alignment = Alignment(horizontal='center')
@@ -398,13 +400,16 @@ def add_row_data(workbook, worksheet, file_path, file_data, last_row, user_name)
         cell_12 = worksheet[f'O{number}']
         cell_12.alignment = Alignment(horizontal='center')
 
+        cell_13 = worksheet[f'P{number}']
+        cell_13.alignment = Alignment(horizontal='center')
+
     try:
         workbook.save(file_path)
     except PermissionError:
         print(f'\n\tClose {Fore.RED}_inventory_transactions.xlsx{Style.RESET_ALL} to send.')
 
 
-def get_drive_transaction_logs(file_data: list, user_name: str):
+def get_drive_transaction_logs(file_data: list, user_name: str, task_name: str):
     """
     Get transaction logs found in the Z: Drive or 172.30.1.100 network.
     :return:
@@ -413,16 +418,115 @@ def get_drive_transaction_logs(file_data: list, user_name: str):
     alt_path: str = r'\\172.30.1.100\pxe\Kirkland_Lab\PipeCleaner\transaction_logs\_inventory_transactions.xlsx'
 
     try:
-        workbook = load_workbook(root_path)
-        worksheet = workbook['All Inventory Transaction']
-        last_row = get_last_entry_row(worksheet)
-        add_row_data(workbook, worksheet, root_path, file_data, last_row, user_name)
+        add_transaction_log(file_data, root_path, user_name, task_name)
+
+        second_place: str = r'Z:\Kirkland_Lab\Users\joe_ton\backup\_inventory_transactions.xlsx'
+        add_transaction_log(file_data, second_place, user_name, task_name)
 
     except FileNotFoundError:
-        workbook = load_workbook(alt_path)
-        worksheet = workbook['All Inventory Transaction']
-        last_row = get_last_entry_row(worksheet)
-        add_row_data(workbook, worksheet, alt_path, file_data, last_row, user_name)
+        add_transaction_log(file_data, alt_path, user_name, task_name)
+
+        second_place: str = r'\\172.30.1.100\pxe\Kirkland_Lab\Users\joe_ton\backup\_inventory_transactions.xlsx'
+        add_transaction_log(file_data, second_place, user_name, task_name)
+
+
+def add_transaction_log(file_data, root_path, user_name, task_name):
+    workbook = load_workbook(root_path)
+    worksheet = workbook['All Inventory Transaction']
+    last_row: int = get_last_entry_row(worksheet)
+    add_row_data(workbook, worksheet, root_path, file_data, last_row, user_name, task_name)
+
+
+def add_email_body(inventory_file: list, file_path: str, file_name: str) -> str:
+    """
+    Add the inventory body of the email.
+    """
+    body_message: str = ''
+
+    for index, request in enumerate(inventory_file, start=1):
+
+        body_message += f'\nInventory Request #{index}'
+        body_message += f'\n\tFrom:         {request[0]}'
+        body_message += f'\n\tTo:              {request[1]}'
+        body_message += f'\n\tType:          {request[2]}'
+        body_message += f'\n\tPart #:        {request[3]}'
+        body_message += f'\n\tQTY:            {request[4]}'
+        body_message += f'\n\tSupplier:   {request[5]}'
+        body_message += f'\n\tPipe #:       {request[6]}'
+        body_message += f'\n\tCage #:       {request[7]}'
+        body_message += f'\n\tPO #:          {request[8]}'
+        body_message += f'\n\tNotes #:     {request[9]}\n'
+
+    body_message += f'\n\nFile Name: {file_name}'
+    body_message += f'\nFile Path: {file_path}'
+
+    return body_message
+
+
+def email_inventory_request(file_path: str, file_name: str, inventory_file: list, task_name: str) -> None:
+    """
+    Sends email to people responsible dealing with
+    """
+    print(f'\tWriting and sending email to Inventory_Kirkland@veritasdcservices.com ....')
+    real_location: str = 'Inventory_Kirkland@veritasdcservices.com'
+    # person_location: str = 'joe.ton@VeritasDCservices.com'
+
+    outlook = client.Dispatch('Outlook.Application')
+    message = outlook.CreateItem(0)
+    message.To = real_location
+    message.Subject = task_name
+
+    message.Body = add_email_body(inventory_file, file_path, file_name)
+    message.Send()
+
+
+def get_task_name(inventory_file_name: str) -> str:
+    """
+    Get task name / task id from MFST Planner.  This is in relationship with the inventory request.
+    """
+    worksheet = load_workbook(filename=inventory_file_name)['Inventory Template']
+    return worksheet['G5'].value
+
+
+def check_task_name(task_name: str) -> bool:
+    """
+    Checks if task name is entered in from the user.
+    """
+    if not task_name:
+        return False
+
+    elif 'Copy Task Title Here' in task_name:
+        return False
+
+    elif 'Copy' in task_name and\
+            'Task' in task_name and \
+            'Title' in task_name and \
+            'Here' in task_name:
+        return False
+
+    else:
+        return True
+
+
+def validate_task_name(inventory_file_name: str) -> str:
+    """
+    Ensures task name is placed within the inventory_transaction.xlsx from the user.
+    """
+    task_name: str = get_task_name(inventory_file_name)
+    is_task_name: bool = check_task_name(task_name)
+
+    if not is_task_name:
+        print(f'\tWARNING!!!')
+        print(f'\tWARNING!!!')
+        print(f'\tWARNING!!!\n')
+        print(f'\tTask name from MFST Planner is not filled out in inventory_transaction.xlsx')
+        print(f'\tPlease enter the assigned task title at the top of the inventory_transaction.xlsx')
+        print(f'\tPress enter to exit.')
+        input()
+        sys.exit()
+
+    elif is_task_name:
+        return task_name
 
 
 def main_method(default_user_name: str, inventory_authorized: tuple) -> None:
@@ -433,19 +537,25 @@ def main_method(default_user_name: str, inventory_authorized: tuple) -> None:
     user_name: str = get_clean_user_name(default_user_name)
 
     if is_authorized_user(default_user_name, inventory_authorized):
-        print(f'\tAuthorized User [PASS]: {user_name}')
+
+        print(f'\tAuthorized User: {user_name}')
+
         root_file_path: str = r'Z:\Kirkland_Lab\PipeCleaner\transaction_logs'
+        inventory_file_name: str = 'inventory_transaction.xlsx'
+
         file_number: str = get_file_number(root_file_path)
+        task_name: str = validate_task_name(inventory_file_name)
 
-        file_data: list = print_file_data()
-
+        inventory_file: list = read_inventory_file(inventory_file_name)
+        file_data: list = print_file_data(inventory_file)
         file_path: str = get_file_path(user_name, root_file_path, file_number)
+        user_response: str = get_user_send_response().upper()
 
-        user_send_response: str = get_user_send_response()
-
-        if 'YES' in user_send_response.upper() or user_send_response.upper() == 'Y':
+        if 'YES' in user_response or user_response == 'Y':
             shutil.copyfile('inventory_transaction.xlsx', file_path)
-            get_drive_transaction_logs(file_data, user_name)
+            get_drive_transaction_logs(file_data, user_name, task_name)
+
+            email_inventory_request(file_path, f'{file_number}_{user_name}', inventory_file, task_name)
 
             print(f'\n\t{Fore.GREEN}Transaction log sent to Z: Drive{Style.RESET_ALL}')
             print(f'\n\tFile Path: {root_file_path}')
@@ -454,7 +564,7 @@ def main_method(default_user_name: str, inventory_authorized: tuple) -> None:
             input(f'\n\tPress enter to exit Pipe Cleaner...')
             sys.exit()
 
-        elif 'NO' in user_send_response.upper() or user_send_response.upper() == 'N':
+        elif 'NO' in user_response or user_response == 'N':
             print(f'\tDid not sent transaction log to Z: Drive')
 
             input(f'\n\tPress enter to exit Pipe Cleaner...')

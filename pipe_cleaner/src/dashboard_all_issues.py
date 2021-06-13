@@ -1667,8 +1667,6 @@ def set_issue_structure(worksheet, structure, sheet_title, site_location, total_
     total_pipes = str(pipe_numbers.get('pipes'))
     total_systems = str(pipe_numbers.get('systems'))
 
-    percentage_correct = str((correct_total / int(total_checks)) * 100)[0:4]
-
     pipe_cleaner_version: str = pipe_cleaner_version.split(' ')[0]
 
     # Top Left Plane
@@ -1681,7 +1679,7 @@ def set_issue_structure(worksheet, structure, sheet_title, site_location, total_
     worksheet.write('D7', f'Blades - {total_systems}', structure.bold_italic_blue_font)
     worksheet.write('D8', f'Issues - {total_issues}', structure.bold_italic_blue_font)
     # worksheet.write('D9', f'Offline - ', structure.bold_italic_blue_font)
-    worksheet.write('B10', f'            Percentage Correct - {percentage_correct} %', structure.bold_italic_green_font)
+    worksheet.write('B10', f'            Percentage Correct - N/A %', structure.bold_italic_green_font)
     worksheet.write('B11', f'       {date} - {time} - {default_name} - v{pipe_cleaner_version}',
                     structure.italic_blue_font)
 

@@ -230,8 +230,11 @@ def add_vse_logo_top_right(current_setup: dict) -> None:
     :param current_setup:
     """
     worksheet: xlsxwriter = current_setup.get('worksheet')
+    structure = current_setup['structure']
 
     worksheet.insert_image('A1', 'pipe_cleaner/img/vse_logo.png')
+    worksheet.write('F5', 'Task Name:', structure.teal_middle_24)
+    worksheet.write('G5', 'Copy Task Title Here…', structure.black_left_18)
 
 
 def add_freeze_panes(current_setup: dict) -> None:
@@ -315,7 +318,7 @@ def create_inventory_transaction(pipe_cleaner_version: str, default_user_name: s
                                           'QTY',
                                           'Supplier',
                                           'Pipe #',
-                                          'Task #',
+                                          'Cage #',
                                           'PO #',
                                           'Notes')}
 
@@ -369,8 +372,8 @@ def add_default_data(current_setup, structure) -> None:
     current_date: str = strftime('%m/%d/%Y')
     items: list = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
 
-    from_to_locations: list = ['Cage', 'Inbound', 'Outbound', 'Rack / Pipe', 'Quarantined', 'Reserved',
-                               'TurboCats', 'Other']
+    from_to_locations: list = ['Cage', 'Inbound', 'Outbound', 'Rack / Pipe', 'Mini-labs', 'Quarantined', 'Reserved',
+                               'TurboCats', 'Taking Pictures', 'Other']
 
     commodity_types: list = ['DIMM', 'SSD', 'HDD', 'NVMe', 'M.2', 'Ruler', 'Disk', 'Other']
 

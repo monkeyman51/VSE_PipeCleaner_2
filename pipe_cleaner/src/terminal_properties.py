@@ -149,3 +149,5 @@ def intro_section(version: str, user_name: str, current_location: str):
     print(f"{header_4}")
     print(f"{header_5}")
     print(f"{header_6}\n")
+
+    print(f"\tChecking system requirements:")

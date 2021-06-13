@@ -11,7 +11,6 @@ from bs4 import BeautifulSoup
 
 from pipe_cleaner.src.credentials import AccessADO as Ado
 from pipe_cleaner.src.credentials import Path
-from colorama import Fore, Style
 
 json_data: dict = {}
 

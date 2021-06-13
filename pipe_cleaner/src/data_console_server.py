@@ -20,6 +20,7 @@ import asyncio
 import json
 
 import aiohttp
+from aiohttp import client_exceptions
 from colorama import Fore, Style
 
 from pipe_cleaner.src.data_access import write_host_groups_json, get_all_host_ids, get_dhcp
@@ -74,9 +75,12 @@ async def generate_console_server_json(client: asyncio, host_id: str) -> str:
                 assert response_product_serial.status == 200
                 response_text = await response_product_serial.text()
 
-                product = json.loads(str(response_text))['host_name_data']['product']
-                serial = json.loads(str(response_text))['host_name_data']['serial']
-                return f'{product}-{serial}'
+                try:
+                    product = json.loads(str(response_text))['host_name_data']['product']
+                    serial = json.loads(str(response_text))['host_name_data']['serial']
+                    return f'{product}-{serial}'
+                except json.decoder.JSONDecodeError:
+                    pass
 
 
 async def get_system_json(client, product_serial: str, host_id: str) -> dict:
@@ -240,6 +244,22 @@ def store_pipe_name(user_name: str, machine_name: str, pipe_name: str):
             console_server_data['user_base'][user_name]['systems'][machine_name]['pipe_name'] = pipe_name
 
 
+def process_pipe_name(pipe_name: str):
+    """
+    Shorten pipe name to fit into excel output
+    :param pipe_name:
+    :return:
+    """
+    clean_data: str = pipe_name. \
+        replace('[', ''). \
+        replace(']', ''). \
+        replace("'", '')
+
+    last_part: str = clean_data.split(' ')[-1]
+
+    return clean_data.replace('Pipe-', '').replace(last_part, '').strip()
+
+
 def store_system_data(system_json: dict, pipe_name: str):
     """
     Grab relevant information based on needs. Stores into Console Server data structure
@@ -294,7 +314,8 @@ def store_system_data(system_json: dict, pipe_name: str):
 
         # Last Time Alive
         raw_last_found_alive = str(system_json.get('last_found_alive', 'None'))
-        current_system_data['last_found_alive']: dict = calculate_last_time_alive(raw_last_found_alive)
+        last_alive: float = calculate_last_time_alive(raw_last_found_alive)
+        current_system_data['last_found_alive']: float = last_alive
 
         # Machine Serial Number
         machine_serial_number: str = system_json.get('bmc', {}).get('fru', {}).get('product', {}).get('serial')
@@ -369,11 +390,35 @@ def store_system_data(system_json: dict, pipe_name: str):
             part_number: list = unique_dimm.get('part')
             count = int(unique_dimm.get('count'))
 
-            if 'P4511' in part_number:
-                print(f'{part_number} - {count} - {pipe_name}')
+            clean_pipe_name: str = process_pipe_name(pipe_name)
+            part_numbers: dict = console_server_data['part_numbers']
+
+            if part_number in part_numbers:
+                part_numbers[part_number]['quantity'] += count
+                locations: dict = part_numbers[part_number]['locations']
+
+                if clean_pipe_name in locations:
+                    locations[clean_pipe_name]['count'] += count
+
+                else:
+                    locations[clean_pipe_name]: dict = {}
+                    locations[clean_pipe_name]['count'] = count
+                    locations[clean_pipe_name]['connection']: int = connection_status
+                    locations[clean_pipe_name]['last_alive']: float = last_alive
+
+            else:
+                part_numbers[part_number]: dict = {}
+                part_numbers[part_number]['locations']: dict = {}
+                part_numbers[part_number]['locations'][clean_pipe_name]: dict = {}
+
+                part_numbers[part_number]['quantity']: int = count
+                part_numbers[part_number]['locations'][clean_pipe_name]['count']: int = count
+                part_numbers[part_number]['locations'][clean_pipe_name]['connection']: int = connection_status
+                part_numbers[part_number]['locations'][clean_pipe_name]['last_alive']: float = last_alive
 
             if not part_number:
                 pass
+
             else:
                 if part_number not in console_server_data['inventory']['commodities']['dimms']:
                     console_server_data['inventory']['commodities']['dimms'][part_number] = count
@@ -440,6 +485,33 @@ def store_system_data(system_json: dict, pipe_name: str):
         for unique_nvme in unique_nvmes:
             nvme_model = get_nvme_model(unique_nvme)
             count = int(unique_nvme.get('count'))
+
+            clean_pipe_name: str = process_pipe_name(pipe_name)
+            part_numbers: dict = console_server_data['part_numbers']
+
+            if nvme_model in part_numbers:
+                part_numbers[nvme_model]['quantity'] += count
+                locations: dict = part_numbers[nvme_model]['locations']
+
+                if clean_pipe_name in locations:
+                    locations[clean_pipe_name]['count'] += count
+
+                else:
+                    locations[clean_pipe_name]: dict = {}
+                    locations[clean_pipe_name]['count'] = count
+                    locations[clean_pipe_name]['connection']: int = connection_status
+                    locations[clean_pipe_name]['last_alive']: float = last_alive
+
+            else:
+                part_numbers[nvme_model]: dict = {}
+                part_numbers[nvme_model]['locations']: dict = {}
+                part_numbers[nvme_model]['locations'][clean_pipe_name]: dict = {}
+
+                part_numbers[nvme_model]['quantity']: int = count
+                part_numbers[nvme_model]['locations'][clean_pipe_name]['count']: int = count
+                part_numbers[nvme_model]['locations'][clean_pipe_name]['connection']: int = connection_status
+                part_numbers[nvme_model]['locations'][clean_pipe_name]['last_alive']: float = last_alive
+
 
             if not nvme_model:
                 pass
@@ -513,8 +585,35 @@ def store_system_data(system_json: dict, pipe_name: str):
             disk_part_number: str = get_disk_part_number(unique_disk)
             count = int(unique_disk.get('count'))
 
+            clean_pipe_name: str = process_pipe_name(pipe_name)
+            part_numbers: dict = console_server_data['part_numbers']
+
+            if disk_part_number in part_numbers:
+                part_numbers[disk_part_number]['quantity'] += count
+                locations: dict = part_numbers[disk_part_number]['locations']
+
+                if clean_pipe_name in locations:
+                    locations[clean_pipe_name]['count'] += count
+
+                else:
+                    locations[clean_pipe_name]: dict = {}
+                    locations[clean_pipe_name]['count'] = count
+                    locations[clean_pipe_name]['connection']: int = connection_status
+                    locations[clean_pipe_name]['last_alive']: float = last_alive
+
+            else:
+                part_numbers[disk_part_number]: dict = {}
+                part_numbers[disk_part_number]['locations']: dict = {}
+                part_numbers[disk_part_number]['locations'][clean_pipe_name]: dict = {}
+
+                part_numbers[disk_part_number]['quantity']: int = count
+                part_numbers[disk_part_number]['locations'][clean_pipe_name]['count']: int = count
+                part_numbers[disk_part_number]['locations'][clean_pipe_name]['connection']: int = connection_status
+                part_numbers[disk_part_number]['locations'][clean_pipe_name]['last_alive']: float = last_alive
+
             if not disk_part_number or disk_part_number == 'Virtual HD':
                 pass
+
             else:
                 if disk_part_number not in console_server_data['inventory']['commodities']['disks']:
                     console_server_data['inventory']['commodities']['disks'][disk_part_number] = count
@@ -651,12 +750,16 @@ async def generate_json(client: asyncio, host_id: str, pipe_name: str):
     :return:
     """
     product_serial: str = await generate_console_server_json(client, host_id)
-    upper_product_serial: str = product_serial.upper()
+    try:
+        upper_product_serial: str = product_serial.upper()
 
-    if 'NONE' not in upper_product_serial:
-        system_json: dict = await get_system_json(client, product_serial, host_id)
+        if 'NONE' not in upper_product_serial:
+            system_json: dict = await get_system_json(client, product_serial, host_id)
 
-        store_system_data(system_json, pipe_name)
+            store_system_data(system_json, pipe_name)
+
+    except AttributeError:
+        pass
 
 
 async def start_loop(host_ids: list, pipe_name: str):
@@ -716,11 +819,6 @@ def main_method() -> dict:
     json_file: dict = write_host_groups_json()
     host_groups_page: dict = json_file['host_groups']
 
-    # import json
-    # foo = json.dumps(json_file, sort_keys=True, indent=4)
-    # print(foo)
-    # input()
-
     # Logs skipped or collected data based on naming of Host Groups
     log_total: list = []
     log_skipped: list = []
@@ -734,6 +832,8 @@ def main_method() -> dict:
     console_server_data['inventory']['commodities']['dimms']: dict = {}
     console_server_data['inventory']['commodities']['nvmes']: dict = {}
     console_server_data['inventory']['commodities']['disks']: dict = {}
+
+    console_server_data['part_numbers']: dict = {}
 
     # Tells user progress in Terminal environment
     print(f'\n\t=====================================================================')
@@ -792,7 +892,10 @@ def main_method() -> dict:
         current_pipe['setup_data']['systems_with_ticket']: dict = []
 
         # Runs async and stores data in module-level dictionary
-        asyncio.run(start_loop(host_ids, host_group_name))
+        try:
+            asyncio.run(start_loop(host_ids, host_group_name))
+        except aiohttp.client_exceptions.ClientPayloadError:
+            return main_method()
 
         # Store all system data from Pipe
         current_pipe['description']: str = description
@@ -816,28 +919,6 @@ def main_method() -> dict:
         total_vms.clear()
         total_tickets_in_pipe.clear()
         total_systems_in_pipe.clear()
-
-        # # Encourages naming convention and extracting only pipes that are going to be in QUAL
-        # elif 'Pipe-' not in host_group_name:
-        #     print(f'\t\tX Skipped  |  non-pipe  |  {host_group_name}')
-        #     log_total.append(1)
-        #     log_skipped.append(1)
-        #     log_non_pipes.append(1)
-        #     pass
-        #
-        # elif 'OFFLINE' in host_group_name and 'OFFLINE' in status:
-        #     print(f'\t\tX Skipped  |  offline   |  {host_group_name}')
-        #     log_total.append(1)
-        #     log_skipped.append(1)
-        #     log_off_lines.append(1)
-        #     pass
-        #
-        # elif 'IDLE' in host_group_name and 'IDLE' in status:
-        #     print(f'\t\tX Skipped  |  idle   |  {host_group_name}')
-        #     log_total.append(1)
-        #     log_skipped.append(1)
-        #     log_idle.append(1)
-        #     pass
 
     # Stores host groups level information for Setup information later
     console_server_data['host_groups_data']: dict = {}

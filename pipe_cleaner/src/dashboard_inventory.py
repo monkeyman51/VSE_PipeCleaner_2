@@ -796,7 +796,7 @@ def get_inventory_data() -> dict:
         return part_to_available
 
     except FileNotFoundError:
-        other_excel_path: str = r'\\172.30.1.100\pxe\Kirkland_Lab\PipeCleaner\inventory.xlsx'
+        other_excel_path: str = r'172.30.1.100\pxe\Kirkland_Lab\PipeCleaner\inventory.xlsx'
 
         part_numbers: list = []
         availability: list = []
@@ -832,7 +832,7 @@ def add_column_data(azure_devops_data: dict, console_server_data: dict, all_issu
 
     """
     clean_console_server: dict = clean_console_server_data(console_server_data)
-    inventory_data: dict = get_inventory_data()
+    # inventory_data: dict = get_inventory_data()
 
     add_pipe_name_column(clean_console_server, current_setup, console_server_data)
 
@@ -846,9 +846,9 @@ def add_column_data(azure_devops_data: dict, console_server_data: dict, all_issu
 
     add_count_column(clean_console_server, console_server_data, current_setup, azure_devops_data)
 
-    add_available_column(clean_console_server, console_server_data, current_setup, azure_devops_data, inventory_data)
+    # add_available_column(clean_console_server, console_server_data, current_setup, azure_devops_data, inventory_data)
 
-    add_inventory_column(console_server_data, current_setup, inventory_data)
+    # add_inventory_column(console_server_data, current_setup, inventory_data)
 
 
 def is_inventory_data(inventory_data: dict, current_item: str) -> str:
@@ -941,68 +941,6 @@ def add_available_column(clean_console_server: dict, console_server_data: dict, 
                     current_position += 1
 
         current_position: int = current_position + 1
-
-    # letter: str = 'I'
-    #
-    # worksheet: xlsxwriter = current_setup.get('worksheet')
-    # structure: xlsxwriter = current_setup.get('structure')
-    # current_position: int = current_setup.get('body_position')
-    #
-    # for index, pipe_number in enumerate(clean_console_server, start=0):
-    #
-    #     current_color: xlsxwriter = get_current_color_11(index, structure)
-    #
-    #     pipe_disks: dict = get_all_machine_disks(console_server_data, pipe_number)
-    #     pipe_nvmes: dict = get_all_machine_nvmes(console_server_data, pipe_number)
-    #     pipe_dimms: dict = get_all_machine_dimms(console_server_data, pipe_number)
-    #
-    #     for disk_commodity in pipe_disks:
-    #         base_position: str = get_base_position(letter, current_position)
-    #         if disk_commodity not in inventory_data.keys():
-    #             worksheet.write(base_position, '', structure.missing_cell)
-    #             current_position += 1
-    #         else:
-    #             available_number: int = inventory_data[disk_commodity]
-    #             worksheet.write(base_position, available_number, current_color)
-    #             current_position += 1
-    #
-    #     for nvme_commodity in pipe_nvmes:
-    #         base_position: str = get_base_position(letter, current_position)
-    #         if nvme_commodity not in inventory_data.keys():
-    #             worksheet.write(base_position, '', structure.missing_cell)
-    #             current_position += 1
-    #         else:
-    #             available_number: int = inventory_data[nvme_commodity]
-    #             worksheet.write(base_position, available_number, current_color)
-    #             current_position += 1
-    #
-    #     for dimm_commodity in pipe_dimms:
-    #         base_position: str = get_base_position(letter, current_position)
-    #         if dimm_commodity not in inventory_data.keys():
-    #             worksheet.write(base_position, '', structure.missing_cell)
-    #             current_position += 1
-    #         else:
-    #             available_number: int = inventory_data[dimm_commodity]
-    #             worksheet.write(base_position, available_number, current_color)
-    #             current_position += 1
-    #
-    #     group_unique_tickets: dict = console_server_data[pipe_number]['group_unique_tickets']
-    #     for unique_ticket in group_unique_tickets:
-    #         base_position: str = get_base_position(letter, current_position)
-    #         part_number: str = azure_devops_data.get(unique_ticket, {}).get('table_data', {}).get('part_number', '')
-    #
-    #         if not part_number:
-    #             worksheet.write(base_position, '', structure.missing_cell)
-    #             current_position += 1
-    #         else:
-    #             if part_number in inventory_data.keys():
-    #                 available_number: int = inventory_data[part_number]
-    #                 worksheet.write(base_position, available_number, current_color)
-    #                 current_position += 1
-    #             else:
-    #                 worksheet.write(base_position, '', structure.missing_cell)
-    #
-    #     current_position: int = current_position + 1
 
 
 def add_count_column(clean_console_server: dict, console_server_data: dict, current_setup: dict,

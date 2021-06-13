@@ -1883,7 +1883,7 @@ def create_excel_output(pipe_cleaner_version: str, default_user_name: str, site_
     azure_devops_data: dict = get_all_ticket_data(console_server_data)
     pipe_numbers: dict = get_pipe_numbers(console_server_data)
 
-    final_data: dict = compare_data(console_server_data, azure_devops_data)
+    # final_data: dict = compare_data(console_server_data, azure_devops_data)
     all_issues: list = get_all_issues()
 
     all_checks: list = get_total_checks()
