@@ -7,8 +7,7 @@ and other important information needed to be sent to the inventory team to handl
 """
 import sys
 from os import system
-from time import strftime
-from datetime import datetime
+from time import strftime, sleep
 
 import win32com.client as client
 from openpyxl import load_workbook
@@ -24,11 +23,8 @@ def add_basic_documents_info(workbook, basic_info: dict, sheet_name: str) -> dic
     sheet_name: str = sheet_name.title()
 
     print(f'\t\t- Creating {sheet_name} excel')
-    if 'Request' in sheet_name:
-        return add_excel_data(sheet_name, basic_info, workbook['Request'])
 
-    elif 'Update' in sheet_name:
-        return add_excel_data(sheet_name, basic_info, workbook['Update'])
+    return add_excel_data(sheet_name, basic_info, workbook['Request'])
 
 
 def get_template_dictionary(start_location: str, end_location: str) -> dict:
@@ -78,7 +74,7 @@ def get_template_dictionary(start_location: str, end_location: str) -> dict:
                             'default': 'None'}}
 
 
-def get_template_pipe_to_cage(start_location: str, end_location: str) -> dict:
+def get_template_pipe_cage(start_location: str, end_location: str) -> dict:
     """
     Get request template based on start and end locations.
     """
@@ -115,7 +111,6 @@ def get_template_pipe_to_shipment(start_location: str, end_location: str) -> dic
     """
     template: dict = get_template_dictionary(start_location, end_location)
 
-    template['task_name']['value']: str = 'main'
     template['part_number']['value']: str = 'main'
     template['pipe_number']['value']: str = 'main'
     template['machine_name']['value']: str = 'main'
@@ -132,9 +127,21 @@ def get_locations_template(basic_info: dict) -> dict:
     end: str = basic_info['end'].upper()
 
     if start == 'PIPE' and end == 'CAGE':
-        return get_template_pipe_to_cage(start, end)
+        return get_template_pipe_cage(start, end)
 
     elif start == 'PIPE' and end == 'SHIPMENT':
+        return get_template_pipe_to_shipment(start, end)
+
+    elif start == 'CAGE' and end == 'PIPE':
+        return get_template_pipe_cage(start, end)
+
+    elif start == 'CAGE' and end == 'SHIPMENT':
+        return get_template_pipe_cage(start, end)
+
+    elif start == 'SHIPMENT' and end == 'CAGE':
+        return get_template_pipe_to_shipment(start, end)
+
+    elif start == 'SHIPMENT' and end == 'PIPE':
         return get_template_pipe_to_shipment(start, end)
 
 
@@ -197,6 +204,7 @@ def add_excel_data(sheet_name: str, basic_info: dict, worksheet) -> dict:
     worksheet['F10']: str = main_fields
 
     add_default_values(basic_info, worksheet, sheet_name)
+    update_database_request_form(basic_info)
 
     return template
 
@@ -213,19 +221,88 @@ def add_default_values(basic_info: dict, worksheet, sheet_name: str) -> None:
     worksheet['K3']: str = strftime('%I:%M %p')
     worksheet['K4']: str = basic_info['name']
     worksheet['K5']: str = basic_info['location']
+    worksheet['K6']: str = basic_info['request_number']
     worksheet['K7']: str = basic_info['version']
     worksheet['K10'] = int(basic_info['quantity'])
 
 
-def get_data_from_excel() -> dict:
+def update_database_request_form(basic_info: dict) -> None:
     """
-    Gather essential information from the request form.  Also includes optional data as well.
+    Add default values to the excel form.
     """
-    # Part Number
-    # Start Location
-    # End Location
-    # Task Name
-    pass
+    request_number: str = basic_info['request_number']
+
+    request_category: str = get_request_form_category(basic_info)
+    request_document = access_database_document('request_forms', request_category)
+
+    new_entry: dict = {'_id': request_number,
+                       'basic_info': {'start': basic_info['start'],
+                                      'end': basic_info['end'],
+                                      'user': basic_info['name'],
+                                      'location': basic_info['location'],
+                                      'version': basic_info['version'],
+                                      'quantity': int(basic_info['quantity']),
+                                      'date': strftime('%m/%d/%Y'),
+                                      'time': strftime('%I:%M %p'),
+                                      'seconds': strftime('%S')},
+                       'excel_data': {}}
+    request_document.insert_one(new_entry)
+
+
+def clean_empty_fields(field_data: str):
+    """
+    Assure database update fields avoid default data or optional data.  Want to be consistent and have none.
+    """
+    clean_field_name: str = field_data.upper()
+
+    if clean_field_name == 'OPTIONAL':
+        return 'None'
+
+    elif clean_field_name == 'COPY FROM TASK':
+        return 'None'
+
+    else:
+        return field_data
+
+
+def update_request_excel_data(request_fields: dict, basic_info: dict) -> None:
+    """
+    Add default values to the excel form.
+    """
+    request_number: str = basic_info['request_number']
+
+    request_category: str = get_request_form_category(basic_info)
+    request_document = access_database_document('request_forms', request_category)
+
+    task_name: str = get_clean_field_data(request_fields, 'task_name')
+    part_number: str = get_clean_field_data(request_fields, 'part_number')
+    pipe_number: str = get_clean_field_data(request_fields, 'pipe_number')
+    machine_name: str = get_clean_field_data(request_fields, 'machine_name')
+    trr_number: str = get_clean_field_data(request_fields, 'trr_number')
+    purchase_order: str = get_clean_field_data(request_fields, 'purchase_order')
+    notes: str = get_clean_field_data(request_fields, 'notes')
+
+    excel_data: dict = {'task_name': task_name,
+                        'part_number': part_number,
+                        'pipe_number': pipe_number,
+                        'machine_name': machine_name,
+                        'trr_number': trr_number,
+                        'purchase_order': purchase_order,
+                        'notes': notes,
+                        'date': strftime('%m/%d/%Y'),
+                        'time': strftime('%I:%M %p'),
+                        'seconds': strftime('%S')}
+
+    request_document.update_one({"_id": request_number},
+                                {"$set": {"excel_data": excel_data}},
+                                upsert=False)
+
+
+def get_clean_field_data(request_fields: dict, field_name: str) -> str:
+    """
+    Assure that clean data enters database and puts consistent None respond if excel field is empty.
+    """
+    return clean_empty_fields(request_fields[field_name])
 
 
 def handle_new_file(basic_info: dict) -> load_workbook:
@@ -280,22 +357,69 @@ def get_backup_name() -> str:
     return f'request_{date}_{time}'
 
 
-def consolidate_basic_info(user_data: dict) -> dict:
+def get_month_name() -> str:
+    """
+
+    """
+    month: str = strftime('%m/%d/%Y')[0:2]
+
+    if month == '01':
+        return 'january'
+
+    elif month == '02':
+        return 'february'
+
+    elif month == '03':
+        return 'march'
+
+    elif month == '04':
+        return 'april'
+
+    elif month == '05':
+        return 'may'
+
+    elif month == '06':
+        return 'june'
+
+    elif month == '07':
+        return 'july'
+
+    elif month == '08':
+        return 'august'
+
+    elif month == '09':
+        return 'september'
+
+    elif month == '10':
+        return 'october'
+
+    elif month == '11':
+        return 'november'
+
+    elif month == '12':
+        return 'december'
+
+
+def merge_basic_info(user_data: dict) -> dict:
     """
     Request inventory amount and gather basic documents info.
     """
+    current_month: str = get_month_name()
+
     user_data['request_file_name'] = f'logs/{get_backup_name()}'
     user_data['name'] = clean_default_name(user_data['name'])
     user_data['request_file'] = 'request_template.xlsx'
+    user_data['month'] = current_month
+    user_data['request_number'] = get_request_number(user_data)
     user_data['request_template'] = 'settings/request_template.xlsx'
     user_data['location'] = str(user_data['location']).replace(' Lab Site', '')
 
     return user_data
 
 
-def setup_excel_output(basic_info) -> dict:
+def setup_excel_output(basic_info: dict) -> dict:
     """
-    Adds data to the excel output.
+    For launching excel sheet.
     """
     workbook: load_workbook = handle_new_file(basic_info)
 
@@ -306,21 +430,21 @@ def setup_excel_output(basic_info) -> dict:
         return template
 
     except PermissionError:
-        print_line_divider()
-        print(f'\tProblem: request_form.xlsx already open.')
+        print_line_divider('Problem: request_form.xlsx already open.')
         print(f'\tSolution: Close request_form.xlsx and run Pipe Cleaner again.')
         input(f'\n\tPress enter to close:')
         sys.exit()
 
 
-def print_line_divider() -> None:
+def print_line_divider(new_section_title: str) -> None:
     """
     Print terminal line divider.
     """
     print(f'\n\n\t{"-" * 60}\n\n')
+    print(f'\t{new_section_title}')
 
 
-def open_excel_file(file_name: str) -> None:
+def open_excel_file_for_inventory_forms(file_name: str) -> None:
     """
     Automatically opens excel file.
     """
@@ -377,24 +501,37 @@ def is_field_correct(field_input: str) -> bool:
 
         if not field_input:
             return False
+
         elif field_input == '':
             return False
+
         elif field_input == 'COPY TASK TITLE':
             return False
+
         elif field_input == 'REQUIRED':
             return False
+
         elif field_input == 'COPY FROM TASK':
             return False
+
         elif field_input == 'RACK / STORAGE / OFFSITE':
             return False
+
         elif field_input == 'OPTIONAL':
             return False
+
+        elif field_input == 'COPY FROM PACKAGE':
+            return False
+
         elif field_input == 'INVENTORY SUPERVISOR':
             return False
+
         elif field_input == 'SCAN MATERIAL P/N':
             return False
+
         elif field_input == 'SCAN RACK / STORAGE / OFFSITE':
             return False
+
         else:
             return True
 
@@ -413,16 +550,33 @@ def respond_request_form_wrong(request_fields: dict) -> None:
     """
     Message printed if request form is filled incorrectly.
     """
-    bad_message: str = 'Invalid or Missing'
+    bad_message: str = 'Missing or Invalid'
 
-    if not is_field_correct(request_fields['task_name']):
-        print(f'\t\t\t- Task Name: {bad_message}')
+    start_location: str = request_fields['start_location'].upper()
+    end_location: str = request_fields['end_location'].upper()
 
-    if not is_field_correct(request_fields['part_number']):
-        print(f'\t\t\t- Part Number: {bad_message}')
+    if 'SHIPMENT' in start_location or 'SHIPMENT' in end_location:
+        print_request_field_missing(bad_message, request_fields, 'part_number')
+        print_request_field_missing(bad_message, request_fields, 'pipe_number')
+        print_request_field_missing(bad_message, request_fields, 'machine_name')
+        print_request_field_missing(bad_message, request_fields, 'purchase_order')
 
-    if not is_field_correct(request_fields['end_location']):
-        print(f'\t\t\t- End Location: {bad_message}\n')
+    else:
+        print_request_field_missing(bad_message, request_fields, 'task_name')
+        print_request_field_missing(bad_message, request_fields, 'machine_name')
+        print_request_field_missing(bad_message, request_fields, 'part_number')
+        print_request_field_missing(bad_message, request_fields, 'pipe_number')
+        print_request_field_missing(bad_message, request_fields, 'trr_number')
+
+
+def print_request_field_missing(bad_message: str, request_fields: dict, field_name: str) -> None:
+    """
+    Print fields out if necessary fields are empty.
+    """
+    field_title: str = field_name.replace('_', ' ').title()
+
+    if not is_field_correct(request_fields[field_name]):
+        print(f'\t\t\t- {field_title}: {bad_message}\n')
 
 
 def respond_update_form_wrong(update_fields: dict) -> None:
@@ -452,10 +606,12 @@ def respond_update_form_wrong(update_fields: dict) -> None:
     print(f'')
 
 
-def get_request_fields(worksheet: load_workbook) -> dict:
+def get_request_field_inputs(file_name: str) -> dict:
     """
     Get request fields information.
     """
+    worksheet = load_workbook(file_name)['Request']
+
     return {'task_name': worksheet['C13'].value,
             'part_number': worksheet['C17'].value,
             'start_location': worksheet['C20'].value,
@@ -464,8 +620,9 @@ def get_request_fields(worksheet: load_workbook) -> dict:
             'pipe_number': worksheet['C29'].value,
             'machine_name': worksheet['C32'].value,
             'trr_number': worksheet['C35'].value,
-            'purchase_order': worksheet['C39'].value,
-            'quantity': worksheet['K10'].value}
+            'purchase_order': worksheet['C38'].value,
+            'quantity': worksheet['K10'].value,
+            'form_number': worksheet['K6'].value}
 
 
 def get_update_fields(request_worksheet, update_worksheet) -> dict:
@@ -523,18 +680,18 @@ def get_serial_numbers(worksheet: load_workbook) -> list:
     return serial_numbers
 
 
-def print_notification_receipt(request_fields: dict) -> None:
+def print_notification_receipt(request_fields: dict, basic_info: dict) -> None:
     """
     Print in terminal the receipt of the notification that will be sent to the inventory team from the request form.
     """
-    print(f'\n-------------------------------------------------------------------')
-    print(f'\n\tRequest Form:')
+    print_line_divider('Request Form:')
     print(f'\t\t- Quantity: {request_fields["quantity"]}\n')
+
     for index, field_name in enumerate(request_fields, start=0):
 
         if index == 4:
             print(f'')
-        if 'Quantity' in field_name:
+        if 'QUANTITY' in field_name.upper():
             continue
 
         field_input: str = request_fields[field_name]
@@ -547,16 +704,15 @@ def print_notification_receipt(request_fields: dict) -> None:
             field_name: str = field_name.replace('_', ' ').title()
             print(f'\t\t- {field_name}: None')
 
-    user_response: str = response_notification_receipt()
-    process_notification_input(user_response, request_fields)
+    notification_response: str = get_inventory_notification_response()
+    process_notification_input(notification_response, request_fields, basic_info)
 
 
-def response_notification_receipt() -> str:
+def get_inventory_notification_response() -> str:
     """
-    Response notification receipt.
+    For email notification on inventory.
     """
-    print_line_divider()
-    print(f'\tNotify inventory team?')
+    print_line_divider('Notify Inventory Team:')
     print(f'\t\tY  ->  Yes')
     print(f'\t\tN  ->  No')
     return input(f'\n\tResponse: ')
@@ -566,15 +722,29 @@ def add_email_body(request_fields: dict) -> str:
     """
     Add the inventory body of the email.
     """
-    body_message: str = 'Please provide confirmation via email to person requesting inventory.  Press "reply" ' \
-                        'found on this page to do so.  \nBe sure to coordinate both time and location for meeting ' \
-                        'up with the inventory requester.  \n'
-    body_message += f'\nInventory Request:'
+    start_location: str = request_fields['start_location']
+    end_location: str = request_fields['end_location']
+
+    if 'SHIPMENT' in start_location or 'SHIPMENT' in end_location:
+        pass
+    else:
+        return get_request_email_message(request_fields)
+
+
+def get_request_email_message(request_fields: dict) -> str:
+    """
+    Get non-shipment email.
+    """
+    body_message: str = 'Inventory Team,'
+    body_message += f'\nNew request form has been made for inventory transaction.  Use Pipe Cleaner to update ' \
+                    f'(command "U") to enter form number to update inventory movement.'
+    body_message += f'\nForm Number: {request_fields["form_number"]}'
+    body_message += f'\n\nInventory Request:'
     body_message += f'\n\t- Quantity: {request_fields["quantity"]}\n'
 
     for index, field in enumerate(request_fields, start=0):
 
-        if 'quantity' in field:
+        if field.upper() == 'QUANTITY' or field.upper() == 'FORM NUMBER':
             continue
 
         field_input: str = request_fields[field]
@@ -591,6 +761,34 @@ def add_email_body(request_fields: dict) -> str:
     return body_message
 
 
+def get_shipment_email_message(request_fields: dict) -> str:
+    """
+    Get non-shipment email.
+    """
+    body_message: str = 'Inventory Team,'
+    body_message += f'\nNew request form has been made for inventory transaction.  Use Pipe Cleaner to update ' \
+                    f'(command "U") to enter form number to update inventory movement.'
+    body_message += f'\nTransaction Number: 021-000-001'
+    body_message += f'\n\nInventory Request:'
+    body_message += f'\n\t- Quantity: {request_fields["quantity"]}\n'
+    for index, field in enumerate(request_fields, start=0):
+
+        if 'quantity' in field:
+            continue
+
+        field_input: str = request_fields[field]
+        field_name: str = field.replace('_', ' ').title()
+
+        if index == 4:
+            body_message += f'\n'
+
+        if is_field_correct(field_input):
+            body_message += f'\n\t- {field_name}: {field_input}'
+        else:
+            body_message += f'\n\t- {field_name}: None'
+    return body_message
+
+
 def email_inventory_request(request_fields: dict) -> None:
     """
     Sends email to people responsible dealing with inventory.
@@ -599,33 +797,48 @@ def email_inventory_request(request_fields: dict) -> None:
     # real_location: str = 'Inventory_Kirkland@veritasdcservices.com'
     person_location: str = 'joe.ton@VeritasDCservices.com'
 
+    create_email_notification(person_location, request_fields)
+
+
+def end_request_form():
+    print(f'\t\t- Email sent and excel data sent to database.')
+    print(f'\n\tWait for a response from inventory team via email to confirm from Inventory Team.')
+    input(f'\tPress enter to exit:')
+    sys.exit()
+
+
+def create_email_notification(person_location, request_fields) -> None:
     outlook = client.Dispatch('Outlook.Application')
     message = outlook.CreateItem(0)
     message.To = person_location
-    message.Subject = request_fields['task_name']
+
+    start_location: str = request_fields['start_location']
+    end_location: str = request_fields['end_location']
+
+    if 'SHIPMENT' in start_location.upper() or 'SHIPMENT' in end_location.upper():
+        form_number: str = request_fields['form_number']
+        message.Subject = f'{start_location} to {end_location} - {form_number}'
+    else:
+        message.Subject = request_fields['task_name']
     message.Body = add_email_body(request_fields)
     message.Send()
 
-    print(f'\t\t- Email sent.')
-    print(f'\n\tWait for a response from inventory team via email.  Prepare to meet with update form excel ready.')
-    print(f'\tIf time lapsed, can restart Pipe Cleaner to bring up update form via pressing "U"')
 
-    input(f'\n\tPress enter to open Update Form: ')
-    print(f'\t\t- Getting Update Form...')
-
-
-def process_notification_input(user_response: str, request_fields: dict) -> None:
+def process_notification_input(user_response: str, request_fields: dict, basic_info: dict) -> None:
     """
     Handle the response to notification on whether to send to inventory team.
     """
     user_response: str = user_response.upper()
+
     if user_response == 'Y':
         email_inventory_request(request_fields)
-        start_update_form()
+        update_request_excel_data(request_fields, basic_info)
+        end_request_form()
 
     elif 'YES' in user_response:
         email_inventory_request(request_fields)
-        start_update_form()
+        update_request_excel_data(request_fields, basic_info)
+        end_request_form()
 
     elif user_response == 'N':
         print(f'\n\tNotification Stopped.')
@@ -638,28 +851,30 @@ def process_notification_input(user_response: str, request_fields: dict) -> None
         sys.exit()
 
 
-def check_request_form(file_name: str, template: dict) -> None:
+def validate_request_form(file_name: str, template: dict, basic_info: dict) -> None:
     """
     Check if inventory request form done correctly.
     """
-    print(f'\t\t- Checking update form')
+    print(f'\t\t- Checking request form...')
 
-    worksheet = load_workbook(file_name)['Request']
+    request_fields_inputs: dict = get_request_field_inputs(file_name)
+    fields_filled: bool = is_essential_fields_filled(request_fields_inputs, template)
+    sleep(1)
 
-    request_fields: dict = get_request_fields(worksheet)
-
-    if is_essential_fields_filled(request_fields, template):
-        print_notification_receipt(request_fields)
+    if fields_filled:
+        print_notification_receipt(request_fields_inputs, basic_info)
 
     else:
         print(f'\n-------------------------------------------------------------------')
-        print(f'\n\t\t*** INVALID REQUEST FORM ***')
-        respond_request_form_wrong(request_fields)
+        print(f'\n\t\t*** INVALID REQUEST FORM ***\n')
+        respond_request_form_wrong(request_fields_inputs)
+
         print(f'-------------------------------------------------------------------')
         print(f'\t\t* Need to fix inventory request form...')
         input(f'\t\t- Press Enter to open request form: ')
-        open_excel_file(file_name)
-        start_request_stage(file_name, template)
+
+        open_excel_file_for_inventory_forms(file_name)
+        start_request_stage(file_name, template, basic_info)
 
 
 def get_update_form_data(fields_data: dict) -> dict:
@@ -706,15 +921,17 @@ def check_update_form(file_name: str) -> None:
                                           load_workbook(f'update_form.xlsx')['Update'])
 
     if is_update_fields_filled(fields_data):
-        print_line_divider()
-        print(f'\tLog inventory:')
+        print_line_divider('Log Inventory:')
         print(f'\t\tY  ->  Yes')
         print(f'\t\tN  ->  No')
         response: str = input(f'\n\tResponse:').upper()
 
         if 'Y' == response:
             update_serial_numbers(fields_data)
-            print(f'\t')
+            update_transactions(fields_data)
+            print(f'\tUpdates to Serial Numbers and Transactions database successfully...')
+            input(f'\tPress enter to exit: ')
+            sys.exit()
 
         elif 'N' == response:
             print(f'\tNot updated to database.')
@@ -728,7 +945,7 @@ def check_update_form(file_name: str) -> None:
         print(f'-------------------------------------------------------------------')
         print(f'\n\t\t* Need to fix inventory update form...')
         input(f'\t\t- Press enter to open excel:')
-        open_excel_file(file_name)
+        open_excel_file_for_inventory_forms(file_name)
         check_update_form(file_name)
 
 
@@ -737,48 +954,148 @@ def update_serial_numbers(fields_data: dict) -> None:
     Update serial numbers based off of update form's fields.
     """
     update_data: dict = get_update_form_data(fields_data)
-    document: MongoClient = access_database_document('serial_numbers', 'all')
+    document = access_database_document('serial_numbers', 'all')
 
     for serial_number in update_data:
 
         db_serial_numbers: dict = document.find_one({'_id': serial_number})
+
         if not db_serial_numbers:
-            current: dict = update_data[serial_number]
+            entry: dict = get_new_serial_number_log(fields_data, serial_number)
 
-            document.insert_one({'_id': serial_number,
-                                 'approved_by': current['approved_by'],
-                                 'date': current['date'],
-                                 'end_location': current['end_location'],
-                                 'form': current['form'],
-                                 'machine_name': current['machine_name'],
-                                 'notes': current['notes'],
-                                 'part_number': current['part_number'],
-                                 'pipe_number': current['pipe_number'],
-                                 'purchase_order': current['purchase_order'],
-                                 'site': current['site'],
-                                 'start_location': current['start_location'],
-                                 'task_name': current['task_name'],
-                                 'time': current['time'],
-                                 'trr_number': current['trr_number'],
-                                 'user': current['user'],
-                                 'version': current['version'],
-                                 'date_time': datetime.today().strftime('%Y-%m-%d-%H:%M:%S')})
+            document.insert_one(entry)
+
+        else:
+            transaction: dict = get_transaction_for_serial_number_log(fields_data)
+            document.update_one({"_id": serial_number},
+                                {"$push": {"transactions": transaction}},
+                                upsert=False)
 
 
-def is_essential_fields_filled(request_fields: dict, template: dict) -> bool:
+def get_current_transactions_count(document) -> int:
+    all_transactions: list = document.find({})
+
+    count: int = 0
+    for item in all_transactions:
+        count += 1
+    return count
+
+
+def update_transactions(fields_data: dict) -> None:
     """
-    Checks to make sure the four essential fields are filled in for the request form.
+    Update serial numbers based off of update form's fields.
+    """
+    year_month: str = get_year_month()
+
+    document = access_database_document('transactions', year_month)
+    transactions_count: int = get_current_transactions_count(document)
+    new_count = str(transactions_count + 1)
+
+    transaction_log: dict = get_transaction_log(fields_data, new_count)
+
+    document.insert_one(transaction_log)
+
+
+def get_transaction_log(fields_data: dict, _id: str) -> dict:
+    """
+    Data being submitted to database as new inventory transaction log.
+    """
+    transaction_log: dict = {"_id": str(_id),
+                             "part_number": fields_data['part_number'],
+                             "scanned": fields_data['current_quantity'],
+                             "time": {},
+                             "location": {},
+                             "source": {}}
+
+    transaction_log['time']['date_entry'] = fields_data['date']
+    transaction_log['time']['time_entry'] = fields_data['time']
+    transaction_log['time']['date_logged'] = strftime('%I:%M %p')
+    transaction_log['time']['time_logged'] = strftime('%m/%d/%Y')
+
+    transaction_log['location']['site'] = fields_data['site']
+    transaction_log['location']['current'] = fields_data['end_location']
+    transaction_log['location']['previous'] = fields_data['start_location']
+    transaction_log['location']['rack'] = 'None'
+    transaction_log['location']['machine'] = fields_data['machine_name']
+    transaction_log['location']['pipe'] = fields_data['pipe_number']
+
+    transaction_log['source']['approved_by'] = fields_data['approved_by']
+    transaction_log['source']['verified_by'] = fields_data['user']
+    transaction_log['source']['version'] = fields_data['version']
+    transaction_log['source']['task'] = fields_data['task_name']
+    transaction_log['source']['trr'] = fields_data['trr_number']
+    transaction_log['source']['comment'] = fields_data['notes']
+
+    return transaction_log
+
+
+def get_new_serial_number_log(fields_data: dict, _id: str) -> dict:
+    """
+    Data being submitted to database as new inventory transaction log.
+    """
+    transaction_log: dict = {"_id": str(_id),
+                             "part_number": fields_data['part_number'],
+                             "transactions": []}
+
+    transaction: dict = get_transaction_for_serial_number_log(fields_data)
+    transaction_log["transactions"].append(transaction)
+
+    return transaction_log
+
+
+def get_transaction_for_serial_number_log(fields_data: dict) -> dict:
+    """
+    Transaction for serial numbers.
+    """
+    return {"time": {"time_entry": fields_data['time'],
+                     "date_entry": fields_data['date'],
+                     "time_logged": strftime('%m/%d/%Y'),
+                     "date_logged": strftime('%I:%M %p')},
+
+            "location": {"site": fields_data['site'],
+                         "current": fields_data[
+                             'end_location'],
+                         "previous": fields_data[
+                             'start_location'],
+                         "rack": "None",
+                         "machine": fields_data[
+                             'machine_name'],
+                         "pipe": fields_data[
+                             'pipe_number']},
+
+            "source": {"approved_by": fields_data['approved_by'],
+                       "verified_by": fields_data['user'],
+                       "version": fields_data['version'],
+                       "task": fields_data['task_name'],
+                       "trr": fields_data['trr_number'],
+                       "comment": fields_data['notes']}}
+
+
+def get_year_month():
+    """
+    Get year month order for database key call.
+    """
+    month: str = strftime('%m/%d/%Y')[0:2]
+    year: str = strftime('%m/%d/%Y')[6:10]
+    return f'{year}_{month}'
+
+
+def is_essential_fields_filled(request_fields_input: dict, template: dict) -> bool:
+    """
+    Check main fields
     """
     main_fields: int = template['main_fields']['value']
+    # start_location: str = request_fields_input['start_location'].upper()
+    # end_location: str = request_fields_input['end_location'].upper()
 
     count: int = 0
     for field_name in template:
 
         try:
-            field_input: str = request_fields[field_name]
             value: str = template[field_name]['value']
+            field_input: str = request_fields_input[field_name]
 
-            if 'main' in value and field_input != 'Copy From Ticket':
+            if 'main' in value and field_input != 'Copy From Task':
                 count += 1
 
         except KeyError:
@@ -862,34 +1179,99 @@ def setup_update_form() -> None:
         sys.exit()
 
 
-def start_request_stage(file_name: str, template: dict) -> None:
+def start_request_stage(file_name: str, template: dict, basic_info: dict) -> None:
     """
     Start the request stage before notifying inventory team
     """
-    if is_excel_file_closed(file_name, 'request'):
-        check_request_form(file_name, template)
+    file_closed: bool = is_excel_file_closed(file_name, 'request')
+
+    if file_closed:
+        validate_request_form(file_name, template, basic_info)
 
 
-def start_update_form() -> None:
+def start_update_form(form_number) -> None:
     """
     After sending email to inventory team. Have update form ready.
     """
     file_name: str = 'update_form.xlsx'
 
     setup_update_form()
-    open_excel_file(file_name)
+    open_excel_file_for_inventory_forms(file_name)
 
     if is_excel_file_closed(file_name, 'update'):
         check_update_form(file_name)
 
 
-def main_method(user_data: dict) -> None:
+def get_request_number(user_data: dict) -> str:
+    """
+    Get next request number
+    """
+    request_category: str = get_request_form_category(user_data)
+    document = access_database_document('request_forms', request_category)
+    all_requests = document.find({})
+
+    return get_current_request_number(all_requests, request_category)
+
+
+def get_request_form_category(user_data: dict) -> str:
+    """
+    Get the request number first three digits. ie. site-year
+    """
+    current_year: str = strftime('%m/%d/%Y')[8:10]
+    current_location: str = user_data['location']
+    current_month: str = user_data['month']
+
+    if 'KIRKLAND' in current_location.upper():
+        return f'0{current_year}_{current_month}'
+
+
+def get_current_request_number(all_requests, request_category: str) -> str:
+    """
+    Get total request forms stored in database.
+    """
+    total_requests = int(all_requests.count()) + 1
+    request_string = str(total_requests)
+    request_length = len(str(request_string))
+    request_first_part = request_category[0:3]
+
+    if request_length == 1:
+        return f'{request_first_part}-000-00{request_string}'
+
+    elif request_length == 2:
+        request_part: str = request_string[0:2]
+
+        return f'{request_first_part}-000-0{request_part}'
+
+    elif request_length == 3:
+        request_part: str = request_string[0:3]
+
+        return f'{request_first_part}-000-{request_part}'
+
+    elif request_length == 4:
+        request_part_1: str = request_string[0:1]
+        request_part_2: str = request_string[1:4]
+
+        return f'{request_first_part}-00{request_part_1}-{request_part_2}'
+
+    elif len(request_string) == 5:
+        request_part_1: str = request_string[0:2]
+        request_part_2: str = request_string[2:5]
+
+        return f'{request_first_part}-0{request_part_1}-{request_part_2}'
+
+    elif len(request_string) == 6:
+        request_part_1: str = request_string[0:3]
+        request_part_2: str = request_string[3:6]
+
+        return f'{request_first_part}-{request_part_1}-{request_part_2}'
+
+
+def start_main_method_for_request_form(user_data: dict) -> None:
     """
     Starting point for handling inventory requests sent to inventory team.
     """
-    basic_info: dict = consolidate_basic_info(user_data)
-
+    basic_info: dict = merge_basic_info(user_data)
     template: dict = setup_excel_output(basic_info)
 
-    open_excel_file('request_form.xlsx')
-    start_request_stage('request_form.xlsx', template)
+    open_excel_file_for_inventory_forms('request_form.xlsx')
+    start_request_stage('request_form.xlsx', template, basic_info)

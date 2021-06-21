@@ -1873,11 +1873,15 @@ def remove_excel_green_corners(current_setup) -> None:
     worksheet.ignore_errors({'number_stored_as_text': 'A1:XFD1048576'})
 
 
-def create_excel_output(pipe_cleaner_version: str, default_user_name: str, site_location: str) -> None:
+def create_excel_output(basic_data: dict) -> None:
     """
     Create Dashboard here
     """
-    current_setup: dict = create_executive_summary(pipe_cleaner_version, default_user_name, site_location)
+    username: str = basic_data['username']
+    site: str = basic_data['site']
+    version: str = basic_data['version']
+
+    current_setup: dict = create_executive_summary(version, username, site)
 
     console_server_data: dict = get_console_server_data()
     azure_devops_data: dict = get_all_ticket_data(console_server_data)
@@ -1903,14 +1907,14 @@ def create_excel_output(pipe_cleaner_version: str, default_user_name: str, site_
     workbook: xlsxwriter = current_setup.get('workbook')
     structure: xlsxwriter = current_setup.get('structure')
 
-    create_issues_sheet(azure_devops_data, console_server_data, workbook, structure, site_location, all_issues,
-                        all_checks, mismatch_tally, missing_tally, pipe_numbers, pipe_cleaner_version)
+    create_issues_sheet(azure_devops_data, console_server_data, workbook, structure, site, all_issues,
+                        all_checks, mismatch_tally, missing_tally, pipe_numbers, version)
 
-    create_setup_sheet(azure_devops_data, console_server_data, workbook, structure, site_location, all_issues,
-                       all_checks, mismatch_tally, missing_tally, pipe_numbers, pipe_cleaner_version)
+    create_setup_sheet(azure_devops_data, console_server_data, workbook, structure, site, all_issues,
+                       all_checks, mismatch_tally, missing_tally, pipe_numbers, version)
 
-    create_virtual_machine_sheet(console_server_data, workbook, structure, site_location, all_issues,
-                                 all_checks, mismatch_tally, missing_tally, pipe_numbers, pipe_cleaner_version)
+    create_virtual_machine_sheet(console_server_data, workbook, structure, site, all_issues,
+                                 all_checks, mismatch_tally, missing_tally, pipe_numbers, version)
 
     add_dashboard_inventory(azure_devops_data, console_server_data, current_setup, all_issues)
 
@@ -1925,4 +1929,4 @@ def create_excel_output(pipe_cleaner_version: str, default_user_name: str, site_
         print(f'\tPlease close the dashboard.xlsx to create a new dashboard.xlsx')
         print(f'\tPress {Fore.BLUE}ENTER{Style.RESET_ALL} to try again...', end='')
         input()
-        create_excel_output(pipe_cleaner_version, default_user_name, site_location)
+        create_excel_output(basic_data)

@@ -282,11 +282,15 @@ def set_excel_column_width(columns_width: tuple, worksheet: xlsxwriter, structur
                              structure.white)
 
 
-def create_inventory_transaction(pipe_cleaner_version: str, default_user_name: str, site_location: str) -> dict:
+def create_inventory_transaction(basic_data: dict) -> dict:
     """
     Current excel sheet design to setup the excel tab for data to fill in later.
     """
     sheet_title: str = 'Inventory Template'
+
+    site: str = basic_data['site']
+    version: str = basic_data['version']
+    username: str = basic_data['username']
 
     check_opened_pipe_cleaner()
 
@@ -296,10 +300,10 @@ def create_inventory_transaction(pipe_cleaner_version: str, default_user_name: s
                          'worksheet': workbook.add_worksheet(sheet_title),
                          'structure': Structure(workbook),
                          'workbook': workbook,
-                         'version': pipe_cleaner_version,
-                         'site_location': site_location,
-                         'default_user_name': default_user_name,
-                         'clean_name': get_clean_user_name(default_user_name),
+                         'version': version,
+                         'site_location': site,
+                         'default_user_name': username,
+                         'clean_name': get_clean_user_name(username),
                          'header_height': 9,
                          'body_position': 15,
                          'left_padding': 2,
@@ -408,11 +412,11 @@ def add_default_data(current_setup, structure) -> None:
         worksheet.write(f'N{number}', '', structure.blank_12)
 
 
-def create_inventory_template(pipe_cleaner_version: str, default_user_name: str, site_location: str) -> None:
+def create_inventory_template(basic_data: dict) -> None:
     """
     Create Dashboard here
     """
-    current_setup: dict = create_inventory_transaction(pipe_cleaner_version, default_user_name, site_location)
+    current_setup: dict = create_inventory_transaction(basic_data)
 
     set_sheet_structure(current_setup)
 

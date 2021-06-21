@@ -103,22 +103,20 @@ def terminal_header_section(header_title: str, header_explanation: str):
     print('\n')
 
 
-def intro_section(version: str, user_name: str, current_location: str):
+def intro_section(basic_data) -> None:
     """
     Reusable for for title and explanation of a terminal section
-    :param version: Pipe Version
-    :param user_name: name via network
-    :param current_location: site using Pipe Cleaner
-    :return:
     """
     characters = "-"
-    # user_name: str = user_name.replace('.', ' ').title()
+    username: str = basic_data['username']
+    site: str = basic_data['site']
+    version: str = basic_data['version']
 
     header_1_content: str = 'Veritas Services & Engineering'
     header_2_content: str = 'Developer: Joe Ton'
     header_3_content: str = 'Project Manager: Bruce Saari'
-    header_4_content: str = f'User: {user_name}'
-    header_5_content: str = f'Location: {current_location}'
+    header_4_content: str = f'User: {username}'
+    header_5_content: str = f'Location: {site}'
     header_6_content: str = f'Version: {version}'
 
     header_1_length = len(header_1_content)

@@ -856,11 +856,14 @@ def check_opened_pipe_cleaner():
         sys.exit()
 
 
-def create_setup(pipe_cleaner_version: str, default_user_name: str, site_location: str) -> dict:
+def create_setup(basic_data) -> dict:
     """
     Current excel sheet design to setup the excel tab for data to fill in later.
     """
     sheet_title: str = 'Inventory Template'
+    site: str = basic_data['site']
+    username: str = basic_data['username']
+    version: str = basic_data['version']
 
     check_opened_pipe_cleaner()
 
@@ -870,10 +873,10 @@ def create_setup(pipe_cleaner_version: str, default_user_name: str, site_locatio
                          'worksheet': workbook.add_worksheet(sheet_title),
                          'structure': Structure(workbook),
                          'workbook': workbook,
-                         'version': pipe_cleaner_version,
-                         'site_location': site_location,
-                         'default_user_name': default_user_name,
-                         'clean_name': get_clean_user_name(default_user_name),
+                         'version': version,
+                         'site_location': site,
+                         'default_user_name': username,
+                         'clean_name': get_clean_user_name(username),
                          'header_height': 9,
                          'body_position': 15,
                          'left_padding': 2,
@@ -974,7 +977,7 @@ def get_teams_transactions(file_paths) -> dict:
     return transactions
 
 
-def main_method(pipe_cleaner_version: str, default_user_name: str, current_location: str) -> None:
+def main_method(basic_data: dict) -> None:
     """
     Consolidate available data to produce excel output of Kirkland inventory total.
     """
@@ -984,11 +987,6 @@ def main_method(pipe_cleaner_version: str, default_user_name: str, current_locat
     console_server_data: dict = get_console_server_data()
     # azure_devops_data: dict = get_all_ticket_data(console_server_data)
     # part_numbers: dict = get_console_server_data()['part_numbers']
-
-    import json
-    foo = json.dumps(drive_transactions, sort_keys=True, indent=4)
-    print(foo)
-    input()
 
     console_server_data: dict = flatten_console_server_data(get_console_server_data()['inventory'])
 
@@ -1001,7 +999,7 @@ def main_method(pipe_cleaner_version: str, default_user_name: str, current_locat
     total_data: dict = consolidate_data(inventory_data, console_server_data)
 
     try:
-        current_setup: dict = create_setup(pipe_cleaner_version, default_user_name, current_location)
+        current_setup: dict = create_setup(basic_data)
 
         set_sheet_structure(current_setup)
         remove_excel_green_corners(current_setup)

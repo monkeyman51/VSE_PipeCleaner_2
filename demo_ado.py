@@ -103,7 +103,7 @@ def clean_html_text(field_data) -> str:
         replace('  ', ' '). \
         replace('\xa0', ''). \
         replace('\u200b', ''). \
-        replace('\u2013', '').\
+        replace('\u2013', ''). \
         strip()
 
 
@@ -111,7 +111,7 @@ def clean_component_value(component_value: str) -> str:
     """
     Cleans component to make easier to call value through key later.
     """
-    return component_value.\
+    return component_value. \
         upper(). \
         replace(' - ', ' '). \
         replace('N/A', 'None')
@@ -195,32 +195,29 @@ def store_part_numbers_data(raw_tickets_data: list) -> dict:
     for raw_ticket_data in raw_tickets_data:
         ticket_json: dict = loads(raw_ticket_data)
         ticket_id = str(ticket_json["id"])
+        print(f'\t\t- Collect  |  Success   |  {ticket_id}')
 
-        try:
-            all_tickets_data[ticket_id] = {'table_data': get_table_data(ticket_json),
-                                           'title': ticket_json['fields']['System.Title'],
-                                           'state': ticket_json['fields']['System.State']}
+        ticket_data = {'table_data': get_table_data(ticket_json),
+                       'title': ticket_json['fields']['System.Title'],
+                       'state': ticket_json['fields']['System.State']}
 
-            print(f'\t\t- Collect  |  Success   |  {ticket_id}')
+        import json
+        foo = json.dumps(ticket_data, sort_keys=True, indent=4)
+        print(foo)
+        input()
 
-        except decoder.JSONDecodeError:
-            pass
-
-        except KeyError:
-            pass
-
-    return all_tickets_data
+    return all_part_numbers
 
 
 def get_table_data(ticket_json: dict) -> dict:
     """
     Get table in key-value pair
     """
-    try:
-        table_data_soup = BeautifulSoup(ticket_json['fields']['System.Description'], 'html.parser')
-        return get_clean_table_data(table_data_soup.findAll('tr'))
-    except KeyError:
-        pass
+    table_data_soup = BeautifulSoup(ticket_json['fields']['System.Description'], 'html.parser')
+    table_data = table_data_soup.findAll('tr')
+    print(f'table_data: {table_data}')
+    input()
+    return get_clean_table_data(table_data)
 
 
 def request_ado() -> None:
