@@ -134,7 +134,6 @@ def main_method() -> None:
     foo = json.dumps(transactions, sort_keys=True, indent=4)
     print(foo)
     input()
-    #  Access database's transactions
     #  Get Rich's dataset
     #  Consolidate Data
     #  Output
