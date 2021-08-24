@@ -4,7 +4,7 @@ Access ADO's Task
 import asyncio
 import sys
 from base64 import b64encode
-from json import loads, decoder
+from json import loads
 
 import requests
 from aiohttp import ClientSession, client_exceptions
@@ -18,11 +18,19 @@ def get_response_text_from_ado() -> str:
     Get content from all recent ADO work items for grabbing TRR IDs. This is an effort towards automating part number
     library.
     """
-    site_url: str = 'https://azurecsi.visualstudio.com/CSI%20Commodity%20Qualification/_workitems/recentlycreated/'
+    # site_url: str = 'https://azurecsi.visualstudio.com/CSI%20Commodity%20Qualification/_workitems/recentlycreated/'
+    # site_url: str = 'https://azurecsi.visualstudio.com/CSI%20Commodity%20Qualification/_workitems/recentlyupdated/'
+    # site_url: str = 'https://azurecsi.visualstudio.com/CSI%20Commodity%20Qualification/_queries/query/' \
+    #                 '5233817c-b790-4482-8cb7-200aae92f508/'
+    # site_url: str = 'https://azurecsi.visualstudio.com/CSI%20Commodity%20Qualification/_queries/query/' \
+    #                 '3eddd432-529e-499d-a7d1-b4e639e95754/'
+    site_url: str = "https://azurecsi.visualstudio.com/CSI%20Commodity%20Qualification/_queries/query/" \
+                    "5233817c-b790-4482-8cb7-200aae92f508/"
     user_password: str = f'{Ado.token_name}:{Ado.personal_access_token}'
 
     headers = {'Authorization': f'Basic {b64encode(user_password.encode()).decode()}'}
 
+    # return requests.get(site_url, headers=headers).text
     return requests.get(site_url, headers=headers).text
 
 
@@ -34,6 +42,16 @@ def find_work_items_from_response(response_text: str) -> dict:
     data = str(soup.findAll('script', type='application/json')).replace('</script>', ''). \
         replace('<script id="dataProviders" type="application/json">', '')
 
+    print(soup)
+    input()
+
+    json_data = loads(data)
+
+    import json
+    foo = json.dumps(json_data, sort_keys=True, indent=4)
+    print(foo)
+    input()
+
     return loads(data)[0]['data']['ms.vss-work-web.new-work-items-hub-recentlycreated-tab-data-provider']['fieldValues']
 
 
@@ -43,10 +61,25 @@ def collect_test_requests_from_work_items(work_items: dict) -> list:
     """
     actual_test_requests: list = []
 
+    count: int = 0
     for work_item in work_items:
+        count += 1
+        trr_id: str = work_item['data'][0]
+        print(trr_id)
+        work_item_name: str = str(work_item['data'][1]).upper()
+        # print(f'work_item_name: {work_item}')
 
-        if 'TEST RUN REQUEST' in str(work_item['data'][1]).upper():
-            actual_test_requests.append(work_item['data'][0])
+        if 'TEST RUN REQUEST' in work_item_name:
+            content: dict = work_item['data'][0]
+
+            # import json
+            # foo = json.dumps(content, sort_keys=True, indent=4)
+            # print(foo)
+            # input()
+
+            actual_test_requests.append(content)
+
+    print(f'count: {count}')
 
     return actual_test_requests
 
@@ -201,10 +234,10 @@ def store_part_numbers_data(raw_tickets_data: list) -> dict:
                        'title': ticket_json['fields']['System.Title'],
                        'state': ticket_json['fields']['System.State']}
 
-        import json
-        foo = json.dumps(ticket_data, sort_keys=True, indent=4)
-        print(foo)
-        input()
+        # import json
+        # foo = json.dumps(ticket_data, sort_keys=True, indent=4)
+        # print(foo)
+        # input()
 
     return all_part_numbers
 
@@ -215,8 +248,7 @@ def get_table_data(ticket_json: dict) -> dict:
     """
     table_data_soup = BeautifulSoup(ticket_json['fields']['System.Description'], 'html.parser')
     table_data = table_data_soup.findAll('tr')
-    print(f'table_data: {table_data}')
-    input()
+
     return get_clean_table_data(table_data)
 
 
@@ -225,8 +257,12 @@ def request_ado() -> None:
     Requests data from ADO
     """
     response_text: str = get_response_text_from_ado()
+    print(response_text)
+    input()
     work_items: dict = find_work_items_from_response(response_text)
     trr_ids: list = collect_test_requests_from_work_items(work_items)
+    # print(f'{len(trr_ids)}')
+
     trr_urls: list = get_trr_urls(trr_ids)
     raw_tickets_data: list = asyncio.run(get_ticket_data(trr_urls))
     store_part_numbers_data(raw_tickets_data)

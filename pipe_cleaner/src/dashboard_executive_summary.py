@@ -747,11 +747,14 @@ def get_pipe_numbers(console_server_data: dict) -> dict:
     return {'pipes': pipe_number, 'systems': system_number}
 
 
-def create_executive_summary(pipe_cleaner_version: str, default_user_name: str, site_location: str) -> dict:
+def create_executive_summary(basic_data: dict) -> dict:
     """
     Current excel sheet design to setup the excel tab for data to fill in later.
     """
     sheet_title: str = 'Executive Summary'
+    username: str = basic_data['username']
+    site: str = basic_data['site']
+    version: str = basic_data['version']
 
     check_opened_pipe_cleaner()
 
@@ -761,10 +764,10 @@ def create_executive_summary(pipe_cleaner_version: str, default_user_name: str, 
                          'worksheet': workbook.add_worksheet(sheet_title),
                          'structure': Structure(workbook),
                          'workbook': workbook,
-                         'version': pipe_cleaner_version,
-                         'site_location': site_location,
-                         'default_user_name': default_user_name,
-                         'clean_name': get_clean_user_name(default_user_name),
+                         'version': version,
+                         'site_location': site,
+                         'default_user_name': username,
+                         'clean_name': get_clean_user_name(username),
                          'header_height': 14,
                          'body_position': 15,
                          'left_padding': 2,
@@ -1083,8 +1086,8 @@ def get_max_position(letter, max_number) -> str:
     return f'{letter}{max_number}'
 
 
-def get_base_position(column, current_position) -> str:
-    return f'{column}{current_position}'
+def get_base_position(column: str, current_position: int) -> str:
+    return f'{column}{str(current_position)}'
 
 
 def write_description_column(processed_console_server, console_server_data, current_setup):
@@ -1178,8 +1181,9 @@ def add_trr_type_column(processed_console_server, azure_devops_data, current_set
 
             else:
                 for count, ticket_data in enumerate(unique_tickets_content, start=0):
-                    modified_position = current_position + count
-                    base_position = get_base_position(letter, modified_position)
+                    modified_position: int = current_position + count
+                    base_position: str = get_base_position(letter, modified_position)
+
                     worksheet.write(base_position, f'  {ticket_data}', current_color_11)
 
         worksheet.set_row(max_number, 3.75, structure.white)
@@ -1205,25 +1209,26 @@ def add_issue_data(azure_devops_data: dict, console_server_data: dict, current_s
     processed_console_server: dict = process_console_server(console_server_data)
 
     write_pipe_name_column(processed_console_server, console_server_data, current_setup)
-
     write_description_column(processed_console_server, console_server_data, current_setup)
-
     current_setup = add_trr_type_column(processed_console_server, azure_devops_data, current_setup)
-
-    current_setup = write_state_column(processed_console_server, azure_devops_data, current_setup)
-
+    current_setup = write_state_column(processed_console_server, azure_devops_data, current_setup)  # TODO - INITIAL
     write_trr_column(processed_console_server, azure_devops_data, current_setup)
-
     add_qual_column(processed_console_server, azure_devops_data, current_setup)
-
     write_assigned_to_column(processed_console_server, azure_devops_data, current_setup)
 
+    add_date_columns(azure_devops_data, current_setup, processed_console_server)
+
+    return current_setup
+
+
+def add_date_columns(azure_devops_data: dict, current_setup: dict, processed_console_server: dict) -> None:
+    """
+    Add data including expected start / end and actual start / end dates.
+    """
     write_expected_start_column(processed_console_server, azure_devops_data, current_setup)
     write_expected_end_column(processed_console_server, azure_devops_data, current_setup)
     write_actual_start_column(processed_console_server, azure_devops_data, current_setup)
     write_actual_end_column(processed_console_server, azure_devops_data, current_setup)
-
-    return current_setup
 
 
 def write_expected_start_column(processed_console_server, azure_devops_data, current_setup):
@@ -1482,6 +1487,7 @@ def write_state_column(processed_console_server: dict, azure_devops_data: dict, 
 
         else:
             for count, unique_ticket in enumerate(group_unique_tickets, start=0):
+
                 modified_position: int = current_position + count
                 ticket_state: str = clean_ticket_state(azure_devops_data, unique_ticket)
 
@@ -1491,29 +1497,43 @@ def write_state_column(processed_console_server: dict, azure_devops_data: dict, 
 
                 try:
                     if ticket_state == 'Done' or ticket_state == 'Test Completed':
-                        is_review_hold: bool = get_time_difference(azure_devops_data, unique_ticket)
+                        is_review_hold: str = get_time_difference(azure_devops_data, unique_ticket)
 
                         if len(group_unique_tickets) >= 2 and len(unique_tickets_state) == 1 and \
                                 len(unique_tickets_actual_end) == 1:
                             worksheet.merge_range(max_vertical, ticket_state, structure.purple_middle_12)
 
-                            if is_review_hold and len(unique_tickets_actual_end) == 1:
+                            if is_review_hold == "None":
+                                worksheet.merge_range(f'F{modified_position}:H{vertical_range}', 'NO DATA',
+                                                      structure.light_grey_middle_12)
+
+                            if is_review_hold == "True" and len(unique_tickets_actual_end) == 1:
                                 worksheet.merge_range(f'F{modified_position}:H{vertical_range}', 'REVIEW HOLD',
                                                       structure.light_grey_middle_12)
-                            elif not is_review_hold and len(unique_tickets_actual_end) == 1:
+
+                            elif is_review_hold == "False" and len(unique_tickets_actual_end) == 1:
                                 worksheet.merge_range(f'F{modified_position}:H{vertical_range}', 'AVAILABLE',
                                                       structure.dark_grey_middle_14)
+
                                 current_setup['available'] += 1
                             break
 
                         else:
+
                             worksheet.write(base_position, ticket_state, structure.purple_middle_12)
-                            if is_review_hold:
+                            if is_review_hold == "True":
                                 worksheet.merge_range(f'F{modified_position}:H{modified_position}', 'REVIEW HOLD',
                                                       structure.light_grey_middle_12)
-                            elif not is_review_hold:
+
+                            elif is_review_hold == "False":
                                 worksheet.merge_range(f'F{modified_position}:H{modified_position}', 'AVAILABLE',
                                                       structure.dark_grey_middle_14)
+
+                            else:
+
+                                if ticket_state == 'Done':
+                                    worksheet.merge_range(f'F{modified_position}:H{modified_position}', 'AVAILABLE',
+                                                          structure.dark_grey_middle_14)
 
                     elif ticket_state == 'Blocked':
                         current_setup['blocked'] += 1
@@ -1652,26 +1672,37 @@ def get_unique_tickets_actual_end(azure_devops_data, group_unique_tickets) -> li
     return list(set(unique_tickets_content))
 
 
-def get_time_difference(azure_devops_data, unique_ticket) -> bool:
+def get_time_difference(azure_devops_data, unique_ticket) -> str:
     """
     Reasons why...
     """
-    days: int = get_epoch_difference(azure_devops_data, unique_ticket)
+    days = get_epoch_difference(azure_devops_data, unique_ticket)
 
-    if days <= 7:
-        return True
+    if days == "None":
+        return "None"
+
+    elif days <= 7:
+        return "True"
+
     else:
-        return False
+        return "False"
 
 
 def get_epoch_difference(azure_devops_data, unique_ticket):
     date_time: str = get_date_time(azure_devops_data, unique_ticket)
     pattern: str = '%d.%m.%Y %H:%M:%S'
-    previous_epoch = int(mktime(strptime(date_time, pattern)))
-    current_epoch = int(time())
-    epoch_diff = current_epoch - previous_epoch
-    days = int(epoch_diff / 86400)
-    return days
+
+    if "None" in date_time or "None" in date_time:
+        return "None"
+
+    elif not date_time or not date_time:
+        return "None"
+    else:
+        previous_epoch = int(mktime(strptime(date_time, pattern)))
+        current_epoch = int(time())
+        epoch_diff = current_epoch - previous_epoch
+        days = int(epoch_diff / 86400)
+        return days
 
 
 def get_date_time(azure_devops_data, unique_ticket) -> str:
@@ -1877,17 +1908,16 @@ def create_excel_output(basic_data: dict) -> None:
     """
     Create Dashboard here
     """
-    username: str = basic_data['username']
     site: str = basic_data['site']
     version: str = basic_data['version']
 
-    current_setup: dict = create_executive_summary(version, username, site)
+    current_setup: dict = create_executive_summary(basic_data)
 
     console_server_data: dict = get_console_server_data()
     azure_devops_data: dict = get_all_ticket_data(console_server_data)
     pipe_numbers: dict = get_pipe_numbers(console_server_data)
 
-    # final_data: dict = compare_data(console_server_data, azure_devops_data)
+    final_data: dict = compare_data(console_server_data, azure_devops_data)
     all_issues: list = get_all_issues()
 
     all_checks: list = get_total_checks()

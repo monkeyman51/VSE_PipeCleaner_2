@@ -97,20 +97,23 @@ def add_pipe_name_column(clean_console_server: dict, current_setup: dict, consol
     current_position: int = current_setup.get('body_position')
 
     for index, pipe_name in enumerate(sorted(clean_console_server), start=0):
-        current_color: xlsxwriter = get_current_color(index, structure)
-        pipe_hyperlink: str = get_pipe_hyperlink(console_server_data, pipe_name)
-        clean_pipe_name: str = f' {process_pipe_name(pipe_name)}'
-        pipe_size = clean_console_server[pipe_name]
+        all_machine_size: int = get_all_machine_size(console_server_data, pipe_name)
 
-        max_number: int = current_position + pipe_size - 1
+        if all_machine_size != 0:
+            current_color: xlsxwriter = get_current_color(index, structure)
+            pipe_hyperlink: str = get_pipe_hyperlink(console_server_data, pipe_name)
+            clean_pipe_name: str = f' {process_pipe_name(pipe_name)}'
+            pipe_size = clean_console_server[pipe_name]
 
-        base_position: str = get_base_position(letter, current_position)
-        merge_position: str = get_merge_position(base_position, letter, max_number)
+            max_number: int = current_position + pipe_size - 1
 
-        worksheet.merge_range(merge_position, clean_pipe_name, current_color)
-        worksheet.write_url(base_position, pipe_hyperlink, current_color, string=clean_pipe_name)
+            base_position: str = get_base_position(letter, current_position)
+            merge_position: str = get_merge_position(base_position, letter, max_number)
 
-        current_position: int = max_number + 2
+            worksheet.merge_range(merge_position, clean_pipe_name, current_color)
+            worksheet.write_url(base_position, pipe_hyperlink, current_color, string=clean_pipe_name)
+
+            current_position: int = max_number + 2
 
 
 def set_single_ticket_row(current_position, worksheet):
@@ -955,39 +958,41 @@ def add_count_column(clean_console_server: dict, console_server_data: dict, curr
     current_position: int = current_setup.get('body_position')
 
     for index, pipe_number in enumerate(sorted(clean_console_server), start=0):
+        all_machine_size: int = get_all_machine_size(console_server_data, pipe_number)
 
-        current_color: xlsxwriter = get_current_color_11(index, structure)
+        if all_machine_size != 0:
+            current_color: xlsxwriter = get_current_color_11(index, structure)
 
-        pipe_disks: dict = get_all_machine_disks(console_server_data, pipe_number)
-        pipe_nvmes: dict = get_all_machine_nvmes(console_server_data, pipe_number)
-        pipe_dimms: dict = get_all_machine_dimms(console_server_data, pipe_number)
+            pipe_disks: dict = get_all_machine_disks(console_server_data, pipe_number)
+            pipe_nvmes: dict = get_all_machine_nvmes(console_server_data, pipe_number)
+            pipe_dimms: dict = get_all_machine_dimms(console_server_data, pipe_number)
 
-        for disk_commodity in sorted(pipe_disks):
-            base_position: str = get_base_position(letter, current_position)
-            current_count: str = pipe_disks[disk_commodity]
-            worksheet.write(base_position, current_count, current_color)
-            current_position += 1
+            for disk_commodity in sorted(pipe_disks):
+                base_position: str = get_base_position(letter, current_position)
+                current_count: str = pipe_disks[disk_commodity]
+                worksheet.write(base_position, current_count, current_color)
+                current_position += 1
 
-        for nvme_commodity in sorted(pipe_nvmes):
-            base_position: str = get_base_position(letter, current_position)
-            current_count: str = pipe_nvmes[nvme_commodity]
-            worksheet.write(base_position, current_count, current_color)
-            current_position += 1
+            for nvme_commodity in sorted(pipe_nvmes):
+                base_position: str = get_base_position(letter, current_position)
+                current_count: str = pipe_nvmes[nvme_commodity]
+                worksheet.write(base_position, current_count, current_color)
+                current_position += 1
 
-        for dimm_commodity in sorted(pipe_dimms):
-            base_position: str = get_base_position(letter, current_position)
-            current_count: str = pipe_dimms[dimm_commodity]
-            worksheet.write(base_position, current_count, current_color)
-            current_position += 1
+            for dimm_commodity in sorted(pipe_dimms):
+                base_position: str = get_base_position(letter, current_position)
+                current_count: str = pipe_dimms[dimm_commodity]
+                worksheet.write(base_position, current_count, current_color)
+                current_position += 1
 
-        group_unique_tickets: dict = console_server_data[pipe_number]['group_unique_tickets']
-        for unique_ticket in sorted(group_unique_tickets):
-            base_position: str = get_base_position(letter, current_position)
+            group_unique_tickets: dict = console_server_data[pipe_number]['group_unique_tickets']
+            for unique_ticket in sorted(group_unique_tickets):
+                base_position: str = get_base_position(letter, current_position)
 
-            worksheet.write(base_position, '', structure.missing_cell)
-            current_position += 1
+                worksheet.write(base_position, '', structure.missing_cell)
+                current_position += 1
 
-        current_position: int = current_position + 1
+            current_position: int = current_position + 1
 
 
 def add_console_part_number_column(clean_console_server: dict, console_server_data: dict, current_setup: dict,
@@ -1002,41 +1007,43 @@ def add_console_part_number_column(clean_console_server: dict, console_server_da
     current_position: int = current_setup.get('body_position')
 
     for index, pipe_number in enumerate(sorted(clean_console_server), start=0):
+        all_machine_size: int = get_all_machine_size(console_server_data, pipe_number)
 
-        current_color: xlsxwriter = get_current_color_11(index, structure)
+        if all_machine_size != 0:
+            current_color: xlsxwriter = get_current_color_11(index, structure)
 
-        pipe_disks: dict = get_all_machine_disks(console_server_data, pipe_number)
-        pipe_nvmes: dict = get_all_machine_nvmes(console_server_data, pipe_number)
-        pipe_dimms: dict = get_all_machine_dimms(console_server_data, pipe_number)
+            pipe_disks: dict = get_all_machine_disks(console_server_data, pipe_number)
+            pipe_nvmes: dict = get_all_machine_nvmes(console_server_data, pipe_number)
+            pipe_dimms: dict = get_all_machine_dimms(console_server_data, pipe_number)
 
-        for disk_commodity in sorted(pipe_disks):
-            base_position: str = get_base_position(letter, current_position)
-            worksheet.write(base_position, disk_commodity, current_color)
-            current_position += 1
-
-        for nvme_commodity in sorted(pipe_nvmes):
-            base_position: str = get_base_position(letter, current_position)
-            worksheet.write(base_position, nvme_commodity, current_color)
-            current_position += 1
-
-        for dimm_commodity in sorted(pipe_dimms):
-            base_position: str = get_base_position(letter, current_position)
-            worksheet.write(base_position, dimm_commodity, current_color)
-            current_position += 1
-
-        group_unique_tickets: dict = console_server_data[pipe_number]['group_unique_tickets']
-        for unique_ticket in sorted(group_unique_tickets):
-            base_position: str = get_base_position(letter, current_position)
-            part_number: str = azure_devops_data.get(unique_ticket, {}).get('table_data', {}).get('part_number', '')
-
-            if not part_number:
-                worksheet.write(base_position, '', structure.missing_cell)
-                current_position += 1
-            else:
-                worksheet.write(base_position, part_number, current_color)
+            for disk_commodity in sorted(pipe_disks):
+                base_position: str = get_base_position(letter, current_position)
+                worksheet.write(base_position, disk_commodity, current_color)
                 current_position += 1
 
-        current_position: int = current_position + 1
+            for nvme_commodity in sorted(pipe_nvmes):
+                base_position: str = get_base_position(letter, current_position)
+                worksheet.write(base_position, nvme_commodity, current_color)
+                current_position += 1
+
+            for dimm_commodity in sorted(pipe_dimms):
+                base_position: str = get_base_position(letter, current_position)
+                worksheet.write(base_position, dimm_commodity, current_color)
+                current_position += 1
+
+            group_unique_tickets: dict = console_server_data[pipe_number]['group_unique_tickets']
+            for unique_ticket in sorted(group_unique_tickets):
+                base_position: str = get_base_position(letter, current_position)
+                part_number: str = azure_devops_data.get(unique_ticket, {}).get('table_data', {}).get('part_number', '')
+
+                if not part_number:
+                    worksheet.write(base_position, '', structure.missing_cell)
+                    current_position += 1
+                else:
+                    worksheet.write(base_position, part_number, current_color)
+                    current_position += 1
+
+            current_position: int = current_position + 1
 
 
 def get_request_type(azure_devops_data, unique_ticket):
@@ -1056,41 +1063,43 @@ def add_item_column(clean_console_server, console_server_data, current_setup, az
     current_position: int = current_setup.get('body_position')
 
     for index, pipe_number in enumerate(sorted(clean_console_server), start=0):
+        all_machine_size: int = get_all_machine_size(console_server_data, pipe_number)
 
-        current_color: xlsxwriter = get_current_color_11(index, structure)
+        if all_machine_size != 0:
+            current_color: xlsxwriter = get_current_color_11(index, structure)
 
-        pipe_disks: dict = get_all_machine_disks(console_server_data, pipe_number)
-        pipe_nvmes: dict = get_all_machine_nvmes(console_server_data, pipe_number)
-        pipe_dimms: dict = get_all_machine_dimms(console_server_data, pipe_number)
+            pipe_disks: dict = get_all_machine_disks(console_server_data, pipe_number)
+            pipe_nvmes: dict = get_all_machine_nvmes(console_server_data, pipe_number)
+            pipe_dimms: dict = get_all_machine_dimms(console_server_data, pipe_number)
 
-        for disk_commodity in sorted(pipe_disks):
-            base_position: str = get_base_position(letter, current_position)
-            worksheet.write(base_position, 'Disk', current_color)
-            current_position += 1
-
-        for nvme_commodity in sorted(pipe_nvmes):
-            base_position: str = get_base_position(letter, current_position)
-            worksheet.write(base_position, 'NVMe', current_color)
-            current_position += 1
-
-        for dimm_commodity in sorted(pipe_dimms):
-            base_position: str = get_base_position(letter, current_position)
-            worksheet.write(base_position, 'DIMM', current_color)
-            current_position += 1
-
-        group_unique_tickets: dict = console_server_data[pipe_number]['group_unique_tickets']
-        for unique_ticket in sorted(group_unique_tickets):
-            base_position: str = get_base_position(letter, current_position)
-            request_type: str = get_request_type(azure_devops_data, unique_ticket)
-
-            if not request_type:
-                worksheet.write(base_position, '', structure.missing_cell)
-                current_position += 1
-            else:
-                worksheet.write(base_position, request_type, current_color)
+            for disk_commodity in sorted(pipe_disks):
+                base_position: str = get_base_position(letter, current_position)
+                worksheet.write(base_position, 'Disk', current_color)
                 current_position += 1
 
-        current_position: int = current_position + 1
+            for nvme_commodity in sorted(pipe_nvmes):
+                base_position: str = get_base_position(letter, current_position)
+                worksheet.write(base_position, 'NVMe', current_color)
+                current_position += 1
+
+            for dimm_commodity in sorted(pipe_dimms):
+                base_position: str = get_base_position(letter, current_position)
+                worksheet.write(base_position, 'DIMM', current_color)
+                current_position += 1
+
+            group_unique_tickets: dict = console_server_data[pipe_number]['group_unique_tickets']
+            for unique_ticket in sorted(group_unique_tickets):
+                base_position: str = get_base_position(letter, current_position)
+                request_type: str = get_request_type(azure_devops_data, unique_ticket)
+
+                if not request_type:
+                    worksheet.write(base_position, '', structure.missing_cell)
+                    current_position += 1
+                else:
+                    worksheet.write(base_position, request_type, current_color)
+                    current_position += 1
+
+            current_position: int = current_position + 1
 
 
 def add_section_column(clean_console_server, console_server_data, current_setup) -> None:
@@ -1104,32 +1113,34 @@ def add_section_column(clean_console_server, console_server_data, current_setup)
     current_position: int = current_setup.get('body_position')
 
     for index, pipe_number in enumerate(sorted(clean_console_server), start=0):
-
-        pipe_size: int = clean_console_server[pipe_number]
-        current_color: xlsxwriter = get_current_color_11(index, structure)
-        base_position: str = get_base_position(letter, current_position)
         all_machine_size: int = get_all_machine_size(console_server_data, pipe_number)
-        max_position: int = current_position + all_machine_size - 1
-        merge_position = get_merge_position(base_position, letter, max_position)
 
-        worksheet.merge_range(merge_position, 'Pipe Commodities', current_color)
+        if all_machine_size != 0:
+            pipe_size: int = clean_console_server[pipe_number]
+            current_color: xlsxwriter = get_current_color_11(index, structure)
+            base_position: str = get_base_position(letter, current_position)
 
-        group_unique_tickets: dict = console_server_data[pipe_number]['group_unique_tickets']
+            max_position: int = current_position + all_machine_size - 1
+            merge_position = get_merge_position(base_position, letter, max_position)
 
-        for count, unique_ticket in enumerate(sorted(group_unique_tickets), start=0):
-            maximum_position: int = current_position + count + all_machine_size
-            hyperlink = f'https://azurecsi.visualstudio.com/CSI%20Commodity%20Qualification/_workitems/edit/' \
-                        f'{unique_ticket}'
+            worksheet.merge_range(merge_position, 'Pipe Commodities', current_color)
 
-            worksheet.write_url(f'{letter}{maximum_position}', hyperlink, current_color,
-                                string=unique_ticket)
+            group_unique_tickets: dict = console_server_data[pipe_number]['group_unique_tickets']
 
-        current_position: int = current_position + pipe_size + 1
+            for count, unique_ticket in enumerate(sorted(group_unique_tickets), start=0):
+                maximum_position: int = current_position + count + all_machine_size
+                hyperlink = f'https://azurecsi.visualstudio.com/CSI%20Commodity%20Qualification/_workitems/edit/' \
+                            f'{unique_ticket}'
+
+                worksheet.write_url(f'{letter}{maximum_position}', hyperlink, current_color,
+                                    string=unique_ticket)
+
+            current_position: int = current_position + pipe_size + 1
     else:
         current_position += 1
 
 
-def add_inventory_column(console_server_data, current_setup, inventory_data) -> None:
+def add_inventory_column(console_server_data: dict, current_setup: dict, inventory_data: dict) -> None:
     """
 
     """

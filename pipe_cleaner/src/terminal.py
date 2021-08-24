@@ -143,17 +143,42 @@ def get_available_chooses() -> str:
     """
     Give user chooses between default, send, and inventory.
     """
-    print(f'\n\n\tChoose between these options...\n')
-    print(f'\t\tR  ->  Request Form - New Inventory')
-    print(f'\t\tU  ->  Update Form - Log S/Ns')
+    print(f'\n\tChoose between these options...\n')
+    print(f'\t\tR  ->  Request Form - New Inventory Transaction')
+    print(f'\t\tU  ->  Update Form - Log S/Ns and Transactions')
 
-    print(f'\n\t\tT  ->  Transactions (Inventory) - This Month')
-    print(f'\t\tS  ->  Serial Numbers - All')
-    print(f'\t\tF  ->  Find specific Serial Number')
-    print(f'\t\tP  ->  Part Number Library')
+    print(f'\n\t\tO  ->  Other Options')
+    print(f'\t\tN  ->  Normal Mode')
 
-    print(f'\n\t\tN  ->  Normal Mode')
-    return input(f'\n\tChoose letter and press enter: ')
+    user_response: str = input(f'\n\tChoose letter and press enter: ')
+
+    if 'O' == user_response.upper():
+        print(f'\n\n\t{"-" * 60}')
+        print(f'\n\n\tChoose between these options...\n')
+        print(f'\t\tK  ->  Kirkland Total Inventory')
+        print(f'\t\tT  ->  Transaction Logs')
+        print(f'\t\tD  ->  Dashboard - Weekly')
+        print(f'\n\t\tS  ->  Serial Numbers - All')
+        print(f'\t\tF  ->  Find specific Serial Number')
+        print(f'\t\tP  ->  Part Number Library')
+        print(f'\t\tA  ->  All Cage - Part Numbers Count')
+
+        return input(f'\n\tChoose letter and press enter: ')
+
+    else:
+        return user_response
+
+
+def get_location_options() -> dict:
+    """
+    Get locations
+    """
+    return {"P": "P  ->  Pipe - From Racks",
+            "C": "C  ->  Cage - Inventory Storage",
+            "Q": "Q  ->  Quarantine - Isolated Items",
+            "T": "T  ->  Turbo Cats - Specific Parts",
+            "S": "S  ->  Shipment - Inventory Inbound / Outbound",
+            "I": "I  ->  Image Commodities - VSS Responsibility"}
 
 
 def get_locations_for_material(location: str) -> str:
@@ -166,15 +191,23 @@ def get_locations_for_material(location: str) -> str:
     print(f'\n\t\tP  ->  Pipe - From Racks')
     print(f'\t\tC  ->  Cage - Inventory Storage')
 
+    print(f'\n\t\tQ  ->  Quarantine - Isolated Items')
+    print(f'\t\tT  ->  Turbo Cats - Specific Parts')
+    print(f'\t\tM  ->  Mini-Lab')
+
     print(f'\n\t\tS  ->  Shipment - Inventory Inbound / Outbound')
     print(f'\t\tI  ->  Image Commodities - VSS Responsibility')
 
     chosen_letter: str = input(f'\n\tChoose letter and press enter: ')
-    location: str = location_letter_to_word(chosen_letter, location)
 
-    print(f'\tChosen Location: {location}')
+    if 'I' == chosen_letter.upper() or 'IMAGE' in chosen_letter.upper():
+        return 'Image'
 
-    return location
+    else:
+        location: str = location_letter_to_word(chosen_letter, location)
+
+        print(f'\tChosen Location: {location}')
+        return location
 
 
 def location_letter_to_word(letter: str, location: str) -> str:
@@ -183,23 +216,26 @@ def location_letter_to_word(letter: str, location: str) -> str:
     """
     letter: str = letter.upper()
 
-    if letter == 'P':
-        return 'Pipe'
+    if letter == "P":
+        return "Pipe"
 
-    elif letter == 'C':
-        return 'Cage'
+    elif letter == "C":
+        return "Cage"
 
-    elif letter == 'S':
-        return 'Shipment'
+    elif letter == "S":
+        return "Shipment"
 
-    elif letter == 'H':
-        return 'Hard Drive Room'
+    elif letter == "H":
+        return "Hard Drive Room"
 
-    elif letter == 'Q':
-        return 'Quarantine'
+    elif letter == "Q":
+        return "Quarantine"
 
-    elif letter == 'M':
-        return 'Mini Labs'
+    elif letter == "T":
+        return "Turbo Cats"
+
+    elif letter == "M":
+        return "Mini Labs"
 
     else:
         print(f'\tProblem: Unavailable Letter. Try again.')
@@ -209,10 +245,8 @@ def location_letter_to_word(letter: str, location: str) -> str:
 def get_user_response_on_chooses(user_response: str) -> str:
     """
     Get response based on user input from terminal.
-    :param user_response:
-    :return:
     """
-    user_input: str = user_response.upper()
+    user_input = str(user_response.upper())
 
     if user_input == 'N':
         return 'N'
@@ -220,11 +254,35 @@ def get_user_response_on_chooses(user_response: str) -> str:
     elif 'NORMAL' in user_response:
         return 'N'
 
+    elif 'DASHBOARD' in user_response:
+        return 'D'
+
+    elif user_input == 'D':
+        return 'D'
+
+    elif user_input == 'I':
+        return 'I'
+
+    elif "INVENTORY" in user_input:
+        return "I"
+
+    elif "Kirkland" in user_response:
+        return "K"
+
+    elif user_response == "K":
+        return "K"
+
     elif user_input == 'R':
         return 'R'
 
-    elif 'REQUEST' in user_input:
+    elif 'REQUEST' == user_input:
         return 'R'
+
+    elif user_input == 'RR':
+        return 'RR'
+
+    elif 'REQUESTS' in user_input:
+        return 'RR'
 
     elif user_input == 'U':
         return 'U'
@@ -255,6 +313,12 @@ def get_user_response_on_chooses(user_response: str) -> str:
 
     elif user_input == 'P':
         return 'P'
+
+    elif 'ALL' in user_input:
+        return 'A'
+
+    elif user_input == 'A':
+        return 'A'
 
     elif 'FIND' in user_input:
         return 'F'
@@ -344,15 +408,20 @@ def ask_inventory_questions(response: str) -> dict:
     Ask user other questions pertaining to inventory.
     """
     start_location: str = get_inventory_position('start')
-    end_location: str = get_inventory_position('end')
 
-    if start_location != end_location:
+    if start_location != 'Image':
+        end_location: str = get_inventory_position('end')
+
         return {'start': start_location,
                 'end': end_location,
                 'quantity': asks_user_quantity(),
                 'letter': response}
+
     else:
-        ask_inventory_questions(response)
+        return {'start': 'Cage',
+                'end': 'Picture Area',
+                'quantity': '10',
+                'letter': 'I'}
 
 
 def run_terminal(basic_data: dict) -> dict:

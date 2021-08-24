@@ -532,7 +532,6 @@ def request_json_from_ado(ticket_number: str):
     :param ticket_number: TRR Number
     :return: JSON File
     """
-
     base_url = 'https://azurecsi.visualstudio.com/'
     path_url = 'CSI%20Commodity%20Qualification/_apis/wit/workitems?'
     query_parameter = f'id={ticket_number}&$expand=all&api-version=5.1'
@@ -563,7 +562,6 @@ def replace_characters(csv_item: str) -> str:
     """
     Replace unnecessary characters from keys and values from TRR Tables
     :param csv_item: key (left) or value (right)  side of TRR (Test Run Request) table column in ADO (Azure DevOps)
-    :return:
     """
     csv_item.replace('\n  ', '')
     csv_item.replace('\\n  ', '')

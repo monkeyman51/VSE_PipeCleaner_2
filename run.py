@@ -6,15 +6,19 @@ import os
 import sys
 from getpass import getuser
 
+from pipe_cleaner.src.dashboard.executive_summary import main_method as executive_summary
+from pipe_cleaner.src.inventory.output import main_method as inventory_output
 from pipe_cleaner.src.dashboard_executive_summary import create_excel_output
-from pipe_cleaner.src.inventory_template import create_inventory_template
+from pipe_cleaner.src.database.all_cage import main_method as all_cage
+from pipe_cleaner.src.database.find_serial_number import main_method as find_serial_number
+from pipe_cleaner.src.database.pn_library import main_method as get_pn_library
+from pipe_cleaner.src.database.serial_numbers import main_method as get_serial_numbers
+from pipe_cleaner.src.database.transactions import main_method as store_transactions
+from pipe_cleaner.src.inventory.all_parts import main_method as all_parts
 from pipe_cleaner.src.request_inventory import start_main_method_for_request_form as request_inventory
 from pipe_cleaner.src.request_inventory import start_update_form
 from pipe_cleaner.src.terminal import run_terminal
-from pipe_cleaner.src.database.serial_numbers import main_method as get_serial_numbers
-from pipe_cleaner.src.database.find_serial_number import main_method as find_serial_number
-from pipe_cleaner.src.database.transactions import main_method as store_transactions
-from pipe_cleaner.src.database.pn_library import main_method as get_pn_library
+from pipe_cleaner.src.inventory.total import main_method as total_inventory
 
 
 def end_program_procedure() -> None:
@@ -22,7 +26,6 @@ def end_program_procedure() -> None:
     End Pipe Cleaner with run time. Automatically bring up Pipe Cleaner excel output.
     """
     open_excel_after_run(r'pipes\main_dashboard.xlsx')
-
     sys.exit()
 
 
@@ -31,7 +34,6 @@ def end_inventory_procedure(file_name: str) -> None:
     End Pipe Cleaner with run time. Automatically bring up Pipe Cleaner excel output.
     """
     open_excel_after_run(file_name)
-
     sys.exit()
 
 
@@ -57,36 +59,61 @@ def response_to_user_input() -> None:
     """
     Responding to which letter user chose.  This letter corresponds to options to move the program forward.
     """
-    letter: str = user_response['letter']
+    letter = str(user_response["letter"])
 
-    if 'R' in letter:
+    if "R" in letter:
         user_data: dict = consolidate_user_data()
         request_inventory(user_data)
 
-    elif 'N' in letter:
+    elif "RR" in letter:
+        print(f'TEST - RR')
+        pass
+
+    elif "N" in letter:
         create_excel_output(basic_data)
         end_program_procedure()
 
-    elif 'I' in letter:
-        create_inventory_template(basic_data)
-        end_inventory_procedure('inventory_transaction.xlsx')
+    elif "I" in letter:
+        total_inventory()
 
-    elif 'T' in letter:
+        # inventory_output()
+
+        # user_data: dict = consolidate_user_data()
+        # request_inventory(user_data)
+        # create_inventory_template(basic_data)
+        # end_inventory_procedure('inventory_transaction.xlsx')
+
+    elif "D" in letter:
+        executive_summary()
+
+    elif "T" in letter:
         store_transactions()
         # create_total_inventory(basic_data)
         # end_inventory_procedure('total_kirkland_inventory.xlsx')
 
-    elif 'P' in letter:
+    elif "P" in letter:
         get_pn_library()
 
-    elif 'U' in letter:
-        form_number: str = input(f'\n\tEnter Number: ')
-        start_update_form(form_number)
+    elif "M" in letter:
+        pass
 
-    elif 'S' in letter:
+    elif "U" in letter:
+        print(f'\n\tForm Number:')
+        print(f'\n\t\t- Enter form number found in inventory email box.')
+        print(f'\t\t- ex. 021-000-001')
+        form_number: str = input(f'\n\t\tEnter Form Number: ')
+        start_update_form(form_number, basic_data)
+
+    elif "S" in letter:
         get_serial_numbers()
 
-    elif 'F' in letter:
+    elif "A" in letter:
+        all_cage()
+
+    elif "K" in letter:
+        all_parts()
+
+    elif "F" in letter:
         serial_number: str = input(f'\n\n\tEnter Serial Number: ')
         find_serial_number(serial_number)
 
@@ -96,7 +123,7 @@ def response_to_user_input() -> None:
 
 
 if __name__ == "__main__":
-    basic_data: dict = {'version': '2.6.7',
+    basic_data: dict = {'version': '2.7.3',
                         'site': 'Kirkland Lab Site',
                         'username': getuser().replace(' ', '').strip()}
 

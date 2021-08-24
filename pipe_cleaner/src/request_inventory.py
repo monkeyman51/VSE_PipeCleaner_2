@@ -119,6 +119,18 @@ def get_template_pipe_to_shipment(start_location: str, end_location: str) -> dic
     return get_total_mains(template)
 
 
+def get_template_image(start_location: str, end_location: str) -> dict:
+    """
+    Get request template based on start and end locations.
+    """
+    template: dict = get_template_dictionary(start_location, end_location)
+
+    template['task_name']['value']: str = 'main'
+    template['part_number']['value']: str = 'main'
+
+    return get_total_mains(template)
+
+
 def get_locations_template(basic_info: dict) -> dict:
     """
     Get the excel template based off of start location and end location.
@@ -143,6 +155,12 @@ def get_locations_template(basic_info: dict) -> dict:
 
     elif start == 'SHIPMENT' and end == 'PIPE':
         return get_template_pipe_to_shipment(start, end)
+
+    elif basic_info["letter"] == 'I':
+        return get_template_image(start, 'Picture Area')
+
+    else:
+        return get_template_pipe_cage(start, end)
 
 
 def add_excel_colors(template: dict, worksheet) -> None:
@@ -253,7 +271,7 @@ def clean_empty_fields(field_data: str):
     """
     Assure database update fields avoid default data or optional data.  Want to be consistent and have none.
     """
-    clean_field_name: str = field_data.upper()
+    clean_field_name = str(field_data).upper()
 
     if clean_field_name == 'OPTIONAL':
         return 'None'
@@ -327,11 +345,15 @@ def handle_new_file(basic_info: dict) -> load_workbook:
         sys.exit()
 
 
-def clean_default_name(default_user_name: str) -> str:
+def clean_default_username(default_user_name: str) -> str:
     """
     Remove unnecessary characters from name to be clean and presentable in the excel document.
     """
-    return default_user_name.upper().replace('.', ' ').replace('-EXT', '').title()
+    if not default_user_name or default_user_name.isdigit():
+        return 'None'
+
+    else:
+        return default_user_name.upper().replace('.', ' ').replace('-EXT', '').title().strip()
 
 
 def get_request_file_name(user_data: dict) -> str:
@@ -407,7 +429,7 @@ def merge_basic_info(user_data: dict) -> dict:
     current_month: str = get_month_name()
 
     user_data['request_file_name'] = f'logs/{get_backup_name()}'
-    user_data['name'] = clean_default_name(user_data['name'])
+    user_data['name'] = clean_default_username(user_data['name'])
     user_data['request_file'] = 'request_template.xlsx'
     user_data['month'] = current_month
     user_data['request_number'] = get_request_number(user_data)
@@ -625,22 +647,30 @@ def get_request_field_inputs(file_name: str) -> dict:
             'form_number': worksheet['K6'].value}
 
 
-def get_update_fields(request_worksheet, update_worksheet) -> dict:
+def get_update_fields(request_form: dict, update_worksheet) -> dict:
     """
     Get update fields information.
     """
+    quantity: str = request_form['basic_info']['quantity']
+    machine_name: str = request_form['excel_data']['machine_name']
+    notes: str = request_form['excel_data']['notes']
+    pipe_number: str = request_form['excel_data']['pipe_number']
+    purchase_order: str = request_form['excel_data']['purchase_order']
+    task_name: str = request_form['excel_data']['task_name']
+    trr_number: str = request_form['excel_data']['trr_number']
+
     return {'approved_by': update_worksheet['C13'].value,
             'part_number': update_worksheet['C16'].value,
             'start_location': update_worksheet['C19'].value,
             'end_location': update_worksheet['C22'].value,
-            'task_name': request_worksheet['C13'].value,
-            'notes': clean_optional_field(request_worksheet['C26'].value),
-            'pipe_number': clean_optional_field(request_worksheet['C29'].value),
-            'machine_name': clean_optional_field(request_worksheet['C32'].value),
-            'trr_number': clean_optional_field(request_worksheet['C35'].value),
-            'purchase_order': clean_optional_field(request_worksheet['C38'].value),
+            'task_name': task_name,
+            'notes': clean_optional_field(notes),
+            'pipe_number': clean_optional_field(pipe_number),
+            'machine_name': clean_optional_field(machine_name),
+            'trr_number': clean_optional_field(trr_number),
+            'purchase_order': clean_optional_field(purchase_order),
             'current_quantity': get_serial_numbers(update_worksheet),
-            'total_quantity': request_worksheet['K10'].value,
+            'total_quantity': quantity,
             'date': update_worksheet['K2'].value,
             'time': update_worksheet['K3'].value,
             'user': update_worksheet['K4'].value,
@@ -726,7 +756,11 @@ def add_email_body(request_fields: dict) -> str:
     end_location: str = request_fields['end_location']
 
     if 'SHIPMENT' in start_location or 'SHIPMENT' in end_location:
-        pass
+        get_shipment_email_message(request_fields)
+
+    elif 'CAGE' in start_location or 'PICTURE AREA' in end_location:
+        get_image_request_email(request_fields)
+
     else:
         return get_request_email_message(request_fields)
 
@@ -766,14 +800,16 @@ def get_shipment_email_message(request_fields: dict) -> str:
     Get non-shipment email.
     """
     body_message: str = 'Inventory Team,'
-    body_message += f'\nNew request form has been made for inventory transaction.  Use Pipe Cleaner to update ' \
+    body_message += f'\nNew request form has been made for inventory shipment.  No need to confirm.  ' \
+                    f'\nUse Pipe Cleaner to update ' \
                     f'(command "U") to enter form number to update inventory movement.'
-    body_message += f'\nTransaction Number: 021-000-001'
+    body_message += f'\nForm Number: {request_fields["form_number"]}'
     body_message += f'\n\nInventory Request:'
     body_message += f'\n\t- Quantity: {request_fields["quantity"]}\n'
+
     for index, field in enumerate(request_fields, start=0):
 
-        if 'quantity' in field:
+        if field.upper() == 'QUANTITY' or field.upper() == 'FORM NUMBER':
             continue
 
         field_input: str = request_fields[field]
@@ -786,6 +822,37 @@ def get_shipment_email_message(request_fields: dict) -> str:
             body_message += f'\n\t- {field_name}: {field_input}'
         else:
             body_message += f'\n\t- {field_name}: None'
+
+    return body_message
+
+
+def get_image_request_email(request_fields: dict) -> str:
+    """
+    Get non-shipment email.
+    """
+    body_message: str = 'Inventory Team,'
+    body_message += f'\nNew request form has been made for taking images for VSS.  Please respond to user via email' \
+                    f'to confirm.'
+    body_message += f'\nForm Number: {request_fields["form_number"]}'
+    body_message += f'\n\nInventory Request:'
+    body_message += f'\n\t- Quantity: {request_fields["quantity"]}\n'
+
+    for index, field in enumerate(request_fields, start=0):
+
+        if field.upper() == 'QUANTITY' or field.upper() == 'FORM NUMBER':
+            continue
+
+        field_input: str = request_fields[field]
+        field_name: str = field.replace('_', ' ').title()
+
+        if index == 4:
+            body_message += f'\n'
+
+        if is_field_correct(field_input):
+            body_message += f'\n\t- {field_name}: {field_input}'
+        else:
+            body_message += f'\n\t- {field_name}: None'
+
     return body_message
 
 
@@ -794,10 +861,10 @@ def email_inventory_request(request_fields: dict) -> None:
     Sends email to people responsible dealing with inventory.
     """
     print(f'\t\t- Writing email to Inventory_Kirkland@veritasdcservices.com')
-    # real_location: str = 'Inventory_Kirkland@veritasdcservices.com'
-    person_location: str = 'joe.ton@VeritasDCservices.com'
+    location: str = 'Inventory_Kirkland@veritasdcservices.com'
+    # location: str = 'joe.ton@VeritasDCservices.com'
 
-    create_email_notification(person_location, request_fields)
+    create_email_notification(location, request_fields)
 
 
 def end_request_form():
@@ -807,19 +874,21 @@ def end_request_form():
     sys.exit()
 
 
-def create_email_notification(person_location, request_fields) -> None:
+def create_email_notification(person_location: str, request_fields: dict) -> None:
     outlook = client.Dispatch('Outlook.Application')
     message = outlook.CreateItem(0)
     message.To = person_location
 
-    start_location: str = request_fields['start_location']
-    end_location: str = request_fields['end_location']
+    start_location: str = request_fields.get("start_location", "None")
+    end_location: str = request_fields.get("end_location", "None")
 
     if 'SHIPMENT' in start_location.upper() or 'SHIPMENT' in end_location.upper():
         form_number: str = request_fields['form_number']
         message.Subject = f'{start_location} to {end_location} - {form_number}'
+
     else:
         message.Subject = request_fields['task_name']
+
     message.Body = add_email_body(request_fields)
     message.Send()
 
@@ -859,7 +928,9 @@ def validate_request_form(file_name: str, template: dict, basic_info: dict) -> N
 
     request_fields_inputs: dict = get_request_field_inputs(file_name)
     fields_filled: bool = is_essential_fields_filled(request_fields_inputs, template)
-    sleep(1)
+
+    # Sometimes excel application does not save properly.  Gives excel time to register new version.
+    sleep(2)
 
     if fields_filled:
         print_notification_receipt(request_fields_inputs, basic_info)
@@ -911,25 +982,24 @@ def get_update_form_data(fields_data: dict) -> dict:
     return serial_number_logs
 
 
-def check_update_form(file_name: str) -> None:
+def check_update_form(file_name: str, request_form: dict, form_number: str) -> None:
     """
     Check if inventory request form done correctly.
     """
     print(f'\t\t- Checking update form')
 
-    fields_data: dict = get_update_fields(load_workbook(f'request_form.xlsx')['Request'],
-                                          load_workbook(f'update_form.xlsx')['Update'])
+    fields_data: dict = get_update_fields(request_form, load_workbook(f'update_form.xlsx')['Update'])
 
     if is_update_fields_filled(fields_data):
-        print_line_divider('Log Inventory:')
+        print_line_divider('Log Serial Numbers and Inventory Transaction:')
         print(f'\t\tY  ->  Yes')
         print(f'\t\tN  ->  No')
-        response: str = input(f'\n\tResponse:').upper()
+        response: str = input(f'\n\tResponse: ').upper()
 
         if 'Y' == response:
             update_serial_numbers(fields_data)
-            update_transactions(fields_data)
-            print(f'\tUpdates to Serial Numbers and Transactions database successfully...')
+            update_transactions(fields_data, form_number)
+            print(f'\n\tSuccess: Updates to Serial Numbers and Transactions database...')
             input(f'\tPress enter to exit: ')
             sys.exit()
 
@@ -946,7 +1016,7 @@ def check_update_form(file_name: str) -> None:
         print(f'\n\t\t* Need to fix inventory update form...')
         input(f'\t\t- Press enter to open excel:')
         open_excel_file_for_inventory_forms(file_name)
-        check_update_form(file_name)
+        check_update_form(file_name, request_form, form_number)
 
 
 def update_serial_numbers(fields_data: dict) -> None:
@@ -981,22 +1051,20 @@ def get_current_transactions_count(document) -> int:
     return count
 
 
-def update_transactions(fields_data: dict) -> None:
+def update_transactions(fields_data: dict, form_number: str) -> None:
     """
     Update serial numbers based off of update form's fields.
     """
-    year_month: str = get_year_month()
-
-    document = access_database_document('transactions', year_month)
+    document = access_database_document('transactions', '021')
     transactions_count: int = get_current_transactions_count(document)
     new_count = str(transactions_count + 1)
 
-    transaction_log: dict = get_transaction_log(fields_data, new_count)
+    transaction_log: dict = get_transaction_log(fields_data, new_count, form_number)
 
     document.insert_one(transaction_log)
 
 
-def get_transaction_log(fields_data: dict, _id: str) -> dict:
+def get_transaction_log(fields_data: dict, _id: str, form_number: str) -> dict:
     """
     Data being submitted to database as new inventory transaction log.
     """
@@ -1009,8 +1077,8 @@ def get_transaction_log(fields_data: dict, _id: str) -> dict:
 
     transaction_log['time']['date_entry'] = fields_data['date']
     transaction_log['time']['time_entry'] = fields_data['time']
-    transaction_log['time']['date_logged'] = strftime('%I:%M %p')
-    transaction_log['time']['time_logged'] = strftime('%m/%d/%Y')
+    transaction_log['time']['date_logged'] = strftime('%m/%d/%Y')
+    transaction_log['time']['time_logged'] = strftime('%I:%M %p')
 
     transaction_log['location']['site'] = fields_data['site']
     transaction_log['location']['current'] = fields_data['end_location']
@@ -1025,6 +1093,7 @@ def get_transaction_log(fields_data: dict, _id: str) -> dict:
     transaction_log['source']['task'] = fields_data['task_name']
     transaction_log['source']['trr'] = fields_data['trr_number']
     transaction_log['source']['comment'] = fields_data['notes']
+    transaction_log['source']['form_number'] = form_number
 
     return transaction_log
 
@@ -1139,11 +1208,37 @@ def is_all_serial_numbers_scanned(request_fields: dict) -> bool:
         return False
 
 
-def setup_update_form() -> None:
+def setup_update_form(request_form: dict) -> None:
     """
     Setup up the fields to have consistent look.
     """
-    request_worksheet = load_workbook('request_form.xlsx')['Request']
+    import json
+    foo = json.dumps(request_form, sort_keys=True, indent=4)
+    print(foo)
+    input()
+
+    form_number: str = request_form['_id']
+
+    date: str = request_form['basic_info']['date']
+    end: str = request_form['basic_info']['end']
+    location: str = request_form['basic_info']['location']
+    quantity: str = request_form['basic_info']['quantity']
+    seconds: str = request_form['basic_info']['seconds']
+    start: str = request_form['basic_info']['start']
+    time: str = request_form['basic_info']['time']
+    user: str = request_form['basic_info']['user']
+    version: str = request_form['basic_info']['version']
+
+    excel_date: str = request_form['excel_data']['date']  # TODO
+    machine_name: str = request_form['excel_data']['machine_name']
+    notes: str = request_form['excel_data']['notes']
+    part_number: str = request_form['excel_data']['part_number']
+    pipe_number: str = request_form['excel_data']['pipe_number']
+    purchase_order: str = request_form['excel_data']['purchase_order']
+    seconds: str = request_form['excel_data']['seconds']
+    task_name: str = request_form['excel_data']['task_name']
+    excel_time: str = request_form['excel_data']['time']
+    trr_number: str = request_form['excel_data']['trr_number']
 
     update_workbook: load_workbook = load_workbook(f'settings/update_template.xlsx')
     update_worksheet = update_workbook['Update']
@@ -1153,25 +1248,26 @@ def setup_update_form() -> None:
     update_worksheet['C19'] = 'Scan Rack / Storage / Offsite'
     update_worksheet['C22'] = 'Scan Rack / Storage / Offsite'
 
-    update_worksheet['D5'] = str(request_worksheet['D5'].value).replace('REQUEST', 'UPDATE')
+    update_worksheet['D5'] = f'{start.upper()} TO {end.upper()} - UPDATE FORM'
 
-    update_worksheet['C25'] = request_worksheet['C13'].value
-    update_worksheet['C28'] = request_worksheet['C26'].value
-    update_worksheet['C29'] = request_worksheet['C29'].value
-    update_worksheet['C30'] = request_worksheet['C32'].value
-    update_worksheet['C31'] = request_worksheet['C35'].value
-    update_worksheet['C32'] = request_worksheet['C38'].value
+    update_worksheet['C25'] = task_name
+    update_worksheet['C28'] = notes
+    update_worksheet['C29'] = pipe_number
+    update_worksheet['C30'] = machine_name
+    update_worksheet['C31'] = trr_number
+    update_worksheet['C32'] = purchase_order
 
-    update_worksheet['K2'] = request_worksheet['K2'].value
-    update_worksheet['K3'] = request_worksheet['K3'].value
-    update_worksheet['K4'] = request_worksheet['K4'].value
-    update_worksheet['K5'] = request_worksheet['K5'].value
-    update_worksheet['K6'] = request_worksheet['K6'].value
-    update_worksheet['K7'] = request_worksheet['K7'].value
-    update_worksheet['M10'] = request_worksheet['K10'].value
+    update_worksheet['K2'] = excel_date
+    update_worksheet['K3'] = excel_time
+    update_worksheet['K4'] = user
+    update_worksheet['K5'] = location
+    update_worksheet['K6'] = form_number
+    update_worksheet['K7'] = version
+    update_worksheet['M10'] = quantity
 
     try:
         update_workbook.save(f'update_form.xlsx')
+
     except PermissionError:
         print(f'\tPermission Denied: update_template.xlsx is already open')
         print(f'\tPlease close file and restart Pipe Cleaner')
@@ -1189,17 +1285,22 @@ def start_request_stage(file_name: str, template: dict, basic_info: dict) -> Non
         validate_request_form(file_name, template, basic_info)
 
 
-def start_update_form(form_number) -> None:
+def start_update_form(form_number: str, basic_data: dict) -> None:
     """
     After sending email to inventory team. Have update form ready.
     """
     file_name: str = 'update_form.xlsx'
+    site = str(basic_data['site']).replace(' Lab Site', '').replace('Kirkland', '0')
 
-    setup_update_form()
+    current_year: str = strftime('%m/%d/%Y')[8:10]
+    document = access_database_document('request_forms', f'{site}{current_year}')
+    request_form: dict = document.find_one({'_id': form_number})
+
+    setup_update_form(request_form)
     open_excel_file_for_inventory_forms(file_name)
 
     if is_excel_file_closed(file_name, 'update'):
-        check_update_form(file_name)
+        check_update_form(file_name, request_form, form_number)
 
 
 def get_request_number(user_data: dict) -> str:
@@ -1219,10 +1320,9 @@ def get_request_form_category(user_data: dict) -> str:
     """
     current_year: str = strftime('%m/%d/%Y')[8:10]
     current_location: str = user_data['location']
-    current_month: str = user_data['month']
 
     if 'KIRKLAND' in current_location.upper():
-        return f'0{current_year}_{current_month}'
+        return f'0{current_year}'
 
 
 def get_current_request_number(all_requests, request_category: str) -> str:

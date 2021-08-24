@@ -123,6 +123,7 @@ def add_all_serial_data(console_server_data: dict, current_setup: dict):
     all_serial_data = console_server_data['all_serial']
 
     for index, serial_data in enumerate(all_serial_data, start=0):
+
         current_color: xlsxwriter = get_current_color(index, structure)
 
         worksheet.write(f'C{index + current_position}', serial_data['pipe_name'], current_color)
@@ -142,6 +143,7 @@ def add_all_serial_data(console_server_data: dict, current_setup: dict):
         worksheet.write(f'G{index + current_position}', serial_data['commodity_type'], current_color)
         worksheet.write(f'H{index + current_position}', serial_data['part_number'], current_color)
         worksheet.write(f'I{index + current_position}', serial_data['serial_number'], current_color)
+        # worksheet.write(f'J{current_position}', get_last_active(part_number_data), row_color)
 
         worksheet.set_row(index + current_position - 1, 18.00)
 

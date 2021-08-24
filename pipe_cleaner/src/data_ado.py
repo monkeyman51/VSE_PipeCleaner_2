@@ -24,7 +24,6 @@ def exception_check_reference_test_plans(potential_test_plans: str):
     """
     Ensure that if an initial reference test plan from the TRR show empty, the next Table Row shows the in
     :param potential_test_plans:
-    :return:
     """
     upper_test_plans: str = potential_test_plans.upper()
     possible_key_words: list = [
@@ -43,10 +42,6 @@ def find_other_potential_components(component_key, index, table_rows):
     """
     Sometimes in the ADO website, table rows and their data do not align. Therefore, when calling the key,
     the value sometimes does not show up due to weird configuration of the ticket table. To ensure that
-    :param component_key:
-    :param index:
-    :param table_rows:
-    :return:
     """
     potential_reference_test_plans = []
 
@@ -488,10 +483,17 @@ def store_tickets_data(raw_tickets_data: list, console_server_data: dict) -> dic
 
     for raw_ticket_data in raw_tickets_data:
         ticket_data: dict = {}
-
         try:
             ticket_json: dict = json.loads(raw_ticket_data)
+        except json.decoder.JSONDecodeError:
+            print(f'\n\tError occurred fetching ADO data.  Complain to MFST.')
+            print(f'\tPlease Restart Pipe Cleaner and try again.  Usually works on 2nd try.')
+            input()
+        # foo = json.dumps(ticket_json, sort_keys=True, indent=4)
+        # print(foo)
+        # input()
 
+        try:
             # For some reason the ticket_json["id"] data type is int
             ticket_id: str = str(ticket_json["id"])
             print(f'\t\t- Collect  |  {Fore.GREEN}Success{Style.RESET_ALL}   |  {ticket_id}')
@@ -549,56 +551,57 @@ def store_tickets_data(raw_tickets_data: list, console_server_data: dict) -> dic
         except KeyError:
             print(f'\tNo Description Table... Grabbing from Summary Table Instead in TRR')
 
-            ticket_json: dict = json.loads(raw_ticket_data)
-
             # For some reason the ticket_json["id"] data type is int
-            ticket_id: str = str(ticket_json["id"])
-            # print(f'\t\t- Collect  |  {Fore.GREEN}Success{Style.RESET_ALL}   |  {ticket_id}')
+            try:
+                ticket_id = str(ticket_json["id"])
+                # print(f'\t\t- Collect  |  {Fore.GREEN}Success{Style.RESET_ALL}   |  {ticket_id}')
 
-            # Table Data
-            table_data = ticket_json['fields']['Custom.Summary']
-            table_data_soup = BeautifulSoup(table_data, 'html.parser')
+                # Table Data
+                table_data = ticket_json['fields']['Custom.Summary']
+                table_data_soup = BeautifulSoup(table_data, 'html.parser')
 
-            table_rows: list = table_data_soup.findAll('tr')
-            table_data: dict = get_clean_table_data(table_rows)
+                table_rows: list = table_data_soup.findAll('tr')
+                table_data: dict = get_clean_table_data(table_rows)
 
-            ticket_data['qcl_parts']: list = get_qcl_parts(table_data)
+                ticket_data['qcl_parts']: list = get_qcl_parts(table_data)
 
-            # Checking for CRDs later
-            server_bios: str = table_data.get('server_bios', 'None')
-            server_bmc: str = table_data.get('server_bmc', 'None')
-            server_cpld: str = table_data.get('server_cpld', 'None')
-            server_os: str = table_data.get('server_os', 'None')
+                # Checking for CRDs later
+                server_bios: str = table_data.get('server_bios', 'None')
+                server_bmc: str = table_data.get('server_bmc', 'None')
+                server_cpld: str = table_data.get('server_cpld', 'None')
+                server_os: str = table_data.get('server_os', 'None')
 
-            if server_bios != 'None' and server_bios != '':
-                all_bios.append(server_bios)
-            if server_bmc != 'None' and server_bmc != '':
-                all_bmc.append(server_bmc)
-            if server_cpld != 'None' and server_cpld != '':
-                all_cpld.append(server_cpld)
-            if server_os != 'None' and server_os != '':
-                all_os.append(server_os)
+                if server_bios != 'None' and server_bios != '':
+                    all_bios.append(server_bios)
+                if server_bmc != 'None' and server_bmc != '':
+                    all_bmc.append(server_bmc)
+                if server_cpld != 'None' and server_cpld != '':
+                    all_cpld.append(server_cpld)
+                if server_os != 'None' and server_os != '':
+                    all_os.append(server_os)
 
-            # Table Data Stored
-            ticket_data['table_data']: dict = table_data
+                # Table Data Stored
+                ticket_data['table_data']: dict = table_data
 
-            ticket_data['title'] = ticket_json['fields']['System.Title']
+                ticket_data['title'] = ticket_json['fields']['System.Title']
 
-            ticket_data['trr_type']: int = ticket_json.get('fields', {}).get('Custom.TRRType')
+                ticket_data['trr_type']: int = ticket_json.get('fields', {}).get('Custom.TRRType')
 
-            # Due Dates
-            ticket_data['due_dates']: dict = access_due_dates(ticket_json)
+                # Due Dates
+                ticket_data['due_dates']: dict = access_due_dates(ticket_json)
 
-            # Assigned To
-            ticket_data['assigned_to']: str = ticket_json['fields']['System.AssignedTo']['displayName']
+                # Assigned To
+                ticket_data['assigned_to']: str = ticket_json['fields']['System.AssignedTo']['displayName']
 
-            # State of Qual
-            ticket_data['state']: str = ticket_json['fields']['System.State']
+                # State of Qual
+                ticket_data['state']: str = ticket_json['fields']['System.State']
 
-            # Test Plans Hyperlink, used later for Async
-            ticket_data['test_plan_hyperlink']: str = get_test_plan_hyperlink(ticket_json)
+                # Test Plans Hyperlink, used later for Async
+                ticket_data['test_plan_hyperlink']: str = get_test_plan_hyperlink(ticket_json)
 
-            all_tickets_data[ticket_id] = ticket_data
+                all_tickets_data[ticket_id] = ticket_data
+            except KeyError:
+                pass
 
     all_tickets_data['unique_bios'] = list(set(all_bios))
     all_tickets_data['unique_bmc'] = list(set(all_bmc))

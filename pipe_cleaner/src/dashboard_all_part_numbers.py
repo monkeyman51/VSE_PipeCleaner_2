@@ -327,10 +327,11 @@ def create_personal_issues_sheet(excel_setup: dict) -> dict:
     excel_setup['rows_height']: tuple = (15.75, 15.75, 15.75, 15.75, 21.00, 15.75, 15.75, 15.75, 15.75, 15.75,
                                          3.75, 3.75, 3.75)
 
-    excel_setup['columns_width']: tuple = (0.50, 0.50, 27.0, 18.0, 25.0, 10.0, 11.0, 21.0, 11.0, 21.00, 10.0, 10.0,
+    excel_setup['columns_width']: tuple = (0.50, 0.50, 27.0, 26.0, 18.0, 22.0, 14.0, 10.0, 24.0, 12.00, 18.0, 10.0,
                                            10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0)
 
-    excel_setup['column_names']: tuple = ('Location',
+    excel_setup['column_names']: tuple = ('Machine',
+                                          'Location',
                                           'SKU',
                                           'Serial Number',
                                           'State',
@@ -345,15 +346,17 @@ def create_personal_issues_sheet(excel_setup: dict) -> dict:
 def get_last_active(part_number_data):
     last_found_alive: float = part_number_data['last_found_alive']
     days = last_found_alive / 86400.00
-
+    # TODO
     if days < 1:
-        return 'Less than 1 Day'
+        # return 'Less than 1 Day'
+        return '1'
     else:
         first_part = str(days).split('.')[0]
         if first_part == '1':
-            return f'{first_part} day last online'
+            # return f'{first_part} day last online'
+            return f'{first_part}'
         else:
-            return f'{first_part} days last online'
+            return f'{first_part}'
 
 
 def add_all_serial_data(console_server_data: dict, current_setup: dict):
@@ -368,21 +371,27 @@ def add_all_serial_data(console_server_data: dict, current_setup: dict):
     for index, part_number_data in enumerate(all_part_numbers, start=0):
         row_color: xlsxwriter = get_row_color(index, structure)
         current_position: int = index + initial_position
+        last_active = int(get_last_active(part_number_data))
 
-        worksheet.write(f'C{current_position}', part_number_data['pipe_name'], row_color)
-        worksheet.write(f'D{current_position}', part_number_data['machine_sku'], row_color)
-        worksheet.write(f'E{current_position}', part_number_data['machine_serial'], row_color)
+        worksheet.write(f'C{current_position}', part_number_data['machine_name'], row_color)
+        worksheet.write(f'D{current_position}', part_number_data['pipe_name'], row_color)
+        worksheet.write(f'E{current_position}', part_number_data['machine_sku'], row_color)
+        worksheet.write(f'F{current_position}', part_number_data['machine_serial'], row_color)
 
         connection_status: str = part_number_data['connection_status']
         if 'ALIVE' in connection_status.upper():
-            worksheet.write(f'F{current_position}', connection_status.upper(), row_color)
-        else:
-            worksheet.write(f'F{current_position}', 'DEAD', structure.light_red_middle_11)
+            worksheet.write(f'G{current_position}', "ONLINE", row_color)
 
-        worksheet.write(f'G{current_position}', part_number_data['type'], row_color)
-        worksheet.write(f'H{current_position}', part_number_data['part_number'], row_color)
-        worksheet.write(f'I{current_position}', part_number_data['count'], row_color)
-        worksheet.write(f'J{current_position}', get_last_active(part_number_data), row_color)
+        elif last_active <= 30:
+            worksheet.write(f'G{current_position}', 'OFFLINE <= 30', structure.light_red_middle_11)
+
+        elif last_active > 30:
+            worksheet.write(f'G{current_position}', 'OFFLINE > 30', structure.light_red_middle_11)
+
+        worksheet.write(f'H{current_position}', part_number_data['type'], row_color)
+        worksheet.write(f'I{current_position}', part_number_data['part_number'], row_color)
+        worksheet.write(f'J{current_position}', part_number_data['count'], row_color)
+        worksheet.write(f'K{current_position}', get_last_active(part_number_data), row_color)
 
         worksheet.set_row(current_position - 1, 18.00)
 
