@@ -2846,7 +2846,7 @@ def set_issue_structure(worksheet, structure, sheet_title, site_location, total_
     pipe_cleaner_version = pipe_cleaner_version.split(' ')[0]
 
     # Top Left Plane
-    worksheet.insert_image('A1', 'pipe_cleaner/img/vse_logo.png')
+    worksheet.insert_image('A1', 'pipe_cleaner/img/vsei_logo.png')
     worksheet.write('B5', f' Pipe Cleaner - {sheet_title}', structure.big_blue_font)
     worksheet.write('B6', f'       {site_location}', structure.bold_italic_blue_font)
     worksheet.write('B7', f'            Pipes - {total_pipes}', structure.bold_italic_blue_font)
@@ -2988,30 +2988,31 @@ def set_issue_layout(worksheet, structure):
     worksheet.set_column('Z:Z', 25, structure.white)
 
 
-def main_method(ado_data: dict, console_server_data: dict, workbook, structure, site_location: str, all_issues,
-                all_checks, mismatch_tally: str, missing_tally: str, pipe_numbers: dict, pipe_cleaner_version: str):
+def main_method(azure_devops_data, console_server_data, workbook, structure, all_issues,
+                all_checks, mismatch_tally, missing_tally, pipe_numbers, basic_data):
     """
 
-    :param pipe_cleaner_version:
+    :param basic_data:
+    :param azure_devops_data:
     :param pipe_numbers:
     :param console_server_data:
-    :param ado_data:
     :param workbook:
     :param structure:
-    :param site_location:
     :param all_issues:
     :param all_checks:
     :param mismatch_tally:
     :param missing_tally:
     :return:
     """
+    site: str = basic_data['site']
+    version: str = basic_data['version']
     sheet_name: str = 'Setup'
     worksheet_issues = workbook.add_worksheet(sheet_name)
 
-    set_issue_structure(worksheet_issues, structure, sheet_name, site_location, len(all_issues),
-                        all_checks, pipe_numbers, pipe_cleaner_version)
+    set_issue_structure(worksheet_issues, structure, sheet_name, site, len(all_issues),
+                        all_checks, pipe_numbers, version)
 
-    add_issue_data(ado_data, console_server_data, worksheet_issues, structure)
+    add_issue_data(azure_devops_data, console_server_data, worksheet_issues, structure)
 
     create_breakdown_graph(console_server_data, workbook, worksheet_issues, 'All Issues', mismatch_tally, missing_tally)
 

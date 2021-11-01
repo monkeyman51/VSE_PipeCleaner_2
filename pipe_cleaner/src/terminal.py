@@ -40,6 +40,7 @@ def get_version_from_database() -> str:
                              'version': '2.7.8',
                              'date_time': datetime.today().strftime('%Y-%m-%d-%H:%M:%S')})
         return version_db['version']
+
     else:
         return version_db['version']
 
@@ -80,15 +81,14 @@ def is_vpn_on(basic_data: dict) -> bool:
     VSE Kirkland Lab is on the 172.18.xxx network.
     VSE Thailand and Europe Network will be put up later.
     """
-    site: str = basic_data['site']
     print(f'\t\t- Confirming VPN...')
 
-    if 'Kirkland' in site:
-        vse_kirkland_network: str = '172.'
+    if 'Kirkland' in basic_data['site']:
+        vse_kirkland_network: str = "172.18."
         ip_addresses: list = socket.gethostbyname_ex(socket.gethostname())[-1]
 
         for ip_address in ip_addresses:
-            if vse_kirkland_network in ip_address[0:4]:
+            if vse_kirkland_network in ip_address:
                 return True
 
         else:
@@ -158,10 +158,11 @@ def get_available_chooses() -> str:
         print(f'\t\tK  ->  Kirkland Total Inventory')
         print(f'\t\tT  ->  Transaction Logs')
         print(f'\t\tD  ->  Dashboard - Weekly')
+        print(f'\t\tL  ->  Library - Part Numbers')
         print(f'\n\t\tS  ->  Serial Numbers - All')
         print(f'\t\tF  ->  Find specific Serial Number')
-        print(f'\t\tP  ->  Part Number Library')
         print(f'\t\tA  ->  All Cage - Part Numbers Count')
+        print(f'\n\t\tP  ->  Pipes Report')
 
         return input(f'\n\tChoose letter and press enter: ')
 
@@ -260,16 +261,25 @@ def get_user_response_on_chooses(user_response: str) -> str:
     elif user_input == 'D':
         return 'D'
 
+    elif user_input == "L":
+        return "L"
+
+    elif "Library" in user_input:
+        return "L"
+
     elif user_input == 'I':
         return 'I'
+
+    elif user_input == "P":
+        return "P"
 
     elif "INVENTORY" in user_input:
         return "I"
 
-    elif "Kirkland" in user_response:
+    elif "Kirkland" in user_input:
         return "K"
 
-    elif user_response == "K":
+    elif user_input == "K":
         return "K"
 
     elif user_input == 'R':

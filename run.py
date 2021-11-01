@@ -1,7 +1,6 @@
 """
 Module responsible for starting Project Pipe Cleaner.
 """
-
 import os
 import sys
 from getpass import getuser
@@ -19,6 +18,9 @@ from pipe_cleaner.src.request_inventory import start_main_method_for_request_for
 from pipe_cleaner.src.request_inventory import start_update_form
 from pipe_cleaner.src.terminal import run_terminal
 from pipe_cleaner.src.inventory.total import main_method as total_inventory
+from pipe_cleaner.src.inventory.kirkland_total import main_method as kirkland_total
+from pipe_cleaner.src.inventory.part_number_library import main_method as get_library
+from pipe_cleaner.src.pipe_state import main as pipe_report
 
 
 def end_program_procedure() -> None:
@@ -74,25 +76,25 @@ def response_to_user_input() -> None:
         end_program_procedure()
 
     elif "I" in letter:
-        total_inventory()
+        # total_inventory()
 
         # inventory_output()
 
-        # user_data: dict = consolidate_user_data()
-        # request_inventory(user_data)
+        user_data: dict = consolidate_user_data()
+        request_inventory(user_data)
         # create_inventory_template(basic_data)
-        # end_inventory_procedure('inventory_transaction.xlsx')
+        end_inventory_procedure('inventory_transaction.xlsx')
 
     elif "D" in letter:
         executive_summary()
+
+    elif "P" in letter:
+        pipe_report()
 
     elif "T" in letter:
         store_transactions()
         # create_total_inventory(basic_data)
         # end_inventory_procedure('total_kirkland_inventory.xlsx')
-
-    elif "P" in letter:
-        get_pn_library()
 
     elif "M" in letter:
         pass
@@ -111,7 +113,11 @@ def response_to_user_input() -> None:
         all_cage()
 
     elif "K" in letter:
-        all_parts()
+        # all_parts()
+        kirkland_total(basic_data)
+
+    elif "L" in letter:
+        get_library(basic_data)
 
     elif "F" in letter:
         serial_number: str = input(f'\n\n\tEnter Serial Number: ')
@@ -123,7 +129,7 @@ def response_to_user_input() -> None:
 
 
 if __name__ == "__main__":
-    basic_data: dict = {'version': '2.7.3',
+    basic_data: dict = {'version': '2.7.5',
                         'site': 'Kirkland Lab Site',
                         'username': getuser().replace(' ', '').strip()}
 

@@ -967,12 +967,21 @@ def get_ticket_urls(console_server_data) -> list:
             f'id={ticket}&$expand=all&api-version=5.1' for ticket in unique_tickets]
 
 
+def set_loop_policy() -> None:
+    """
+    Thanks to stack overflow, this solved event loops closing prematurely and also getting the right data for the
+    dashboard output.
+    :return:
+    """
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
+
 def main_method(console_server_data: dict):
     """
     Using asynchronous for getting all relevant data from Azure DevOps
     """
     ticket_urls: list = get_ticket_urls(console_server_data)
-
+    set_loop_policy()
     raw_tickets_data: list = asyncio.run(get_ticket_data(ticket_urls))
 
     return store_tickets_data(raw_tickets_data, console_server_data)

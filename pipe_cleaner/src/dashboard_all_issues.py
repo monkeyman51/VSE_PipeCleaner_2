@@ -1670,7 +1670,7 @@ def set_issue_structure(worksheet, structure, sheet_title, site_location, total_
     pipe_cleaner_version: str = pipe_cleaner_version.split(' ')[0]
 
     # Top Left Plane
-    worksheet.insert_image('A1', 'pipe_cleaner/img/vse_logo.png')
+    worksheet.insert_image('A1', 'pipe_cleaner/img/vsei_logo.png')
     worksheet.write('B5', f' Pipe Cleaner - {sheet_title}', structure.big_blue_font)
     worksheet.write('B6', f'       {site_location}', structure.bold_italic_blue_font)
     worksheet.write('B7', f'            Pipes - {total_pipes}', structure.bold_italic_blue_font)
@@ -1683,12 +1683,12 @@ def set_issue_structure(worksheet, structure, sheet_title, site_location, total_
     worksheet.write('B11', f'       {date} - {time} - {default_name} - v{pipe_cleaner_version}',
                     structure.italic_blue_font)
 
-    worksheet.merge_range('F6:H6', f'Checks being Done', structure.red_middle_18)
-    worksheet.write('F7', f'Console Server [BIOS, BMC, CPLD, OS]', structure.bold_italic_blue_font)
-    worksheet.write('F8', f'Chipset Driver, NIC [FM, PXE, UEFI, Driver]', structure.bold_italic_blue_font)
-    worksheet.write('F9', f'Server PSU FW, Rack Manager FW, Boot Drive', structure.bold_italic_blue_font)
-    worksheet.write('F10', f'Request Type, Target Config, Part Number', structure.bold_italic_blue_font)
-    worksheet.write('F11', f'Supplier, Toolkit, CRD [BIOS, BMC], TRR Title', structure.bold_italic_blue_font)
+    # worksheet.merge_range('F6:H6', f'Checks being Done', structure.red_middle_18)
+    # worksheet.write('F7', f'Console Server [BIOS, BMC, CPLD, OS]', structure.bold_italic_blue_font)
+    # worksheet.write('F8', f'Chipset Driver, NIC [FM, PXE, UEFI, Driver]', structure.bold_italic_blue_font)
+    # worksheet.write('F9', f'Server PSU FW, Rack Manager FW, Boot Drive', structure.bold_italic_blue_font)
+    # worksheet.write('F10', f'Request Type, Target Config, Part Number', structure.bold_italic_blue_font)
+    # worksheet.write('F11', f'Supplier, Toolkit, CRD [BIOS, BMC], TRR Title', structure.bold_italic_blue_font)
 
 
 def set_issue_columns(top_plane_height, worksheet, structure):
@@ -1828,17 +1828,16 @@ def set_issue_layout(worksheet, structure):
     worksheet.set_column('V:V', 37, structure.white)
 
 
-def main_method(ado_data: dict, console_server_data: dict, workbook, structure, site_location: str, all_issues,
-                all_checks, mismatch_tally: str, missing_tally: str, pipe_numbers: dict, pipe_cleaner_version: str):
+def main_method(azure_devops_data, console_server_data, workbook, structure, all_issues,
+                all_checks, mismatch_tally, missing_tally, pipe_numbers, basic_data):
     """
 
-    :param pipe_cleaner_version:
     :param pipe_numbers:
     :param console_server_data:
-    :param ado_data:
+    :param azure_devops_data:
     :param workbook:
     :param structure:
-    :param site_location:
+    :param basic_data:
     :param all_issues:
     :param all_checks:
     :param mismatch_tally:
@@ -1846,13 +1845,15 @@ def main_method(ado_data: dict, console_server_data: dict, workbook, structure, 
     :return:
     """
     sheet_name: str = 'All Issues'
+    site: str = basic_data['site']
+    version: str = basic_data['version']
 
     worksheet_issues = workbook.add_worksheet(sheet_name)
 
-    set_issue_structure(worksheet_issues, structure, sheet_name, site_location, len(all_issues), all_checks,
-                        pipe_numbers, pipe_cleaner_version)
+    set_issue_structure(worksheet_issues, structure, sheet_name, site, len(all_issues), all_checks,
+                        pipe_numbers, version)
 
-    add_issue_data(ado_data, console_server_data, all_issues, worksheet_issues, structure)
+    add_issue_data(azure_devops_data, console_server_data, all_issues, worksheet_issues, structure)
 
     create_breakdown_graph(console_server_data, workbook, worksheet_issues, sheet_name, mismatch_tally, missing_tally)
 

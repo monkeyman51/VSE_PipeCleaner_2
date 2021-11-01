@@ -113,6 +113,96 @@ def add_pipe_name_column(clean_console_server: dict, current_setup: dict, consol
         current_position: int = max_number + 2
 
 
+def get_underscore_count(serial_number: str) -> int:
+    """
+    Get underscore count in serial number.
+    :param serial_number:
+    :return: count
+    """
+    count: int = 0
+    for character in serial_number:
+        if "_" in character:
+            count += 1
+
+    return count
+
+
+def is_fake_serial(raw_serial_number: str) -> bool:
+    """
+    Checks if fake serial based on known fake template.  Fake template could be from PowerShell anomaly.
+
+    :param raw_serial_number: serial number from SMART tool
+    :return: True is fake serial, False is real serial
+    """
+    underscore_count: int = 0
+    for character in raw_serial_number:
+        if "_" in character:
+            underscore_count += 1
+
+    if underscore_count >= 3:
+        return True
+    else:
+        return False
+
+
+def is_normal_serial(raw_serial_number: str) -> bool:
+    """
+    Checks if raw serial number is non-NGUID format. NGUID format will include at least 3 or more underscore.
+
+    :param raw_serial_number: adapter serial if not normal serial (NGUID)
+    :return: True if normal, False if NGUID format
+    """
+    underscore_count: int = 0
+    for character in raw_serial_number:
+        if "_" in character:
+            underscore_count += 1
+
+    if underscore_count >= 3:
+        return False
+    else:
+        return True
+
+
+def clean_serial_number(raw_serial_number: str) -> str:
+    """
+    Remove non-serial appended format.  Sometimes these non-serial appended strings show up if using adapter serial.
+
+    :param raw_serial_number: adapter serial if not normal serial (NGUID)
+    :return: normal serial if not NGUID format
+    """
+    if is_normal_serial(raw_serial_number):
+        normal_serial: str = raw_serial_number.split("_")[0]
+
+        return normal_serial.upper().strip()
+
+    else:
+        return raw_serial_number
+
+
+def check_serial_type(raw_serial_number: str, commodity_type: str) -> str:
+    """
+
+
+    :param raw_serial_number:
+    :param commodity_type:
+    :return:
+    """
+    if commodity_type.upper() != "NVME":
+        return "Normal"
+
+    elif is_normal_serial(raw_serial_number) and commodity_type.upper() == "NVME":
+        normal_serial: str = raw_serial_number.split("_")[0]
+        non_serial: str = raw_serial_number.split("_")[-1]
+
+        if "_" in raw_serial_number and " " in normal_serial and "0" in non_serial:
+            return "Clean Format"
+        else:
+            return "Normal"
+
+    elif is_fake_serial(raw_serial_number) and commodity_type.upper() == "NVME":
+        return "NGUID Format"
+
+
 def add_all_serial_data(console_server_data: dict, current_setup: dict):
     """
     Writes Pipe Name column in excel output
@@ -122,11 +212,17 @@ def add_all_serial_data(console_server_data: dict, current_setup: dict):
     current_position: int = current_setup.get('body_position')
     all_serial_data = console_server_data['all_serial']
 
+    count_nvme_total: int = 0
+    count_weird: int = 0
+    nvme_data: dict = {}
+
     for index, serial_data in enumerate(all_serial_data, start=0):
+
+        pipe_name: str = serial_data['pipe_name']
 
         current_color: xlsxwriter = get_current_color(index, structure)
 
-        worksheet.write(f'C{index + current_position}', serial_data['pipe_name'], current_color)
+        worksheet.write(f'C{index + current_position}', pipe_name, current_color)
 
         status: str = serial_data['connection_status']
         if 'ALIVE' in status.upper():
@@ -138,12 +234,31 @@ def add_all_serial_data(console_server_data: dict, current_setup: dict):
         elif 'MOSTLY_DEAD' in status.upper():
             worksheet.write(f'D{index + current_position}', 'RECENT INACTIVE', structure.neutral_cell)
 
+        serial_number: str = serial_data['serial_number']
+        commodity_type: str = serial_data['commodity_type']
+        serial_type: str = check_serial_type(serial_number, commodity_type)
+
         worksheet.write(f'E{index + current_position}', serial_data['machine_unique_id'], current_color)
         worksheet.write(f'F{index + current_position}', serial_data['machine_name'], current_color)
-        worksheet.write(f'G{index + current_position}', serial_data['commodity_type'], current_color)
+        worksheet.write(f'G{index + current_position}', commodity_type, current_color)
         worksheet.write(f'H{index + current_position}', serial_data['part_number'], current_color)
-        worksheet.write(f'I{index + current_position}', serial_data['serial_number'], current_color)
+        worksheet.write(f'I{index + current_position}', serial_number, current_color)
+        worksheet.write(f'J{index + current_position}', serial_type, current_color)
         # worksheet.write(f'J{current_position}', get_last_active(part_number_data), row_color)
+
+        if pipe_name not in nvme_data:
+            nvme_data[pipe_name]: int = 0
+            if get_underscore_count(serial_number) >= 3:
+                nvme_data[pipe_name]: int = 1
+        else:
+            if get_underscore_count(serial_number) >= 3:
+                nvme_data[pipe_name] += 1
+
+        if get_underscore_count(serial_number) >= 3:
+            count_weird += 1
+
+        if commodity_type.upper() == "NVME":
+            count_nvme_total += 1
 
         worksheet.set_row(index + current_position - 1, 18.00)
 
@@ -1642,7 +1757,7 @@ def add_vse_logo_top_right(current_setup: dict) -> None:
     """
     worksheet: xlsxwriter = current_setup.get('worksheet')
 
-    worksheet.insert_image('A1', 'pipe_cleaner/img/vse_logo.png')
+    worksheet.insert_image('A1', 'pipe_cleaner/img/vsei_logo.png')
 
 
 def clean_pipe_cleaner_version(pipe_cleaner_version) -> str:
@@ -1796,7 +1911,7 @@ def create_personal_issues_sheet(excel_setup: dict) -> dict:
     excel_setup['rows_height']: tuple = (15.75, 15.75, 15.75, 15.75, 21.00, 15.75, 15.75, 15.75, 3.75, 3.75,
                                          3.75, 3.75, 3.75)
 
-    excel_setup['columns_width']: tuple = (0.50, 0.50, 28.0, 15.0, 36.0, 24.0, 15.0, 35.0, 50.0, 10.00, 10.0, 10.0,
+    excel_setup['columns_width']: tuple = (0.50, 0.50, 28.0, 15.0, 36.0, 24.0, 15.0, 35.0, 50.0, 21.00, 10.0, 10.0,
                                            10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0)
 
     excel_setup['column_names']: tuple = ('Pipe Number',
@@ -1805,7 +1920,8 @@ def create_personal_issues_sheet(excel_setup: dict) -> dict:
                                           'Machine Name',
                                           'Type',
                                           'Part Number',
-                                          'Serial Number')
+                                          'Serial Number',
+                                          'Serial Type')
 
     return excel_setup
 

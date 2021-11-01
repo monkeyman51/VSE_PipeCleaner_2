@@ -506,74 +506,6 @@ def clean_ticket_state(ticket_state):
             replace('Ready to start', 'Ready to Start')
 
 
-def get_crd_file_name(crd_path):
-    file_name: str = crd_path.split('\\')[-1]
-    return file_name[0:8]
-
-
-def get_crd_path(azure_devops_data, console_server_data, machine_name, pipe_name):
-    ticket_id: str = console_server_data.get(pipe_name, {}). \
-        get('pipe_data', {}).get(machine_name, {}).get('ticket', 'None')
-    return azure_devops_data.get(ticket_id, {}).get('attachment_file_paths', {}).get('crd_drive_path', 'None')
-
-
-def get_skudoc_path(azure_devops_data, console_server_data, machine_name, pipe_name):
-    ticket_id: str = console_server_data.get(pipe_name, {}). \
-        get('pipe_data', {}).get(machine_name, {}).get('ticket', 'None')
-    return azure_devops_data.get(ticket_id, {}).get('attachment_file_paths', {}).get('skudoc_drive_path', 'None')
-
-
-def write_item_column(initial_point, user_sorted_pipes, worksheet, structure, console_server_data,
-                      virtual_machines_data, user_virtual_machines) -> None:
-    """
-    Writes Pipe Name column in excel output
-    """
-    column: str = 'F'
-
-    color_change: int = 0
-    current_pipe_point: int = initial_point
-    for pipe_name in user_sorted_pipes:
-        user_machines: list = get_user_machines(pipe_name, user_sorted_pipes)
-
-        machine_order: int = 0
-        pipe_max_size: int = current_pipe_point
-        for machine_name in user_machines:
-
-            machine_issues: dict = user_sorted_pipes.get(pipe_name, {}).get(machine_name, '')
-            contrast_color: int = get_contrast_color(color_change, structure)
-            row = str(machine_order + current_pipe_point)
-
-            machine_issues_count: int = get_machine_issues_count(machine_issues)
-            machine_ticket_id: str = get_machine_ticket_id(console_server_data, machine_name, pipe_name)
-
-            if machine_issues_count == 1 and check_missing(machine_ticket_id) == 'None':
-                worksheet.write(f'{column}{row}', 'Ticket', contrast_color)
-
-            elif machine_issues_count == 1 and machine_issues == {}:
-                worksheet.write(f'{column}{row}', 'System', contrast_color)
-
-            else:
-
-                for issue_index, current_issue in enumerate(machine_issues):
-                    machine_issue: str = get_machine_issue(current_issue, machine_issues)
-                    actual_row = str(int(row) + issue_index)
-
-                    add_machine_issue_item(column, contrast_color, machine_issue, actual_row, worksheet)
-
-            machine_issues_total: int = get_machine_issues_size(machine_issues)
-            machine_order += machine_issues_total
-            pipe_max_size += machine_issues_total
-            color_change += 1
-
-        current_pipe_point: int = pipe_max_size + 1
-
-    current_pipe_point += 1
-    for index, item in enumerate(user_virtual_machines):
-        current_row = current_pipe_point + index
-        worksheet.write(f'{column}{current_row}', '', structure.missing_cell)
-        color_change += 1
-
-
 def get_machine_issues_count(machine_issues):
     if machine_issues == {} or len(machine_issues) == 1:
         return 1
@@ -756,6 +688,11 @@ def clean_cell_data(cell_data: str) -> str:
 
 
 def clean_number_cell(number_cell: str) -> int:
+    """
+
+    :param number_cell:
+    :return:
+    """
     if not number_cell:
         return 0
     else:
@@ -1546,7 +1483,7 @@ def add_vse_logo_top_right(current_setup: dict) -> None:
     """
     worksheet: xlsxwriter = current_setup.get('worksheet')
 
-    worksheet.insert_image('A1', 'pipe_cleaner/img/vse_logo.png')
+    worksheet.insert_image('A1', 'pipe_cleaner/img/vsei_logo.png')
 
 
 def clean_pipe_cleaner_version(pipe_cleaner_version) -> str:

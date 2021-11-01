@@ -45,7 +45,7 @@ def write_pipe_name_column(initial_point: int, user_sorted_pipes: dict, workshee
     :param user_sorted_pipes: organized data
     :return:
     """
-    column: str = 'C'
+    column: str = "C"
 
     current_pipe_point = initial_point
     for index, pipe_name in enumerate(user_sorted_pipes):
@@ -57,14 +57,14 @@ def write_pipe_name_column(initial_point: int, user_sorted_pipes: dict, workshee
         pipe_hyperlink: str = get_pipe_hyperlink(console_server_data, pipe_name)
 
         if pipe_size >= 2:
-            worksheet.merge_range(f'{column}{current_pipe_point}:{column}{pipe_max_size}', clean_pipe_name,
+            worksheet.merge_range(f"{column}{current_pipe_point}:{column}{pipe_max_size}", clean_pipe_name,
                                   structure.blue_middle_huge)
 
-            worksheet.write_url(f'{column}{current_pipe_point}', pipe_hyperlink, structure.blue_middle_huge,
+            worksheet.write_url(f"{column}{current_pipe_point}", pipe_hyperlink, structure.blue_middle_huge,
                                 string=clean_pipe_name)
 
         else:
-            worksheet.write_url(f'{column}{current_pipe_point}', pipe_hyperlink, structure.blue_middle,
+            worksheet.write_url(f"{column}{current_pipe_point}", pipe_hyperlink, structure.blue_middle,
                                 string=clean_pipe_name)
 
         worksheet.set_row(pipe_max_size, 13.5, structure.white)
@@ -75,11 +75,11 @@ def write_pipe_name_column(initial_point: int, user_sorted_pipes: dict, workshee
 
     if virtual_machine_size >= 2:
         proper_size = current_pipe_point + virtual_machine_size - 1
-        worksheet.merge_range(f'{column}{current_pipe_point}:{column}{proper_size}', 'VMs',
+        worksheet.merge_range(f"{column}{current_pipe_point}:{column}{proper_size}", 'VMs',
                               structure.blue_middle_huge)
 
     else:
-        worksheet.write(f'{column}{current_pipe_point}', 'VM', structure.blue_middle_huge)
+        worksheet.write(f"{column}{current_pipe_point}", "VM", structure.blue_middle_huge)
 
 
 def get_pipe_size(pipe_name, user_sorted_pipes):
@@ -1024,19 +1024,18 @@ def get_machine_issues(all_machines_in_pipes: list, issues_dict: dict):
 
 def add_issue_data(azure_devops_data: dict, console_server_data: dict, all_issues: list, current_setup: dict) -> None:
     """
-
+    Adds data based on issues found to Personal Issues tab within Excel output.
     :param current_setup:
     :param console_server_data:
     :param azure_devops_data:
     :param all_issues:
     """
-    default_user_name: str = current_setup.get('default_user_name')
     initial_point: int = current_setup.get('header_height') + 1
 
     worksheet: xlsxwriter = current_setup.get('worksheet')
     structure: xlsxwriter = current_setup.get('structure')
 
-    user_info: dict = get_user_info(console_server_data, default_user_name)
+    user_info: dict = get_user_info(console_server_data, current_setup)
 
     if user_info == {}:
         pass
@@ -1443,7 +1442,7 @@ def add_header_items_under_testing(current_setup: dict) -> None:
     worksheet.write('E6', f'SSD/HDD - Part Number / Firmware', structure.pale_red_middle_12)
     worksheet.write('E7', f'NVMe - Part Number / Firmware', structure.pale_red_middle_12)
 
-    worksheet.merge_range(f'C{upper_header}:G{upper_header}', f'Veritas Services & Engineering - Console Server',
+    worksheet.merge_range(f'C{upper_header}:G{upper_header}', f'Variscale - Console Server',
                           structure.teal_middle_14)
     worksheet.merge_range(f'I{upper_header}:J{upper_header}', f'Compared Data', structure.teal_middle_14)
     worksheet.merge_range(f'L{upper_header}:P{upper_header}', f'Client - TRRs - ADO', structure.teal_middle_14)
@@ -1461,12 +1460,15 @@ def get_user_systems(user_info) -> dict:
     return user_info['systems']
 
 
-def get_user_info(console_server_data, default_name) -> dict:
+def get_user_info(console_server_data: dict, current_setup: dict) -> dict:
+    """
+    Get User information from network for later output.
+    :param console_server_data:
+    :param current_setup:
+    :return:
+    """
+    default_name: str = current_setup.get('default_user_name')
     default_name_underscore: str = default_name_period_to_underscore(default_name)
-    # import json
-    # foo = json.dumps(console_server_data['user_base'], sort_keys=True, indent=4)
-    # print(foo)
-    # input()
 
     try:
         for user_name in console_server_data['user_base']:
@@ -1522,7 +1524,7 @@ def add_vse_logo_top_right(current_setup: dict) -> None:
     """
     worksheet: xlsxwriter = current_setup.get('worksheet')
 
-    worksheet.insert_image('A1', 'pipe_cleaner/img/vse_logo.png')
+    worksheet.insert_image('A1', 'pipe_cleaner/img/vsei_logo.png')
 
 
 def clean_pipe_cleaner_version(pipe_cleaner_version) -> str:

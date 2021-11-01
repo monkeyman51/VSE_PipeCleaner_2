@@ -675,7 +675,7 @@ def get_file_paths() -> dict:
     """
     Get file paths for extracting data from.
     """
-    return {'manual_transaction': 'settings/transaction_logs.xlsx',
+    return {'manual_transaction': 'settings/ftransaction_logs.xlsx',
             'shared_main': r'Z:\Kirkland_Lab\PipeCleaner\transaction_logs\_inventory_transactions.xlsx',
             'baseline_4_22': 'settings/baseline_cage_4_22.csv',
             'teams': 'settings/transactions.csv',

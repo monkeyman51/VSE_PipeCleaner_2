@@ -1,8 +1,5 @@
 """
-5/3/2021 - Joe Ton
-
-Responsible for gathering and consolidating inventory data dealing with part numbers within Console Server.  Purpose
-is to showcase in an excel flat file displaying active and inactive part numbers for reference.  
+9/16/2021 - Data Dump for Aws or others.
 """
 
 from time import strftime
@@ -48,7 +45,7 @@ def add_header_sheet_title(current_setup: dict) -> None:
     worksheet: xlsxwriter = current_setup.get('worksheet')
     structure: xlsxwriter = current_setup.get('structure')
 
-    worksheet.write('B5', f'  Console Server - Part Numbers', structure.blue_font_22)
+    worksheet.write('B5', f'  Console Server - Data Dump', structure.blue_font_22)
 
 
 def set_excel_design(current_setup: dict) -> None:
@@ -320,25 +317,25 @@ def create_personal_issues_sheet(excel_setup: dict) -> dict:
     workbook: xlsxwriter = excel_setup.get('workbook')
 
     excel_setup['host_group_hyperlink']: str = 'http://172.30.1.100/console/host_groups.php'
-    excel_setup['sheet_title']: str = 'All Part Numbers'
+    excel_setup['sheet_title']: str = 'Data Dump'
 
     excel_setup['worksheet']: xlsxwriter = workbook.add_worksheet(excel_setup.get('sheet_title'))
 
     excel_setup['rows_height']: tuple = (15.75, 15.75, 15.75, 15.75, 21.00, 15.75, 15.75, 15.75, 15.75, 15.75,
                                          3.75, 3.75, 3.75)
 
-    excel_setup['columns_width']: tuple = (0.50, 0.50, 27.0, 26.0, 18.0, 22.0, 14.0, 10.0, 24.0, 12.00, 18.0, 10.0,
+    excel_setup['columns_width']: tuple = (0.50, 0.50, 27.0, 26.0, 18.0, 22.0, 21.0, 10.0, 24.0, 49.00, 18.0, 10.0,
                                            10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0)
 
-    excel_setup['column_names']: tuple = ('Machine',
+    excel_setup['column_names']: tuple = ('Pipe Number',
+                                          'Machine Name',
                                           'Location',
-                                          'SKU',
-                                          'Serial Number',
-                                          'State',
-                                          'Type',
-                                          'Part Number',
-                                          'Count',
-                                          'Last Online')
+                                          'Assigned To',
+                                          'BIOS',
+                                          'BMC',
+                                          'Host IP',
+                                          'DHCP IP',
+                                          'TRR')
 
     return excel_setup
 
@@ -359,62 +356,172 @@ def get_last_active(part_number_data):
             return f'{first_part}'
 
 
+def process_pipe_name(pipe_name: str):
+    """
+    Shorten pipe name to fit into excel output
+    :param pipe_name:
+    :return:
+    """
+    clean_data: str = pipe_name. \
+        replace('[', ''). \
+        replace(']', ''). \
+        replace("'", '')
+
+    last_part: str = clean_data.split(' ')[-1]
+
+    return clean_data.replace('Pipe-', '').replace(last_part, '')
+
+
 def add_all_serial_data(console_server_data: dict, current_setup: dict):
     """
     Writes Pipe Name column in excel output
     """
+    machines_data: list = get_all_machines_data(console_server_data)
+
     worksheet: xlsxwriter = current_setup.get('worksheet')
     structure: xlsxwriter = current_setup.get('structure')
     initial_position: int = current_setup.get('body_position')
-    all_part_numbers = console_server_data['all_part_numbers']
 
-    for index, part_number_data in enumerate(all_part_numbers, start=0):
+    for index, machine_data in enumerate(machines_data, start=0):
         row_color: xlsxwriter = get_row_color(index, structure)
         current_position: int = index + initial_position
-        last_active = int(get_last_active(part_number_data))
 
-        worksheet.write(f'C{current_position}', part_number_data['machine_name'], row_color)
-        worksheet.write(f'D{current_position}', part_number_data['pipe_name'], row_color)
-        worksheet.write(f'E{current_position}', part_number_data['machine_sku'], row_color)
-        worksheet.write(f'F{current_position}', part_number_data['machine_serial'], row_color)
-
-        connection_status: str = part_number_data['connection_status']
-        if 'ALIVE' in connection_status.upper():
-            worksheet.write(f'G{current_position}', "ONLINE", row_color)
-
-        elif last_active <= 30:
-            worksheet.write(f'G{current_position}', 'OFFLINE <= 30', structure.light_red_middle_11)
-
-        elif last_active > 30:
-            worksheet.write(f'G{current_position}', 'OFFLINE > 30', structure.light_red_middle_11)
-
-        worksheet.write(f'H{current_position}', part_number_data['type'], row_color)
-        worksheet.write(f'I{current_position}', part_number_data['part_number'], row_color)
-        worksheet.write(f'J{current_position}', part_number_data['count'], row_color)
-        worksheet.write(f'K{current_position}', get_last_active(part_number_data), row_color)
+        worksheet.write(f'C{current_position}', machine_data["pipe_number"], row_color)
+        worksheet.write(f'D{current_position}', machine_data["machine_name"], row_color)
+        worksheet.write(f'E{current_position}', machine_data["location"], row_color)
+        worksheet.write(f'F{current_position}', machine_data["assigned_to"], row_color)
+        worksheet.write(f'G{current_position}', machine_data["bios"], row_color)
+        worksheet.write(f'H{current_position}', machine_data["bmc"], row_color)
+        worksheet.write(f'I{current_position}', machine_data["host_ip"], row_color)
+        worksheet.write(f'J{current_position}', machine_data["dhcp_ip"], row_color)
+        worksheet.write(f'K{current_position}', machine_data["ticket"], row_color)
 
         worksheet.set_row(current_position - 1, 18.00)
 
 
+def get_dhcp_ip(console_server_data: dict, key_name: str) -> str:
+    """
+    Get correct DHCP IP based on naming convention.
+    :param console_server_data:
+    :param key_name:
+    :return:
+    """
+    short_pipe_name = key_name[-7:-3]
+    # print(f"short_pipe_name: {short_pipe_name}")
+    dhcp_data: list = console_server_data.get('dhcp_data')
+
+    possible_dhcp: list = []
+    for dhcp in dhcp_data:
+        dhcp_name: str = dhcp.get('name')
+        if short_pipe_name in dhcp_name:
+            dhcp_ip: str = dhcp.get('ip')
+            possible_dhcp.append(dhcp_ip)
+
+    if len(possible_dhcp) >= 2:
+        return ", ".join(possible_dhcp)
+    elif len(possible_dhcp) == 0:
+        return "None"
+    else:
+        return str(possible_dhcp[0])
+
+
+def get_clean_ticket(pipe_data: dict, machine_name: str) -> str:
+    """
+    Get clean ticket data.  Placed None if none.
+    :param pipe_data:
+    :param machine_name:
+    :return:
+    """
+    ticket: str = pipe_data[machine_name]["ticket"]
+    if ticket.upper() == "NONE" or ticket is None or ticket == "":
+        return "None"
+    else:
+        return ticket
+
+
+def get_machine_name(machine_name: str) -> str:
+    """
+
+    :param machine_name:
+    :return:
+    """
+    machine_name: str = machine_name.strip().upper()
+
+    if "-VM-" in machine_name:
+        return "None"
+    else:
+        return machine_name
+
+
+def get_assigned_to(pipe_data: dict, machine_name: str) -> str:
+    """
+
+    :param pipe_data:
+    :param machine_name:
+    :return:
+    """
+    checked_out_to: str = pipe_data[machine_name]["checked_out_to"]
+
+    if checked_out_to == "None" or checked_out_to == "" or checked_out_to is None:
+        return "None"
+    else:
+        return checked_out_to.replace(".", " ").title()
+
+
+def get_all_machines_data(console_server_data: dict) -> list:
+    """
+    Console Server data
+    :param console_server_data:
+    :return:
+    """
+    all_machines: list = []
+    for key_name in console_server_data:
+
+        dhcp_ip: str = get_dhcp_ip(console_server_data, key_name)
+
+        if "PIPE" in key_name.upper():
+            pipe_data: dict = console_server_data[key_name]["pipe_data"]
+
+            for machine_name in pipe_data:
+                if "VSE" in machine_name:
+                    clean_machine_name: str = get_machine_name(machine_name)
+                    ticket: str = get_clean_ticket(pipe_data, machine_name)
+
+                    if clean_machine_name != "None":
+                        machine_data: dict = {"pipe_number": process_pipe_name(key_name),
+                                              "machine_name": clean_machine_name,
+                                              "location": pipe_data[machine_name]["location"],
+                                              "assigned_to": get_assigned_to(pipe_data, machine_name),
+                                              "bios": pipe_data[machine_name]["server_bios"],
+                                              "bmc": pipe_data[machine_name]["server_bmc"],
+                                              "host_ip": pipe_data[machine_name]["host_ip"],
+                                              "dhcp_ip": dhcp_ip,
+                                              "ticket": ticket}
+
+                        all_machines.append(machine_data)
+
+    return all_machines
+
+
 def get_row_color(index: int, structure: xlsxwriter) -> xlsxwriter:
     """
-    Contrast excel row colors to improve readability. 
-    :param index: 
-    :param structure: 
-    :return: 
+    Contrast excel row colors to improve readability.
+    :param index:
+    :param structure:
+    :return:
     """
     result: int = index % 2
-    
+
     if result == 0:
         return structure.blue_middle
-    
+
     elif result == 1:
         return structure.alt_blue_middle
 
 
 def main_method(console_server_data: dict, excel_setup: dict) -> None:
     """
-    Consolidate all part numbers found in Console Server including active and inactive part numbers within the racks.
+    Data dump.
     """
     current_setup: dict = create_personal_issues_sheet(excel_setup)
 

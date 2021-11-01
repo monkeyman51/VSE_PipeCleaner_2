@@ -18,6 +18,7 @@ from pipe_cleaner.src.dashboard_write import main_method as write_column_data
 from pipe_cleaner.src.dashboard_write import parsed_date
 from pipe_cleaner.src.data_ado import main_method as get_all_ticket_data
 from pipe_cleaner.src.data_console_server import main_method as get_console_server_data
+from pipe_cleaner.src.data_dump import main_method as get_data_dump
 from pipe_cleaner.src.dashboard_inventory import main_method as add_dashboard_inventory
 from pipe_cleaner.src.dashboard_all_serial import main_method as add_all_serial
 from pipe_cleaner.src.dashboard_all_part_numbers import main_method as add_all_part_numbers
@@ -217,9 +218,9 @@ def add_header_items_being_checked(current_setup: dict) -> None:
     worksheet: xlsxwriter = current_setup.get('worksheet')
     structure: xlsxwriter = current_setup.get('structure')
 
-    worksheet.merge_range('F2:H2', 'ITEMS BEING CHECKED', structure.teal_middle_14)
-    worksheet.merge_range('F3:H3', 'BIOS, BMC, CPLD, OS, Ticket', structure.pale_teal_middle_12_normal)
-    worksheet.merge_range('F4:H4', 'Configured Systems, Virtual Machines', structure.pale_teal_middle_12_normal)
+    # worksheet.merge_range('F2:H2', 'ITEMS BEING CHECKED', structure.teal_middle_14)
+    # worksheet.merge_range('F3:H3', 'BIOS, BMC, CPLD, OS, Ticket', structure.pale_teal_middle_12_normal)
+    # worksheet.merge_range('F4:H4', 'Configured Systems, Virtual Machines', structure.pale_teal_middle_12_normal)
 
 
 def add_header_date_and_version(current_setup: dict) -> None:
@@ -282,7 +283,7 @@ def add_header_user_name(current_setup: dict):
     structure: xlsxwriter = current_setup.get('structure')
 
     worksheet.write('B7', f'            {clean_name}', structure.bold_italic_blue_font)
-    worksheet.merge_range('C10:D11', 'WORK IN PROGRESS', structure.light_red_middle_14)
+    # worksheet.merge_range('C10:D11', 'WORK IN PROGRESS', structure.light_red_middle_14)
 
 
 def set_excel_design(current_setup: dict) -> None:
@@ -377,7 +378,7 @@ def add_vse_logo_top_right(current_setup: dict) -> None:
     """
     worksheet: xlsxwriter = current_setup.get('worksheet')
 
-    worksheet.insert_image('A1', 'pipe_cleaner/img/vse_logo.png')
+    worksheet.insert_image('A1', 'pipe_cleaner/img/vsei_logo.png')
 
 
 def add_freeze_panes(current_setup: dict) -> None:
@@ -1889,6 +1890,13 @@ def write_trr_column(processed_console_server, azure_devops_data, current_setup)
 
 
 def get_max_number(current_position, pipe_name, processed_console_server) -> int:
+    """
+
+    :param current_position:
+    :param pipe_name:
+    :param processed_console_server:
+    :return:
+    """
     total_tickets: int = get_total_tickets(pipe_name, processed_console_server)
     max_number: int = current_position + total_tickets - 1
     return max_number
@@ -1908,16 +1916,14 @@ def create_excel_output(basic_data: dict) -> None:
     """
     Create Dashboard here
     """
-    site: str = basic_data['site']
-    version: str = basic_data['version']
-
     current_setup: dict = create_executive_summary(basic_data)
 
     console_server_data: dict = get_console_server_data()
+
     azure_devops_data: dict = get_all_ticket_data(console_server_data)
     pipe_numbers: dict = get_pipe_numbers(console_server_data)
 
-    final_data: dict = compare_data(console_server_data, azure_devops_data)
+    compare_data(console_server_data, azure_devops_data)
     all_issues: list = get_all_issues()
 
     all_checks: list = get_total_checks()
@@ -1937,20 +1943,22 @@ def create_excel_output(basic_data: dict) -> None:
     workbook: xlsxwriter = current_setup.get('workbook')
     structure: xlsxwriter = current_setup.get('structure')
 
-    create_issues_sheet(azure_devops_data, console_server_data, workbook, structure, site, all_issues,
-                        all_checks, mismatch_tally, missing_tally, pipe_numbers, version)
+    create_issues_sheet(azure_devops_data, console_server_data, workbook, structure, all_issues,
+                        all_checks, mismatch_tally, missing_tally, pipe_numbers, basic_data)
 
-    create_setup_sheet(azure_devops_data, console_server_data, workbook, structure, site, all_issues,
-                       all_checks, mismatch_tally, missing_tally, pipe_numbers, version)
+    create_setup_sheet(azure_devops_data, console_server_data, workbook, structure, all_issues,
+                       all_checks, mismatch_tally, missing_tally, pipe_numbers, basic_data)
 
-    create_virtual_machine_sheet(console_server_data, workbook, structure, site, all_issues,
-                                 all_checks, mismatch_tally, missing_tally, pipe_numbers, version)
+    create_virtual_machine_sheet(console_server_data, workbook, structure, all_issues,
+                                 all_checks, mismatch_tally, missing_tally, pipe_numbers, basic_data)
 
     add_dashboard_inventory(azure_devops_data, console_server_data, current_setup, all_issues)
 
     add_all_serial(azure_devops_data, console_server_data, current_setup, all_issues)
 
     add_all_part_numbers(console_server_data, current_setup)
+
+    get_data_dump(console_server_data, current_setup)
 
     try:
         workbook.close()

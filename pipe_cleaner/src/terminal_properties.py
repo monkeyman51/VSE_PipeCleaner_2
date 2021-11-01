@@ -112,16 +112,16 @@ def intro_section(basic_data) -> None:
     site: str = basic_data['site']
     version: str = basic_data['version']
 
-    header_1_content: str = 'Veritas Services & Engineering'
-    header_2_content: str = 'Developer: Joe Ton'
-    header_3_content: str = 'Project Manager: Bruce Saari'
+    header_1_content: str = 'Veriscale Services & Engineering, Inc.'
+    header_2_content: str = 'Software Engineer: Joe Ton'
+    # header_3_content: str = 'Project Manager: Bruce Saari'
     header_4_content: str = f'User: {username}'
     header_5_content: str = f'Location: {site}'
     header_6_content: str = f'Version: {version}'
 
     header_1_length = len(header_1_content)
     header_2_length = len(header_2_content)
-    header_3_length = len(header_3_content)
+    # header_3_length = len(header_3_content)
     header_4_length = len(header_4_content)
     header_5_length = len(header_5_content)
     header_6_length = len(header_6_content)
@@ -129,21 +129,21 @@ def intro_section(basic_data) -> None:
     # Diff = Difference
     header_1_diff = int((row_length - header_1_length) / 2)
     header_2_diff = int((row_length - header_2_length) / 2) + 2
-    header_3_diff = int((row_length - header_3_length) / 2) + 2
+    # header_3_diff = int((row_length - header_3_length) / 2) + 2
     header_4_diff = int((row_length - header_4_length) / 2) + 2
     header_5_diff = int((row_length - header_5_length) / 2) + 2
     header_6_diff = int((row_length - header_6_length) / 2) + 2
 
     header_1 = f"{space}{header_1_diff * f'{characters}'}[ {header_1_content} ]{header_1_diff * f'{characters}'}"
-    header_2 = f"{space}{header_2_diff * ' '}{header_2_content}{header_2_diff * ' '}"
-    header_3 = f"{space}{header_3_diff * ' '}{header_3_content}{header_3_diff * ' '}"
+    header_2 = f"{space}{header_2_diff * ' '}{header_2_content}{header_2_diff * ' '}\n"
+    # header_3 = f"{space}{header_3_diff * ' '}{header_3_content}{header_3_diff * ' '}"
     header_4 = f"{space}{header_4_diff * ' '}{header_4_content}{header_4_diff * ' '}"
     header_5 = f"{space}{header_5_diff * ' '}{header_5_content}{header_5_diff * ' '}"
     header_6 = f"{space}{header_6_diff * ' '}{header_6_content}{header_6_diff * ' '}"
 
     print(f"{header_1}")
     print(f"{header_2}")
-    print(f"{header_3}\n")
+    # print(f"{header_3}\n")
     print(f"{header_4}")
     print(f"{header_5}")
     print(f"{header_6}\n")

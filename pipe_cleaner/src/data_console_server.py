@@ -338,6 +338,9 @@ def store_system_data(system_json: dict, pipe_name: str):
         current_system_data['location']: dict = str(system_json.
                                                     get('location', 'None'))
 
+        host_ip: str = str(system_json['net']['interfaces'][0].get('ip', 'None'))
+        current_system_data['host_ip']: dict = host_ip
+
         # BIOS ex. C2030.BS.2A42.AF1
         current_system_data['server_bios']: dict = str(system_json.
                                                        get('dmi', {}).
@@ -512,7 +515,6 @@ def store_system_data(system_json: dict, pipe_name: str):
                 part_numbers[nvme_model]['locations'][clean_pipe_name]['connection']: int = connection_status
                 part_numbers[nvme_model]['locations'][clean_pipe_name]['last_alive']: float = last_alive
 
-
             if not nvme_model:
                 pass
             else:
@@ -670,7 +672,6 @@ def store_system_data(system_json: dict, pipe_name: str):
 
                     except KeyError:
                         pass
-
 
         count_username(clean_username)
         store_machine_name(clean_username, upper_machine_name)
@@ -858,7 +859,7 @@ def main_method() -> dict:
             overall_workload[clean_username] = {}
 
         if 'pipes' not in overall_workload[clean_username]:
-            overall_workload[clean_username]['pipes'] = 0
+            overall_workload[clean_username]['pipes']: int = 0
 
         if 'pipes' in overall_workload[clean_username]:
             overall_workload[clean_username]['pipes'] += 1

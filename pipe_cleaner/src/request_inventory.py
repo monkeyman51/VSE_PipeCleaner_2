@@ -473,11 +473,11 @@ def open_excel_file_for_inventory_forms(file_name: str) -> None:
     system(f'start EXCEL.EXE {file_name}')
 
 
-def close_message(file_name: str) -> None:
+def close_message(file_name: str, message: str) -> None:
     """
     Close message when excel closed.
     """
-    print(f'\t\t- {file_name} closed')
+    print(f'\t\t- {file_name} {message}')
 
 
 def is_excel_file_running(file_name: str) -> bool:
@@ -492,13 +492,14 @@ def is_excel_file_running(file_name: str) -> bool:
                         return True
 
             except ProcessLookupError:
-                close_message(file_name)
+                close_message(file_name, "check closed")
                 return False
+
             except NoSuchProcess:
-                close_message(file_name)
+                close_message(file_name, "check closed")
                 return False
     else:
-        close_message(file_name)
+        close_message(file_name, "check closed")
         return False
 
 
@@ -508,6 +509,10 @@ def is_excel_file_closed(file_name: str, form_type: str) -> bool:
     """
     print(f'\t\t- {file_name} opened')
     print(f'\t\t- Fill out {form_type} form...\n')
+
+    while True:
+        if not is_excel_file_running(file_name):
+            break
 
     while True:
         if not is_excel_file_running(file_name):
@@ -651,6 +656,8 @@ def get_update_fields(request_form: dict, update_worksheet) -> dict:
     """
     Get update fields information.
     """
+    print(f'\t\t- Checking update form')
+
     quantity: str = request_form['basic_info']['quantity']
     machine_name: str = request_form['excel_data']['machine_name']
     notes: str = request_form['excel_data']['notes']
@@ -860,11 +867,12 @@ def email_inventory_request(request_fields: dict) -> None:
     """
     Sends email to people responsible dealing with inventory.
     """
-    print(f'\t\t- Writing email to Inventory_Kirkland@veritasdcservices.com')
-    location: str = 'Inventory_Kirkland@veritasdcservices.com'
+    current_email: str = "Inventory_kirkland@vsei.com"
+
+    print(f'\t\t- Writing email to {current_email}')
     # location: str = 'joe.ton@VeritasDCservices.com'
 
-    create_email_notification(location, request_fields)
+    create_email_notification(current_email, request_fields)
 
 
 def end_request_form():
@@ -986,24 +994,19 @@ def check_update_form(file_name: str, request_form: dict, form_number: str) -> N
     """
     Check if inventory request form done correctly.
     """
-    print(f'\t\t- Checking update form')
-
     fields_data: dict = get_update_fields(request_form, load_workbook(f'update_form.xlsx')['Update'])
 
     if is_update_fields_filled(fields_data):
-        print_line_divider('Log Serial Numbers and Inventory Transaction:')
-        print(f'\t\tY  ->  Yes')
-        print(f'\t\tN  ->  No')
-        response: str = input(f'\n\tResponse: ').upper()
+        response: str = get_update_log_response()
 
-        if 'Y' == response:
+        if "Y" == response:
             update_serial_numbers(fields_data)
             update_transactions(fields_data, form_number)
             print(f'\n\tSuccess: Updates to Serial Numbers and Transactions database...')
             input(f'\tPress enter to exit: ')
             sys.exit()
 
-        elif 'N' == response:
+        elif "N" == response:
             print(f'\tNot updated to database.')
             input(f'\tPress enter to exit: ')
             sys.exit()
@@ -1014,9 +1017,21 @@ def check_update_form(file_name: str, request_form: dict, form_number: str) -> N
         respond_update_form_wrong(fields_data)
         print(f'-------------------------------------------------------------------')
         print(f'\n\t\t* Need to fix inventory update form...')
-        input(f'\t\t- Press enter to open excel:')
+        input(f'\t\t- Press enter to open excel: ')
         open_excel_file_for_inventory_forms(file_name)
         check_update_form(file_name, request_form, form_number)
+
+
+def get_update_log_response() -> str:
+    """
+    Ask user to log S/N and Inventory Transactions
+    :return: Y or N
+    """
+    print_line_divider('Log Serial Numbers and Inventory Transaction:')
+    print(f'\t\tY  ->  Yes')
+    print(f'\t\tN  ->  No')
+
+    return input(f'\n\tResponse: ').upper()
 
 
 def update_serial_numbers(fields_data: dict) -> None:
@@ -1212,30 +1227,20 @@ def setup_update_form(request_form: dict) -> None:
     """
     Setup up the fields to have consistent look.
     """
-    import json
-    foo = json.dumps(request_form, sort_keys=True, indent=4)
-    print(foo)
-    input()
-
     form_number: str = request_form['_id']
 
-    date: str = request_form['basic_info']['date']
     end: str = request_form['basic_info']['end']
     location: str = request_form['basic_info']['location']
     quantity: str = request_form['basic_info']['quantity']
-    seconds: str = request_form['basic_info']['seconds']
     start: str = request_form['basic_info']['start']
-    time: str = request_form['basic_info']['time']
     user: str = request_form['basic_info']['user']
     version: str = request_form['basic_info']['version']
 
     excel_date: str = request_form['excel_data']['date']  # TODO
     machine_name: str = request_form['excel_data']['machine_name']
     notes: str = request_form['excel_data']['notes']
-    part_number: str = request_form['excel_data']['part_number']
     pipe_number: str = request_form['excel_data']['pipe_number']
     purchase_order: str = request_form['excel_data']['purchase_order']
-    seconds: str = request_form['excel_data']['seconds']
     task_name: str = request_form['excel_data']['task_name']
     excel_time: str = request_form['excel_data']['time']
     trr_number: str = request_form['excel_data']['trr_number']
@@ -1290,17 +1295,37 @@ def start_update_form(form_number: str, basic_data: dict) -> None:
     After sending email to inventory team. Have update form ready.
     """
     file_name: str = 'update_form.xlsx'
-    site = str(basic_data['site']).replace(' Lab Site', '').replace('Kirkland', '0')
-
-    current_year: str = strftime('%m/%d/%Y')[8:10]
-    document = access_database_document('request_forms', f'{site}{current_year}')
-    request_form: dict = document.find_one({'_id': form_number})
+    request_form: dict = get_request_form(basic_data, form_number)
 
     setup_update_form(request_form)
     open_excel_file_for_inventory_forms(file_name)
 
     if is_excel_file_closed(file_name, 'update'):
         check_update_form(file_name, request_form, form_number)
+
+
+def get_request_form(basic_data: dict, form_number: str) -> dict:
+    """
+    Get request form based on the user input.
+    :param basic_data:
+    :param form_number:
+    :return:
+    """
+    update_database: str = get_update_database(basic_data)
+    document = access_database_document('request_forms', update_database)
+    return document.find_one({'_id': form_number})
+
+
+def get_update_database(basic_data) -> str:
+    """
+    Get database location.
+    :param basic_data:
+    :return:
+    """
+    site = str(basic_data['site']).replace(' Lab Site', '').replace('Kirkland', '0')
+    current_year: str = strftime('%m/%d/%Y')[8:10]
+    update_database: str = f"{site}{current_year}"
+    return update_database
 
 
 def get_request_number(user_data: dict) -> str:
