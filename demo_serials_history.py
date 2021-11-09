@@ -37,24 +37,23 @@ def clean_serial_number(serial_number: str, part_number: str) -> str:
     :param part_number:
     :return:
     """
-    serial_number = str(serial_number)
-    # if " " in part_number:
-    #     part_number: str = part_number.split(" ")[0]
-    #
-    #     if part_number in serial_number:
-    #         clean_serial: str = serial_number.replace(f"{part_number}_", "").replace(f"{part_number} ", "")
-    #         return clean_serial
-    # else:
-
-    print(f"serial_number: {serial_number}")
-    print(f"serial_number: {type(serial_number)}")
-    print(f"part_number: {part_number}\n")
+    serial_number = str(serial_number).upper()
 
     if part_number in serial_number:
-        clean_serial: str = serial_number.replace(f"{part_number}_", "").replace(f"{part_number} ", "")
+        clean_serial: str = serial_number.replace(f"{part_number}_", "").replace(f"{part_number} ", "").strip()
         return clean_serial
     else:
         return str(serial_number)
+
+
+def clean_part_name(part_name: str) -> str:
+    """
+    Erase any known characters that do not belong in the part name.
+
+    :param part_name: raw part name
+    :return: clean part name
+    """
+    return part_name.replace(":", "").upper().strip()
 
 
 def get_serial_numbers_database():
@@ -67,11 +66,11 @@ def get_serial_numbers_database():
 
     database: dict = {}
     for entry in serial_numbers_database:
-        serial_number: str = entry["_id"]
-        current_location: str = entry["to_locations"][-1]
-        previous_location: str = entry["from_locations"][-1]
+        serial_number: str = entry["_id"].upper()
+        current_location: str = entry["to_locations"][-1].title()
+        previous_location: str = entry["from_locations"][-1].title()
         date_logged: str = entry["dates"][-1]
-        part_number: str = entry["part_numbers"][-1]
+        part_number: str = clean_part_name(entry["part_numbers"][-1])
 
         clean_serial: str = clean_serial_number(serial_number, part_number)
 
@@ -136,12 +135,13 @@ def get_transactions_from_database() -> list:
             scanned: list = current_entry["scanned"]
             current_location: str = current_entry["location"]["current"]
             previous_location: str = current_entry["location"]["previous"]
+            clean_part: str = clean_part_name(part_number)
 
             for serial_number in scanned:
 
                 clean_serial: str = clean_serial_number(serial_number, part_number)
 
-                current_serial: dict = {"part_number": part_number,
+                current_serial: dict = {"part_number": clean_part,
                                         "serial_number": clean_serial,
                                         "current_location": current_location,
                                         "date_logged": current_date,
@@ -200,7 +200,13 @@ def output_excel(update_serials: dict) -> None:
         previous_location: str = serial_entry["previous_location"]
         date_logged: str = serial_entry["date_logged"]
 
-        worksheet[f"A{index}"].value = serial_number
+        # if serial_number == part_number:
+        #     print(f"serial_number: {serial_number}")
+
+        if "_" in serial_number:
+            print(f"serial_number: {serial_number}")
+
+        worksheet[f"A{index}"].value = clean_serial_number(serial_number, part_number)
         worksheet[f"B{index}"].value = part_number
         worksheet[f"C{index}"].value = current_location
         worksheet[f"D{index}"].value = previous_location

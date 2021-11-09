@@ -1529,7 +1529,7 @@ def main_method(basic_data: dict) -> None:
     serial_numbers_database: dict = get_serial_numbers_database(part_numbers_library)
     transactions_database: dict = get_transactions_from_database(part_numbers_library)
 
-    pretty_print(transactions_database)
+    # pretty_print(transactions_database)
 
     combined: dict = combine_serial_with_transaction(serial_numbers_database, transactions_database)
 
