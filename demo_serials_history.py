@@ -3,6 +3,7 @@ Get all history serials
 """
 from pipe_cleaner.src.log_database import access_database_document
 from openpyxl import load_workbook
+from os import system
 
 
 def get_clean_alternatives(alternative, alternatives, serial_number) -> list:
@@ -138,7 +139,6 @@ def get_transactions_from_database() -> list:
             clean_part: str = clean_part_name(part_number)
 
             for serial_number in scanned:
-
                 clean_serial: str = clean_serial_number(serial_number, part_number)
 
                 current_serial: dict = {"part_number": clean_part,
@@ -213,6 +213,121 @@ def output_excel(update_serials: dict) -> None:
         worksheet[f"E{index}"].value = date_logged
 
     workbook.save("serials_history.xlsx")
+    system(fr'start EXCEL.EXE serials_history.xlsx')
+
+
+def get_part_to_counts() -> dict:
+    """
+    Create part number counts for later data storage.
+    """
+    return {"serials": {},
+            "overall": {"cage": 0,
+                        "rack": 0,
+                        "quarantine": 0,
+                        "offsite": 0,
+                        "exceptions": 0,
+                        "onsite": 0}}
+
+
+def sort_serials_into_categories(update_serials: dict) -> dict:
+    """
+    Organize serials into categories.  Pipe
+    :param update_serials:
+    :return:
+    """
+    part_to_counts: dict = get_part_to_counts()
+
+    for unique_serial in update_serials:
+        current_serial: dict = update_serials[unique_serial]
+        part_number: str = current_serial["part_number"]
+        current_location: str = current_serial["current_location"].upper()  # Upper for consistent comparison
+
+        if part_number not in part_to_counts["serials"]:
+            part_to_counts["serials"][part_number]: dict = {}
+            serial_part_numbers: dict = part_to_counts["serials"][part_number]
+
+            serial_part_numbers["cage"]: int = 0
+            serial_part_numbers["rack"]: int = 0
+            serial_part_numbers["quarantine"]: int = 0
+            serial_part_numbers["offsite"]: int = 0
+            serial_part_numbers["exceptions"]: int = 0
+            serial_part_numbers["onsite"]: int = 0
+
+            part_to_counts: dict = count_part_serials(current_location, part_number, part_to_counts)
+            part_to_counts: dict = count_overall_serials(current_location, part_to_counts)
+
+        elif part_number in part_to_counts["serials"]:
+            part_to_counts: dict = count_part_serials(current_location, part_number, part_to_counts)
+            part_to_counts: dict = count_overall_serials(current_location, part_to_counts)
+
+    return part_to_counts
+
+
+def count_overall_serials(current_location: str, part_to_counts: dict) -> dict:
+    """
+    Add count to overall part locations for overview of different categories.  These categories include Rack, Cage,
+    Quarantine, Offsite, or Other (Exemptions)
+
+    WARNING: count_part_serials should be aligned here.
+    """
+    overall_count: dict = part_to_counts["overall"]
+
+    if "TURBO" in current_location and "CAT" in current_location:
+        overall_count["rack"] += 1
+        overall_count["onsite"] += 1
+
+    if "QUARANTINE" == current_location or "QUAR" == current_location:
+        overall_count["quarantine"] += 1
+        overall_count["onsite"] += 1
+
+    elif "CAGE" == current_location or "PICTURE" in current_location:
+        overall_count["cage"] += 1
+        overall_count["onsite"] += 1
+
+    elif "RACK" == current_location or "PIPE" == current_location:
+        overall_count["rack"] += 1
+        overall_count["onsite"] += 1
+
+    elif "CUSTOMER" == current_location or "OUT" == current_location or "SHIPMENT" == current_location:
+        overall_count["offsite"] += 1
+
+    else:
+        overall_count["exceptions"] += 1
+
+    return part_to_counts
+
+
+def count_part_serials(current_location: str, part_number: str, part_to_counts: dict) -> dict:
+    """
+    Add count based on parts' state.  Will go to either Rack, Cage, Quarantine, Offsite, or Other (Exemptions)
+
+    WARNING: count_overall_serials should be aligned here.
+    """
+    serials: dict = part_to_counts["serials"]
+
+    if "TURBO" in current_location and "CAT" in current_location:
+        serials[part_number]["rack"] += 1
+        serials[part_number]["onsite"] += 1
+
+    if "QUARANTINE" == current_location or "QUAR" == current_location:
+        serials[part_number]["quarantine"] += 1
+        serials[part_number]["onsite"] += 1
+
+    elif "CAGE" == current_location or "PICTURE" in current_location:
+        serials[part_number]["cage"] += 1
+        serials[part_number]["onsite"] += 1
+
+    elif "RACK" == current_location or "PIPE" == current_location:
+        serials[part_number]["rack"] += 1
+        serials[part_number]["onsite"] += 1
+
+    elif "CUSTOMER" == current_location or "OUT" == current_location or "SHIPMENT" == current_location:
+        serials[part_number]["offsite"] += 1
+
+    else:
+        serials[part_number]["Exceptions"] += 1
+
+    return part_to_counts
 
 
 def main() -> None:
@@ -223,13 +338,14 @@ def main() -> None:
     base_serial_numbers: dict = get_serial_numbers_database()
     transactions: list = get_transactions_from_database()
     update_serials: dict = update_serial_history(base_serial_numbers, transactions)
-    output_excel(update_serials)
 
-    # import json
-    # foo = json.dumps(transactions, sort_keys=True, indent=4)
-    # print(foo)
-    # print(len(transactions))
-    # input()
+    sorted_serials: dict = sort_serials_into_categories(update_serials)
+    import json
+    foo = json.dumps(sorted_serials, sort_keys=True, indent=4)
+    print(foo)
+    input()
+
+    output_excel(update_serials)
 
 
 main()

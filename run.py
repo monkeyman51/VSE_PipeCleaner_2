@@ -129,7 +129,7 @@ def response_to_user_input() -> None:
 
 
 if __name__ == "__main__":
-    basic_data: dict = {'version': '2.7.5',
+    basic_data: dict = {'version': '2.7.6',
                         'site': 'Kirkland Lab Site',
                         'username': getuser().replace(' ', '').strip()}
 

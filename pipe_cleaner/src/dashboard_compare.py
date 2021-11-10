@@ -155,7 +155,16 @@ def scrub_ticket_bios(raw_ticket_bios):
     :param raw_ticket_bios: data from ticket in ADO
     :return: clean data
     """
-    return raw_ticket_bios.strip()
+    return raw_ticket_bios.strip().replace(r"GN0/", "").\
+        replace(r"GN1/", "").\
+        replace(r"GN2/", "").\
+        replace(r"GN3/", "").\
+        replace(r"GN4/", "").\
+        replace(r"GN5/", "").\
+        replace(r"GN6/", "").\
+        replace(r"GN7/", "").\
+        replace(r"GN8/", "").\
+        replace(r"GN9/", "")
 
 
 def scrub_ticket_bmc(raw_ticket_bmc: str):
@@ -1058,7 +1067,7 @@ def get_empty_list(dimm_parts) -> list:
 def get_commodity_firmware(pipe_data: dict, machine_name: str) -> list:
     dimm_parts: list = []
 
-    for component in pipe_data[machine_name]['unique_nvmes']:
+    for component in pipe_data[machine_name]['unique_disks']:
         disk_firmware: str = component['firmware']
 
         if not disk_firmware:
