@@ -1,5 +1,8 @@
 """
+Variscale IT has prevented Full Scope unlimited access to ADO.  Maximum length is 90 days.  Need to reset access to
+ADO via Personal Access Tokens.
 
+To have to
 """
 
 
@@ -15,7 +18,10 @@ class AccessADO:
     # personal_access_token = 'rxmhssgtgs5s43wt6cewvxwkfk7qhgswwycf54iv2whcmhgoui6q'  # Expiration 7/6/2021
 
     # personal_access_token: str = 'yvfooyk5ltg5oj5ivpkhgvdxvoiru3ojzxd3sh6tfennr5awlqiq'  # Expiration 10/4/2021
-    personal_access_token: str = 'g5mnab2a6vnlqlchb5yzu3xkc755wyk2k75m6ijwz7wm5hpl7s5a'  # Expiration 1/3/2021
+    # personal_access_token: str = 'g5mnab2a6vnlqlchb5yzu3xkc755wyk2k75m6ijwz7wm5hpl7s5a'  # Expiration 1/3/2022
+    # personal_access_token: str = 'myv4c46xk5jqk4yabndtvdb5utkz3quzgfcq5yhma3bb7uykfsia'  # Expiration 4/3/2022
+    # personal_access_token: str = 'h754wnld2ast42bb4ogjj5oblgtx5duimj5p74bvyiyiktuwhkgq'  # Expiration 7/3/2022
+    personal_access_token: str = 'h754wnld2ast42bb4ogjj5oblgtx5duimj5p74bvyiyiktuwhkgq'  # Expiration 7/3/2022
 
 
 class AccessOneDrive:

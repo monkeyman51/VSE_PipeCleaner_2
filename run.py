@@ -19,8 +19,10 @@ from pipe_cleaner.src.request_inventory import start_update_form
 from pipe_cleaner.src.terminal import run_terminal
 from pipe_cleaner.src.inventory.total import main_method as total_inventory
 from pipe_cleaner.src.inventory.kirkland_total import main_method as kirkland_total
+from pipe_cleaner.src.inventory.kirkland_inventory import main_method as kirkland_inventory
 from pipe_cleaner.src.inventory.part_number_library import main_method as get_library
 from pipe_cleaner.src.pipe_state import main as pipe_report
+from pipe_cleaner.src.rack_manager_powers import main as rack_manager_powers
 
 
 def end_program_procedure() -> None:
@@ -63,13 +65,10 @@ def response_to_user_input() -> None:
     """
     letter = str(user_response["letter"])
 
-    if "R" in letter:
-        user_data: dict = consolidate_user_data()
-        request_inventory(user_data)
-
-    elif "RR" in letter:
-        print(f'TEST - RR')
-        pass
+    if "R" == letter:
+        rack_manager_powers()
+        # user_data: dict = consolidate_user_data()
+        # request_inventory(user_data)
 
     elif "N" in letter:
         create_excel_output(basic_data)
@@ -77,7 +76,6 @@ def response_to_user_input() -> None:
 
     elif "I" in letter:
         # total_inventory()
-
         # inventory_output()
 
         user_data: dict = consolidate_user_data()
@@ -96,15 +94,13 @@ def response_to_user_input() -> None:
         # create_total_inventory(basic_data)
         # end_inventory_procedure('total_kirkland_inventory.xlsx')
 
-    elif "M" in letter:
-        pass
-
     elif "U" in letter:
-        print(f'\n\tForm Number:')
-        print(f'\n\t\t- Enter form number found in inventory email box.')
-        print(f'\t\t- ex. 021-000-001')
-        form_number: str = input(f'\n\t\tEnter Form Number: ')
-        start_update_form(form_number, basic_data)
+        pass
+        # print(f'\n\tForm Number:')
+        # print(f'\n\t\t- Enter form number found in inventory email box.')
+        # print(f'\t\t- ex. 021-000-001')
+        # form_number: str = input(f'\n\t\tEnter Form Number: ')
+        # start_update_form(form_number, basic_data)
 
     elif "S" in letter:
         get_serial_numbers()
@@ -113,8 +109,9 @@ def response_to_user_input() -> None:
         all_cage()
 
     elif "K" in letter:
+        kirkland_inventory()
         # all_parts()
-        kirkland_total(basic_data)
+        # kirkland_total(basic_data)
 
     elif "L" in letter:
         get_library(basic_data)
@@ -129,7 +126,7 @@ def response_to_user_input() -> None:
 
 
 if __name__ == "__main__":
-    basic_data: dict = {'version': '2.7.6',
+    basic_data: dict = {'version': '2.7.7',
                         'site': 'Kirkland Lab Site',
                         'username': getuser().replace(' ', '').strip()}
 

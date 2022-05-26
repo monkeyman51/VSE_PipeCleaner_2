@@ -8,9 +8,13 @@ def get_mongodb_client(username: str, password: str, database: str) -> MongoClie
     """
     Get client based on username, password, and database name.  SSL is true with no certification needed.
     """
-    return MongoClient(f"mongodb+srv://{username}:{password}@cluster0.fueyc.mongodb.net/"
-                       f"{database}?retryWrites=true&w=majority",
-                       ssl=True, ssl_cert_reqs="CERT_NONE")
+    # return MongoClient(f"mongodb+srv://{username}:{password}@cluster0.fueyc.mongodb.net/",
+    #                    f"{database}?retryWrites=true&w=majority",
+    #                    ssl=True, ssl_cert_reqs="CERT_NONE")
+
+    return MongoClient("mongodb+srv://joton51:FordFocus24@cluster0.fueyc.mongodb.net/test")
+
+    # mongodb+srv://joton51:FordFocus24@cluster0.fueyc.mongodb.net/test
 
 
 def get_mongodb_document(client: MongoClient, collection_name: str, document_name: str) -> MongoClient:

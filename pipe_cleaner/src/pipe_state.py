@@ -235,14 +235,19 @@ def get_ticket_state(ticket_number: str, azure_devops_data: dict) -> str:
     if ticket_number == "None":
         return "No TRR Assigned"
     else:
-        ticket_state: str = azure_devops_data[ticket_number]["state"]
+        try:
+            ticket_state: str = azure_devops_data[ticket_number]["state"]
 
-        clean_state: str = ticket_state.replace('InProgress', 'In Progress'). \
-            replace('Test completed', 'Test Completed'). \
-            replace('Ready To Review', 'Ready to Review'). \
-            replace('Ready to start', 'Ready to Start')
+            clean_state: str = ticket_state.replace('InProgress', 'In Progress'). \
+                replace('Test completed', 'Test Completed'). \
+                replace('Ready To Review', 'Ready to Review'). \
+                replace('Ready to start', 'Ready to Start')
 
-        return clean_state
+            return clean_state
+        except KeyError:
+            print(f"\n\n\tTRR {ticket_number} does not exist in ADO.  Please get rid of Ticket Field {ticket_number}.")
+            print(f"\tTIP: Use Console Server All Hosts tab to quickly find TRR {ticket_number}")
+            input(f"Press enter to exit.")
 
 
 def get_pipe_states(azure_devops_data: dict, blades_data: list) -> dict:

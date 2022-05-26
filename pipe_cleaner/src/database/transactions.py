@@ -31,10 +31,6 @@ def add_excel_data(document, worksheet: load_workbook) -> None:
     transactions: list = reverse_transactions(all_transactions)
 
     for index, transaction_log in enumerate(transactions, start=2):
-        # import json
-        # foo = json.dumps(transaction_log, sort_keys=True, indent=4)
-        # print(foo)
-        # input()
 
         date: str = transaction_log["time"]["date_logged"]
         approved_by: str = transaction_log["source"]["approved_by"]

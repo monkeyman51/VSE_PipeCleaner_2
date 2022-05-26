@@ -144,11 +144,11 @@ def get_available_chooses() -> str:
     Give user chooses between default, send, and inventory.
     """
     print(f'\n\tChoose between these options...\n')
-    print(f'\t\tR  ->  Request Form - New Inventory Transaction')
-    print(f'\t\tU  ->  Update Form - Log S/Ns and Transactions')
 
-    print(f'\n\t\tO  ->  Other Options')
-    print(f'\t\tN  ->  Normal Mode')
+    print(f'\n\t\tN  ->  Normal Mode')
+    print(f'\t\tO  ->  Other Options\n')
+    print(f'\t\tP  ->  Pipes Report')
+    print(f'\t\tR  ->  Rack Manager Powers\n')
 
     user_response: str = input(f'\n\tChoose letter and press enter: ')
 

@@ -205,7 +205,7 @@ def main_method() -> None:
 
         all_machines.append(machine_data)
 
-    workbook = load_workbook('all_machines.xlsx')
+    workbook = load_workbook('template_all_machines.xlsx')
     worksheet = workbook['all_machines']
 
     worksheet['A1'].value = 'Machine Name'
@@ -219,7 +219,7 @@ def main_method() -> None:
         worksheet[f'C{index}'].value = row['machine_serial']
         worksheet[f'D{index}'].value = row['days_last_online']
 
-    workbook.save('all_machines.xlsx')
+    workbook.save('template_all_machines.xlsx')
 
 
 def get_machine_location(host_data: dict) -> str:

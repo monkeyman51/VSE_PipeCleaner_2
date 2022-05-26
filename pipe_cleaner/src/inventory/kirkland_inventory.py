@@ -1,5 +1,5 @@
 """
-Get all history information.
+Kirkland inventory based on static, manually counted data plus transactions.
 """
 from pipe_cleaner.src.log_database import access_database_document
 from openpyxl import load_workbook
@@ -51,25 +51,25 @@ def clean_serial_number(raw_serial_number: str, part_number: str) -> str:
 
         if part_number in serial_1:
 
-            clean_serial: str = serial_number.\
-                replace(f"{serial_1}_", "").\
-                replace(f"{serial_1}+", "").\
+            clean_serial: str = serial_number. \
+                replace(f"{serial_1}_", ""). \
+                replace(f"{serial_1}+", ""). \
                 replace(f"{serial_1} ", "")
 
             return clean_serial.upper().strip()
 
         elif part_number in serial_2:
-            clean_serial: str = serial_number.\
-                replace(f"_{serial_2}", "").\
-                replace(f"+{serial_2}", "").\
+            clean_serial: str = serial_number. \
+                replace(f"_{serial_2}", ""). \
+                replace(f"+{serial_2}", ""). \
                 replace(f" {serial_2}", "")
 
             return clean_serial.upper().strip()
 
     elif part_number in serial_number:
-        clean_serial: str = serial_number.\
-            replace(f"{part_number}_", "").\
-            replace(f"{part_number}+", "").\
+        clean_serial: str = serial_number. \
+            replace(f"{part_number}_", ""). \
+            replace(f"{part_number}+", ""). \
             replace(f"{part_number} ", "")
 
         return clean_serial.upper().strip()
@@ -85,15 +85,9 @@ def clean_part_name(part_name: str) -> str:
     :param part_name: raw part name
     :return: clean part name
     """
-    return part_name.replace(":", "").upper().strip().split(" (")[0]
+    clean_part: str = part_name.replace(":", "").upper().strip().split(" (")[0]
 
-
-def print_current(clean_serial: str, part_number: str, current_location: str) -> None:
-    """
-    Temporary.  Prints only current part.
-    """
-    if "MZ7LH960HAJR-000MV" == part_number:
-        print(f"{part_number} ({current_location}):   {clean_serial}")
+    return substitute_part_number(clean_part)
 
 
 def get_serial_numbers_database():
@@ -112,8 +106,6 @@ def get_serial_numbers_database():
         part_number: str = clean_part_name(entry["part_numbers"][-1])
 
         clean_serial: str = clean_serial_number(serial_number, part_number)
-
-        print_current(clean_serial, part_number, current_location)
 
         database[clean_serial]: dict = {}
         database[clean_serial]["current_location"]: str = current_location
@@ -180,8 +172,6 @@ def get_transactions_from_database() -> list:
             for serial_number in scanned:
 
                 clean_serial: str = clean_serial_number(serial_number, part_number)
-
-                print_current(clean_serial, clean_part, current_location)
 
                 current_serial: dict = {"part_number": clean_part,
                                         "serial_number": clean_serial,
@@ -787,7 +777,201 @@ def launch_output_after_save() -> None:
     system(fr'start EXCEL.EXE {file_name}')
 
 
-def main() -> None:
+def substitute_part_number(part_number: str) -> str:
+    """
+    Based off of Inventory Team's feedback, substitutes invalid P/N for real P/N
+
+    :return: Data
+    """
+    if "KRM393A4K40DB2-CVF2030" == part_number:
+        return "M393A4K40DB2-CVF"
+
+    elif "HMA84GR7CJR4N-VKTNAD943" == part_number:
+        return "HMA84GR7CJR4N-VK"
+
+    elif "KRM393A4G40AB3-CWE2007" == part_number:
+        return "M393A4G40AB3-CWE"
+
+    elif "KRM393A4G40AB3-CWE2028" == part_number:
+        return "M393A4G40AB3-CWE"
+
+    elif "HMAA8GR7AJR4N-WMT4AD030" == part_number:
+        return "HMAA8GR7AJR4N-WM"
+
+    elif "HMA84GR7JJR4N-VKTFAC936" == part_number:
+        return "HMA84GR7JJR4N-VK"
+
+    elif "HMA84GR7CJR4N-VKTFAC904" == part_number:
+        return "HMA84GR7CJR4N-VK"
+
+    elif "HMA84GR7CJR4N-VKT3AD944" == part_number:
+        return "HMA84GR7CJR4N-VK"
+
+    elif "HMAA8GR7AJR4N-WMT4AC927" == part_number:
+        return "HMAA8GR7AJR4N-WMT"
+
+    elif "MTA36ASF4G72PZ-3G2R1112" == part_number:
+        return "MTA36ASF4G72PZ-3G2R1"
+
+    elif "HMA84GR7CJR4N-VKT3AD943" == part_number:
+        return "HMA84GR7CJR4N-VK"
+
+    elif "HMA82GR7CJR4N-VKT3AD930" == part_number:
+        return "HMA82GR7CJR4N-VK"
+
+    elif "HMA84GR7DJR4N-WMT4AC946" == part_number:
+        return "HMA84GR7DJR4N-WM"
+
+    elif "MTA18ASF4G72PZ-2G9E1945" == part_number:
+        return "MTA18ASF4G72PZ-2G9E"
+
+    elif "HMAA8GR7AJR4N-WMT8AC929" == part_number:
+        return "HMAA8GR7AJR4N-WM"
+
+    elif "KRM393A4K40DB2-CVF2001" == part_number:
+        return "M393A4K40DB2-CVF"
+
+    elif "KRM393A4K40CB2-CTD1902" == part_number:
+        return "M393A4K40CB2-CTD"
+
+    elif "KRM393A4K40CB2-CTD1902" == part_number:
+        return "M393A4K40CB2-CTD"
+
+    elif "HMA84GR7CJR4N-XNTGAA018" == part_number:
+        return "HMA84GR7CJR4N-XN"
+
+    elif "KRM393A4K40CB2-CTD1903" == part_number:
+        return "M393A4K40CB2-CTD"
+
+    elif "HMA84GR7CJR4N-VKT3AC905" == part_number:
+        return "HMA84GR7CJR4N-VK"
+
+    elif "HMA84GR7CJR4N-VKTNAC744" == part_number:
+        return "HMA84GR7CJR4N-VK"
+
+    elif "MTA36ASF4G72PZ-2G6E1819" == part_number:
+        return "MTA36ASF4G72PZ-2G6E"
+
+    elif "HMA84GR7CJR4N-VKT3AC743" == part_number:
+        return "HMA84GR7CJR4N-VK"
+
+    # Model Number -> Part Number
+    elif "ST18000NM019J" == part_number:
+        return "3AY212-401"
+
+    # Model Number -> Part Number
+    elif "WUH721816ALN6L6" == part_number:
+        return "0F38420"
+
+    elif "MG08SCA16TA" == part_number:
+        return "HDEPN20SMA51F"
+
+    elif "ST14000NM000G-2KG103" == part_number:
+        return "2KG103-401"
+
+    elif "ST12000NM007G-2RM102" == part_number:
+        return "2RM102-402"
+
+    elif "WUH721414ALN600" == part_number:
+        return "0F31114"
+
+    elif "HMAA4GR7AJHR4N-XN" == part_number:
+        return "HMAA4GR7AJR4N-XN"
+
+    elif "SSDPELKX019T8M2" == part_number:
+        return "SSDPELKX019T8DM2"
+
+    elif "SSDPELKX960G8D-203" == part_number:
+        return "SSDPELKX960G8D"
+
+    elif "ST16000NM000G-2KH103" == part_number:
+        return "2KH103-402"
+
+    elif "M393A2K43BB1CTD" == part_number:
+        return "M393A2K43BB1-CTD"
+
+    elif "MG07ACA12TA" == part_number:
+        return "HDEPW21SMA51"
+
+    elif "PE8110NVME1TB" == part_number:
+        return "HFS960GDE0X098N"
+
+    elif "ST14000NM021J-2TX112" == part_number:
+        return "2TX112-401"
+
+    elif "ST18000NM018J-3B1112" == part_number:
+        return "3B1112-402"
+
+    elif "ST6000NM0115-1YZ110" == part_number:
+        return "1YZ110-003"
+
+    elif "ST6000NM037A-2MQ101" == part_number:
+        return "2MQ101-402"
+
+    elif "WUH721414AL" == part_number:
+        return "0F31114"
+
+    elif "WUH721816AL4206" == part_number:
+        return "0F38313"
+
+    elif "WUH721818ALN6L6" == part_number:
+        return "0F38423"
+
+    elif "WUS4BB038D4MBE7" == part_number:
+        return "0TS2381"
+
+    elif "HFS960GDE0X089N" == part_number:
+        return "HFS960GDE0X098N"
+
+    elif "SSDPFXNV153TZEM" == part_number:
+        return "SSDPFXNV153TZD"
+
+    else:
+        return part_number
+
+
+def reverse_transactions(all_transactions: list) -> list:
+    """
+
+    """
+    order: list = []
+
+    for entry in all_transactions:
+        order.append(entry)
+
+    new_order: list = order[::-1]
+
+    return new_order
+
+
+def add_transaction_data(workbook) -> None:
+    """
+    Add inventory transaction data for report tab.
+    """
+    document = access_database_document('transactions', '021')
+    worksheet = workbook["Transactions"]
+
+    all_transactions: list = document.find({})
+    transactions: list = reverse_transactions(all_transactions)
+
+    for index, transaction_log in enumerate(transactions, start=9):
+
+        date: str = transaction_log["time"]["date_logged"]
+        previous: str = transaction_log["location"]["previous"]
+        current: str = transaction_log["location"]["current"]
+        part_number: str = transaction_log["part_number"]
+        quantity = len(transaction_log["scanned"])
+        task: str = transaction_log["source"]["task"]
+
+        worksheet[f'B{index}'].value = date
+        worksheet[f'C{index}'].value = previous
+        worksheet[f'D{index}'].value = current
+        worksheet[f'E{index}'].value = part_number
+        worksheet[f'F{index}'].value = quantity
+        worksheet[f'G{index}'].value = task
+
+
+def main_method() -> None:
     """
 
     """
@@ -799,11 +983,9 @@ def main() -> None:
 
     workbook = create_workbook_for_report()
     worksheet_master = create_worksheet_master(workbook)
+    add_transaction_data(workbook)
     write_report(sorted_serials, worksheet_master)
 
-    # save_and_launch(workbook)
+    save_and_launch(workbook)
 
-    output_excel(update_serials)
-
-
-main()
+    # output_excel(update_serials)

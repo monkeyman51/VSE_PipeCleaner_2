@@ -11,6 +11,7 @@ from json import loads
 from datetime import datetime, date
 from openpyxl import load_workbook
 from os import system
+from openpyxl.styles import Alignment
 
 
 def build_command_result(dhcp_name: str, rack_ip_address: str) -> dict:
@@ -206,6 +207,22 @@ def output_excel(results: list) -> None:
     workbook.save("rack_managers_power.xlsx")
     system(fr'start EXCEL.EXE rack_managers_power.xlsx')
 
+
+def store_excel_data(position: str, key_name: str, worksheet, blade_data: dict) -> None:
+    """
+
+    :param position:
+    :param index:
+    :param key_name:
+    :return:
+    """
+    value = blade_data.get(key_name)
+
+    if type(value) == str:
+        worksheet[position].value = value
+
+    elif type(value) == int:
+        worksheet[position].value = value
 
 
 def main():

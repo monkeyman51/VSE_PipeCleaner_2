@@ -1038,9 +1038,11 @@ def add_issue_data(azure_devops_data: dict, console_server_data: dict, all_issue
     user_info: dict = get_user_info(console_server_data, current_setup)
 
     if user_info == {}:
+        print(f"TESET1")
         pass
 
     else:
+        print(f"TESET2")
         user_systems: dict = get_user_systems(user_info)
         user_pipes: list = get_user_pipes(user_systems)
         user_unique_pipes: list = get_user_unique_pipes(user_pipes)
@@ -1111,16 +1113,15 @@ def clean_user_sorted_pipes(all_issues, user_sorted_pipes) -> dict:
     return user_sorted_pipes
 
 
-def get_sorted_pipes_and_systems(user_systems, user_unique_pipes):
+def get_sorted_pipes_and_systems(user_systems: dict, user_unique_pipes: list) -> dict:
     """
 
-    :param user_systems:
-    :param user_unique_pipes:
-    :return:
     """
     user_sorted_pipes: dict = get_user_sorted_pipes(user_unique_pipes)
+
     for user_system in user_systems:
         pipe_name: str = user_systems.get(user_system, {}).get('pipe_name')
+        print(f"pipe_name: {pipe_name}")
         user_sorted_pipes[pipe_name][user_system] = {}
 
     return user_sorted_pipes
